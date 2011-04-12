@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object pk="1" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">17</field>
+        <field type="CharField" name="full_name">Alpha Cremation Services</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-686-3034</field>
+    </object>
+    <object pk="2" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">9</field>
+        <field type="CharField" name="full_name">Andreason's Cremation &amp; Burial Service</field>
+        <field type="CharField" name="city">Springfield</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-485-6659</field>
+    </object>
+    <object pk="3" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">10</field>
+        <field type="CharField" name="full_name">Aurora Cremation &amp; Burial Services</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-484-7122</field>
+    </object>
+    <object pk="21" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">27</field>
+        <field type="CharField" name="full_name">Bowman Funeral Services</field>
+        <field type="CharField" name="city">Garden City</field>
+        <field type="CharField" name="state">Idaho</field>
+        <field type="CharField" name="phone"></field>
+    </object>
+    <object pk="4" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">6</field>
+        <field type="CharField" name="full_name">Buell Funeral Chapel</field>
+        <field type="CharField" name="city">Springfield</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-747-1266</field>
+    </object>
+    <object pk="14" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">21</field>
+        <field type="CharField" name="full_name">Goglin Funeral Home</field>
+        <field type="CharField" name="city">Tyndall</field>
+        <field type="CharField" name="state">S.D.</field>
+        <field type="CharField" name="phone"></field>
+    </object>
+    <object pk="16" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">22</field>
+        <field type="CharField" name="full_name">Lane Memorial Gardens &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-343-1684</field>
+    </object>
+    <object pk="5" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">11</field>
+        <field type="CharField" name="full_name">Major Family Funeral Home</field>
+        <field type="CharField" name="city">Springfield</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-746-9667</field>
+    </object>
+    <object pk="6" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">18</field>
+        <field type="CharField" name="full_name">Murphy-Musgrove Funeral Home</field>
+        <field type="CharField" name="city">Junction City</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-998-2152</field>
+    </object>
+    <object pk="7" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">5</field>
+        <field type="CharField" name="full_name">Musgrove Family Mortuary</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-686-2818</field>
+    </object>
+    <object pk="8" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">12</field>
+        <field type="CharField" name="full_name">Oakridge Funeral Home Chapel of the Woods</field>
+        <field type="CharField" name="city"></field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-782-4328</field>
+    </object>
+    <object pk="18" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">23</field>
+        <field type="CharField" name="full_name">Peake Funeral Chapel</field>
+        <field type="CharField" name="city">Milwaukie</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">503-654-7755</field>
+    </object>
+    <object pk="9" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">13</field>
+        <field type="CharField" name="full_name">Poole-Larsen Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-484-1435</field>
+    </object>
+    <object pk="20" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">26</field>
+        <field type="CharField" name="full_name">Rest-Haven Memorial Park &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-345-8521</field>
+    </object>
+    <object pk="10" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">14</field>
+        <field type="CharField" name="full_name">Smith-Lund-Mills Funeral Chapel</field>
+        <field type="CharField" name="city">Cottage Grove</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-942-0185</field>
+    </object>
+    <object pk="11" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">15</field>
+        <field type="CharField" name="full_name">Springfield Memorial Gardens &amp; Funeral Home</field>
+        <field type="CharField" name="city"></field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-746-5311</field>
+    </object>
+    <object pk="12" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">16</field>
+        <field type="CharField" name="full_name">Sunset Hills Cemetery &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-342-6853</field>
+    </object>
+    <object pk="13" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">19</field>
+        <field type="CharField" name="full_name">Weddle Funeral Chapel</field>
+        <field type="CharField" name="city">Stayton</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-769-2423</field>
+    </object>
+    <object pk="17" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">24</field>
+        <field type="CharField" name="full_name">West Lawn Memorial Park &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-342-8281</field>
+    </object>
+    <object pk="19" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">25</field>
+        <field type="CharField" name="full_name">Whispering Pines Funeral Home</field>
+        <field type="CharField" name="city">Prineville</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-416-9733</field>
+    </object>
+    <object pk="15" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">20</field>
+        <field type="CharField" name="full_name">Wood Funeral Home</field>
+        <field type="CharField" name="city">Idaho Falls</field>
+        <field type="CharField" name="state">Idaho</field>
+        <field type="CharField" name="phone"></field>
+    </object>
+    <object pk="1" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="first_name">Patricia</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Fraser</field>
+        <field type="IntegerField" name="age">81</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="DateField" name="death_date">2010-01-26</field>
+        <field type="BooleanField" name="has_run">False</field>
+        <field type="DateTimeField" name="created">2010-02-04 18:19:14</field>
+    </object>
+    <object pk="2" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="first_name">Delores</field>
+        <field type="CharField" name="middle_name">J.</field>
+        <field type="CharField" name="nickname">Dee</field>
+        <field type="CharField" name="last_name">Johnson</field>
+        <field type="IntegerField" name="age">62</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="DateField" name="death_date">2010-02-01</field>
+        <field type="BooleanField" name="has_run">False</field>
+        <field type="DateTimeField" name="created">2010-02-04 18:51:08</field>
+    </object>
+    <object pk="3" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="first_name">Clyde</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Cummings</field>
+        <field type="IntegerField" name="age">73</field>
+        <field type="CharField" name="city_of_residence">Boise, formerly of Lane County</field>
+        <field type="DateField" name="death_date">2010-02-01</field>
+        <field type="BooleanField" name="has_run">False</field>
+        <field type="DateTimeField" name="created">2010-02-05 16:55:44</field>
+    </object>
+    <object pk="4" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="first_name">Valera</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Bloom</field>
+        <field type="IntegerField" name="age">90</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="DateField" name="death_date">2010-02-02</field>
+        <field type="BooleanField" name="has_run">False</field>
+        <field type="DateTimeField" name="created">2010-02-09 16:28:09</field>
+    </object>
+    <object pk="5" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="first_name">Joe</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Lincoln</field>
+        <field type="IntegerField" name="age">45</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="DateField" name="death_date">2010-01-20</field>
+        <field type="BooleanField" name="has_run">False</field>
+        <field type="DateTimeField" name="created">2010-02-09 16:36:31</field>
+    </object>
+    <object pk="1" model="obituary.service">
+        <field to="obituary.death_notice" name="death_notice" rel="OneToOneRel">1</field>
+        <field type="CharField" name="service">memorial service</field>
+        <field type="DateTimeField" name="service_date_time"><None></None></field>
+        <field type="CharField" name="service_location"></field>
+        <field type="CharField" name="service_city"></field>
+    </object>
+    <object pk="2" model="obituary.service">
+        <field to="obituary.death_notice" name="death_notice" rel="OneToOneRel">2</field>
+        <field type="CharField" name="service">celebration of life</field>
+        <field type="DateTimeField" name="service_date_time">2010-02-06 18:00:00</field>
+        <field type="CharField" name="service_location">Chalet Village Club House</field>
+        <field type="CharField" name="service_city">Springfield</field>
+    </object>
+    <object pk="3" model="obituary.service">
+        <field to="obituary.death_notice" name="death_notice" rel="OneToOneRel">3</field>
+        <field type="CharField" name="service">military graveside funeral</field>
+        <field type="DateTimeField" name="service_date_time">2010-02-08 12:00:00</field>
+        <field type="CharField" name="service_location"></field>
+        <field type="CharField" name="service_city"></field>
+    </object>
+    <object pk="1" model="obituary.obituary">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">9</field>
+        <field to="obituary.death_notice" name="death_notice" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="cause_of_death">age-related causes</field>
+        <field type="CharField" name="gender">F</field>
+        <field type="DateField" name="date_of_birth">1928-06-20</field>
+        <field type="CharField" name="place_of_birth">Dayton, Ohio</field>
+        <field type="CharField" name="parents_names">Clarence and Ann Lord Greth</field>
+        <field type="CharField" name="married"></field>
+        <field type="DateField" name="marriage_date"><None></None></field>
+        <field type="CharField" name="marriage_location"></field>
+        <field type="CharField" name="education"></field>
+        <field type="TextField" name="career_work_experience">She was a records clerk for juvenile court in Las Vegas.</field>
+        <field type="TextField" name="military_service"></field>
+        <field type="CharField" name="life_domestic_partner"></field>
+        <field type="CharField" name="length_of_relationship"></field>
+        <field type="CharField" name="memorial_contributions"></field>
+        <field type="CharField" name="family_contact">A brother</field>
+        <field type="CharField" name="family_contact_phone">555-1234</field>
+        <field type="FileField" name="photo">obit_images/ob.fraser.patricia.jpg</field>
+        <field type="CharField" name="spouse"></field>
+        <field type="DateField" name="spouse_death"><None></None></field>
+        <field type="CharField" name="parents"></field>
+        <field type="CharField" name="grandparents"></field>
+        <field type="IntegerField" name="number_of_grandchildren">5</field>
+        <field type="IntegerField" name="number_of_great_grandchildren">6</field>
+        <field type="IntegerField" name="number_of_great_great_grandchildren"><None></None></field>
+        <field type="TextField" name="preceded_in_death_by">A son, Roderick Mathis died in September 1996.</field>
+        <field type="BooleanField" name="has_run">False</field>
+        <field type="DateTimeField" name="created">2010-02-04 18:24:48</field>
+    </object>
+    <object pk="2" model="obituary.obituary">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">6</field>
+        <field to="obituary.death_notice" name="death_notice" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="cause_of_death">chronic obstructive pulmonary disease</field>
+        <field type="CharField" name="gender">F</field>
+        <field type="DateField" name="date_of_birth">1947-09-09</field>
+        <field type="CharField" name="place_of_birth">McMinnville</field>
+        <field type="CharField" name="parents_names"></field>
+        <field type="CharField" name="married">She married William Johnson</field>
+        <field type="DateField" name="marriage_date">1996-04-20</field>
+        <field type="CharField" name="marriage_location">Laramie, Wyo.</field>
+        <field type="CharField" name="education"></field>
+        <field type="TextField" name="career_work_experience"></field>
+        <field type="TextField" name="military_service"></field>
+        <field type="CharField" name="life_domestic_partner"></field>
+        <field type="CharField" name="length_of_relationship"></field>
+        <field type="CharField" name="memorial_contributions">Remembrances to the American Lung Association</field>
+        <field type="CharField" name="family_contact">Next of kin</field>
+        <field type="CharField" name="family_contact_phone">555-1234</field>
+        <field type="FileField" name="photo">obit_images/ob.Johnson_Delores.0203.jpg</field>
+        <field type="CharField" name="spouse">husband</field>
+        <field type="DateField" name="spouse_death"><None></None></field>
+        <field type="CharField" name="parents">mother, Gladys Nyseth Allingham</field>
+        <field type="CharField" name="grandparents"></field>
+        <field type="IntegerField" name="number_of_grandchildren">16</field>
+        <field type="IntegerField" name="number_of_great_grandchildren">2</field>
+        <field type="IntegerField" name="number_of_great_great_grandchildren"><None></None></field>
+        <field type="TextField" name="preceded_in_death_by"></field>
+        <field type="BooleanField" name="has_run">True</field>
+        <field type="DateTimeField" name="created">2010-02-04 18:56:32</field>
+    </object>
+    <object pk="1" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="gender">daughter</field>
+        <field type="CharField" name="name">Victoria Reinhard</field>
+        <field type="CharField" name="residence">Eugene</field>
+    </object>
+    <object pk="2" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="gender">daughter</field>
+        <field type="CharField" name="name">Jackie Lee Checlat</field>
+        <field type="CharField" name="residence">Denver</field>
+    </object>
+    <object pk="3" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="gender">son</field>
+        <field type="CharField" name="name">Roderick Mathis</field>
+        <field type="CharField" name="residence">Eugene</field>
+    </object>
+    <object pk="4" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="gender">son</field>
+        <field type="CharField" name="name">Bruce Britton</field>
+        <field type="CharField" name="residence">Fredericksburg, Texas</field>
+    </object>
+    <object pk="5" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">son</field>
+        <field type="CharField" name="name">Lynn Smith</field>
+        <field type="CharField" name="residence">Springfield</field>
+    </object>
+    <object pk="6" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">son</field>
+        <field type="CharField" name="name">Emmett Smith</field>
+        <field type="CharField" name="residence">Salem</field>
+    </object>
+    <object pk="9" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">stepson</field>
+        <field type="CharField" name="name">John</field>
+        <field type="CharField" name="residence">Florida</field>
+    </object>
+    <object pk="10" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">stepson</field>
+        <field type="CharField" name="name">Art</field>
+        <field type="CharField" name="residence">Florida</field>
+    </object>
+    <object pk="8" model="obituary.children">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">stepdaughter</field>
+        <field type="CharField" name="name">Yvonne Caneles</field>
+        <field type="CharField" name="residence">Texas</field>
+    </object>
+    <object pk="1" model="obituary.siblings">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">sister</field>
+        <field type="CharField" name="name">Sandy Paxton</field>
+        <field type="CharField" name="residence">Lincoln City</field>
+    </object>
+    <object pk="2" model="obituary.siblings">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">sister</field>
+        <field type="CharField" name="name">Diane Culp</field>
+        <field type="CharField" name="residence">Garibaldi</field>
+    </object>
+    <object pk="3" model="obituary.siblings">
+        <field to="obituary.obituary" name="obituary" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="gender">sister</field>
+        <field type="CharField" name="name">Cheryl Ralston</field>
+        <field type="CharField" name="residence">Springfield</field>
+    </object>
+</django-objects>

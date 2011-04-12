@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object pk="1" model="obituary.death_notice">
+        <field type="CharField" name="first_name">Abraham</field>
+        <field type="CharField" name="last_name">Lincoln</field>
+        <field to="auth.user" name="author" rel="ManyToOneRel">241</field>
+    </object>
+    <object pk="2" model="obituary.death_notice">
+        <field type="CharField" name="first_name">George</field>
+        <field type="CharField" name="last_name">Washington</field>
+        <field to="auth.user" name="author" rel="ManyToOneRel">242</field>
+    </object>
+</django-objects>
