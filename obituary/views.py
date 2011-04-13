@@ -15,10 +15,10 @@ from obituary.forms import Death_noticeForm, ServiceFormSet, ObituaryForm, \
 def deaths(request, model=None):
     if request.META['HTTP_USER_AGENT'].count('Macintosh'):
         request_machine = 'MAC'
-        template_name = 'obituary/obituary_list_mac.html'    # saved in UTF-8 format
+        template_name = 'obituary_list_mac.html'    # saved in UTF-8 format
     else:
         request_machine = 'WIN'
-        template_name = 'obituary/obituary_list_win.html'    # saved in DOS format
+        template_name = 'obituary_list_win.html'    # saved in DOS format
 
     model = eval(model)
     if model == Death_notice:
@@ -40,7 +40,7 @@ def deaths(request, model=None):
 def fh_index(request):
     death_notices = Death_notice.objects.filter(funeral_home__username=request.user.username)
     obituaries = Obituary.objects.filter(funeral_home__username=request.user.username)
-    return render_to_response('obituary/fh_index.html', {
+    return render_to_response('fh_index.html', {
         'death_notices': death_notices,
         'obituaries': obituaries,
         'user': request.user,
@@ -71,7 +71,7 @@ def manage_death_notice(request, death_notice_id=None):
             form = Death_noticeForm()
             formset = ServiceFormSet(instance=Death_notice())
     
-    return render_to_response('obituary/manage_death_notice.html', {
+    return render_to_response('manage_death_notice.html', {
         'form': form,
         'formset': formset,
     }, context_instance=RequestContext(request))
@@ -87,7 +87,7 @@ def manage_obituary(request, obituary_id=None):
         form = ObituaryForm(request)
         formset = VisitationFormSet(instance=Obituary())
     
-    return render_to_response('obituary/manage_obituary.html', {
+    return render_to_response('manage_obituary.html', {
         'form': form,
         'formset': formset,
     }, context_instance=RequestContext(request))
