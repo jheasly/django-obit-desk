@@ -111,7 +111,7 @@ class Obituary(models.Model):
         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
     funeral_home = models.ForeignKey('auth.User', blank=True)
-    death_notice = models.OneToOneField(Death_notice, unique=True)
+    death_notice = models.OneToOneField(Death_notice)
     cause_of_death = models.CharField(max_length=75)
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
