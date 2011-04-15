@@ -73,8 +73,8 @@ class Death_notice(models.Model):
     age = models.IntegerField()
     city_of_residence = models.CharField(max_length=110)
     death_date = models.DateField()
-    has_run = models.BooleanField()
-    created = models.DateTimeField(auto_now_add=True)
+    death_notice_has_run = models.BooleanField()
+    death_notice_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name = 'Death notice'
@@ -100,7 +100,7 @@ class Service(models.Model):
     def __unicode__(self):
         return self.service
 
-class Obituary(models.Model):
+class Obituary(Death_notice):
     GENDERS =  (
         ('M', 'M',),
         ('F', 'F',),
@@ -110,7 +110,6 @@ class Obituary(models.Model):
         (orig_name, orig_ext) = path.splitext(filename)
         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
-    funeral_home = models.ForeignKey('auth.User', blank=True)
     death_notice = models.OneToOneField(Death_notice)
     cause_of_death = models.CharField(max_length=75)
     gender = models.CharField(choices=GENDERS, max_length=1)
@@ -139,8 +138,8 @@ class Obituary(models.Model):
     number_of_great_great_grandchildren = models.IntegerField(blank=True, null=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     
-    has_run = models.BooleanField()
-    created = models.DateTimeField(auto_now_add=True)
+    obituary_has_run = models.BooleanField()
+    obituary_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name_plural = 'obituaries'
