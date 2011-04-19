@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <p>Hello {{ user.funeralhomeprofile.full_name }}</p>
 <p><a href="{% url logout %}">Logout</a>&nbsp;|&nbsp;<a href="{% url add_death_notice %}">Add death notice</a>&nbsp;|&nbsp;<a href={% url add_obituary %}>Add obituary</a></p>
 
@@ -10,4 +13,8 @@
 
 {% if obituaries %}
 <h3>Obituaries</h3>
+{% for obituary in obituaries %}
+	<p><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a></p>
+{% endfor %}
 {% endif %}
+{% endblock content %}

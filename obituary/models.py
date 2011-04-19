@@ -100,7 +100,7 @@ class Service(models.Model):
     def __unicode__(self):
         return self.service
 
-class Obituary(Death_notice):
+class Obituary(models.Model):
     GENDERS =  (
         ('M', 'M',),
         ('F', 'F',),
@@ -110,7 +110,7 @@ class Obituary(Death_notice):
         (orig_name, orig_ext) = path.splitext(filename)
         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
-    death_notice = models.OneToOneField(Death_notice)
+    death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75)
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')

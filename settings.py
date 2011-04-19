@@ -96,3 +96,9 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'obituary',
 )
+
+# To override these settings for local development...
+try:
+    from local_settings import *
+except ImportError, exp:
+    pass

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object pk="1" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">245</field>
+        <field type="CharField" name="full_name">Alpha Cremation Services</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-686-3034</field>
+    </object>
+    <object pk="2" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">246</field>
+        <field type="CharField" name="full_name">Andreason's Cremation &amp; Burial Service</field>
+        <field type="CharField" name="city">Springfield</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-485-6659</field>
+    </object>
+    <object pk="3" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">247</field>
+        <field type="CharField" name="full_name">Aurora Cremation &amp; Burial Services</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-484-7122</field>
+    </object>
+    <object pk="4" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">242</field>
+        <field type="CharField" name="full_name">Buell Funeral Chapel</field>
+        <field type="CharField" name="city">Springfield</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-747-1266</field>
+    </object>
+    <object pk="21" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">262</field>
+        <field type="CharField" name="full_name">England's Eugene Memorial Chapel</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-686-2035</field>
+    </object>
+    <object pk="16" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">249</field>
+        <field type="CharField" name="full_name">Lane Memorial Gardens &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-343-1684</field>
+    </object>
+    <object pk="5" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">250</field>
+        <field type="CharField" name="full_name">Major Family Funeral Home</field>
+        <field type="CharField" name="city">Springfield</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-746-9667</field>
+    </object>
+    <object pk="6" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">251</field>
+        <field type="CharField" name="full_name">Murphy-Musgrove Funeral Home</field>
+        <field type="CharField" name="city">Junction City</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-998-2152</field>
+    </object>
+    <object pk="7" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">241</field>
+        <field type="CharField" name="full_name">Musgrove Family Mortuary</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-686-2818</field>
+    </object>
+    <object pk="8" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">252</field>
+        <field type="CharField" name="full_name">Oakridge Funeral Home Chapel of the Woods</field>
+        <field type="CharField" name="city"></field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-782-4328</field>
+    </object>
+    <object pk="18" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">253</field>
+        <field type="CharField" name="full_name">Peake Funeral Chapel</field>
+        <field type="CharField" name="city">Milwaukie</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">503-654-7755</field>
+    </object>
+    <object pk="9" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">254</field>
+        <field type="CharField" name="full_name">Poole-Larsen Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-484-1435</field>
+    </object>
+    <object pk="20" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">255</field>
+        <field type="CharField" name="full_name">Rest-Haven Memorial Park &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-345-8521</field>
+    </object>
+    <object pk="10" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">256</field>
+        <field type="CharField" name="full_name">Smith-Lund-Mills Funeral Chapel</field>
+        <field type="CharField" name="city">Cottage Grove</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-942-0185</field>
+    </object>
+    <object pk="11" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">257</field>
+        <field type="CharField" name="full_name">Springfield Memorial Gardens &amp; Funeral Home</field>
+        <field type="CharField" name="city"></field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-746-5311</field>
+    </object>
+    <object pk="12" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">258</field>
+        <field type="CharField" name="full_name">Sunset Hills Cemetery &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-342-6853</field>
+    </object>
+    <object pk="13" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">259</field>
+        <field type="CharField" name="full_name">Weddle Funeral Chapel</field>
+        <field type="CharField" name="city">Stayton</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-769-2423</field>
+    </object>
+    <object pk="17" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">260</field>
+        <field type="CharField" name="full_name">West Lawn Memorial Park &amp; Funeral Home</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-342-8281</field>
+    </object>
+    <object pk="1" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Frances</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Black</field>
+        <field type="IntegerField" name="age">88</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="DateField" name="death_date">2011-04-12</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-04-14 22:38:52</field>
+    </object>
+</django-objects>

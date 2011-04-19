@@ -39,7 +39,7 @@ def deaths(request, model=None):
 @login_required
 def fh_index(request):
     death_notices = Death_notice.objects.filter(funeral_home__username=request.user.username)
-    obituaries = Obituary.objects.filter(funeral_home__username=request.user.username)
+    obituaries = Obituary.objects.filter(death_notice__funeral_home__username=request.user.username)
     return render_to_response('fh_index.html', {
         'death_notices': death_notices,
         'obituaries': obituaries,
@@ -76,15 +76,20 @@ def manage_death_notice(request, death_notice_id=None):
         'formset': formset,
     }, context_instance=RequestContext(request))
 
+# http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
 def manage_obituary(request, obituary_id=None):
+    if obituary_id:
+        obituary = Obituary.objects.get(pk=obituary_id)
+        form = ObituaryForm(request.POST, request.FILES, instance=obituary)
     if request.POST:
-        if obituary_id:
-            obituary = Obituary.objects.get(pk=obituary_id)
-            form = ObituaryForm(request.POST, request.FILES, instance=obituary)
-        else:
-            form = ObituaryForm(request.POST, request.FILES)
+        form = ObituaryForm(request.POST, request.FILES)
+        formset = VisitationFormSet(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
+            
+            form.save()
+            formset.save()
     else:
-        form = ObituaryForm(request)
+        form = ObituaryForm()
         formset = VisitationFormSet(instance=Obituary())
     
     return render_to_response('manage_obituary.html', {
