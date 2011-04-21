@@ -1,10 +1,14 @@
+from django import forms
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models.loading import get_models, get_app, get_apps
+from django.forms.models import modelform_factory
 # from django.forms.models import modelformset_factory, inlineformset_factory
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.utils.html import escape
 from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Service, Obituary, Visitation
 from obituary.forms import Death_noticeForm, ServiceFormSet, ObituaryForm, \
@@ -132,3 +136,36 @@ def manage_obituary(request, obituary_id=None):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('death_notice_index'))
+
+@login_required
+def add_new_model(request, model_name):
+    if (model_name.lower() == model_name):
+        normal_model_name = model_name.capitalize()
+    else:
+        normal_model_name = model_name
+    
+    app_list = get_apps()
+    for app in app_list:
+        for model in get_models(app):
+            if model.__name__ == normal_model_name:
+                form = modelform_factory(model)
+                
+                if normal_model_name == 'Death_notice':
+                    form = Death_noticeForm
+                
+                if request.method == 'POST':
+                    form = form(request.POST)
+                    if form.is_valid():
+                        try:
+                            new_obj = form.save()
+                        except forms.ValidationError, error:
+                            new_obj = None
+                        
+                        if new_obj:
+                             return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script>' % \
+                                    (escape(new_obj._get_pk_val()), escape(new_obj)))
+                else:
+                   form = form()
+                
+                page_context = {'form': form, 'field': normal_model_name}
+                return render_to_response('popup.html', page_context, context_instance=RequestContext(request))

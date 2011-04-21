@@ -80,7 +80,7 @@ class Death_notice(models.Model):
         verbose_name = 'Death notice'
     
     def __unicode__(self):
-        return '%s %s' % (self.first_name, self.last_name)
+        return u'Death notice for %s %s' % (self.first_name, self.last_name)
 
 class Service(models.Model):
     SERVICES = (
@@ -145,7 +145,7 @@ class Obituary(models.Model):
         verbose_name_plural = 'obituaries'
     
     def __unicode__(self):
-        return 'Obituary for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+        return u'Obituary for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
     
     def photo_file_name(self):
         if self.photo:
