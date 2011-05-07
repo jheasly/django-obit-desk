@@ -4,6 +4,14 @@ from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
 from obituary.models import Death_notice, Service, Obituary, Visitation
 
+class CalendarWidget(forms.DateInput):
+    class Media:
+        css = {'all':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
+        )
+
 ServiceFormSet = inlineformset_factory(Death_notice, 
     Service,
     can_delete=True,
@@ -13,6 +21,8 @@ class Death_noticeForm(ModelForm):
 #     def __init__(self, request, *args, **kwargs):
 #         super(Death_noticeForm, self).__init__(*args, **kwargs)
 #         self.fields['funeral_home'].queryset = Death_notice.objects.filter(funeral_home=request.user).order_by('last_name',)
+    
+    death_date = forms.DateField(widget=CalendarWidget())
     
     class Meta:
          model = Death_notice

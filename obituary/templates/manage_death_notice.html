@@ -10,4 +10,15 @@
 	</tr>
 </table>
 </form>
+<script type="text/javascript"> 
+  $(function(){
+    $("#id_death_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-110:c+0',
+            dateFormat: 'yy-mm-dd'
+        });
+  });
+</script>
+
 {% endblock content %}
