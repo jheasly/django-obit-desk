@@ -138,4 +138,86 @@
         <field type="BooleanField" name="death_notice_has_run">False</field>
         <field type="DateTimeField" name="death_notice_created">2011-04-14 22:38:52</field>
     </object>
+    <object pk="2" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Pearl</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname">Pearly Girl</field>
+        <field type="CharField" name="last_name">Gartska</field>
+        <field type="IntegerField" name="age">83</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="DateField" name="death_date">1927-12-10</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-04-20 20:24:34</field>
+    </object>
+    <object pk="5" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
+        <field type="CharField" name="first_name">Faith</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Carothers</field>
+        <field type="IntegerField" name="age">1</field>
+        <field type="CharField" name="city_of_residence">Harrisburg</field>
+        <field type="DateField" name="death_date">2011-05-03</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-06 20:21:59</field>
+    </object>
+    <object pk="1" model="obituary.obituary">
+        <field type="CharField" name="cause_of_death">Age-related causes</field>
+        <field type="CharField" name="gender">F</field>
+        <field type="DateField" name="date_of_birth">1963-06-28</field>
+        <field type="CharField" name="place_of_birth">Eugene</field>
+        <field type="CharField" name="parents_names"></field>
+        <field type="CharField" name="married"></field>
+        <field type="DateField" name="marriage_date"><None></None></field>
+        <field type="CharField" name="marriage_location"></field>
+        <field type="CharField" name="education"></field>
+        <field type="TextField" name="career_work_experience"></field>
+        <field type="TextField" name="military_service"></field>
+        <field type="CharField" name="life_domestic_partner"></field>
+        <field type="CharField" name="length_of_relationship"></field>
+        <field type="CharField" name="memorial_contributions"></field>
+        <field type="CharField" name="family_contact">Alice Addertongue</field>
+        <field type="CharField" name="family_contact_phone">541-485-1234</field>
+        <field type="FileField" name="photo"></field>
+        <field type="CharField" name="spouse"></field>
+        <field type="DateField" name="spouse_death"><None></None></field>
+        <field type="CharField" name="parents"></field>
+        <field type="CharField" name="grandparents"></field>
+        <field type="IntegerField" name="number_of_grandchildren"><None></None></field>
+        <field type="IntegerField" name="number_of_great_grandchildren"><None></None></field>
+        <field type="IntegerField" name="number_of_great_great_grandchildren"><None></None></field>
+        <field type="TextField" name="preceded_in_death_by"></field>
+        <field type="BooleanField" name="obituary_has_run">False</field>
+        <field type="DateTimeField" name="obituary_created">2011-04-19 17:42:12</field>
+    </object>
+    <object pk="2" model="obituary.obituary">
+        <field type="CharField" name="cause_of_death">age-related causes</field>
+        <field type="CharField" name="gender">F</field>
+        <field type="DateField" name="date_of_birth">1927-12-10</field>
+        <field type="CharField" name="place_of_birth">Globe-Miami, Ariz.</field>
+        <field type="CharField" name="parents_names">Festes and Mable Campbell</field>
+        <field type="CharField" name="married"></field>
+        <field type="DateField" name="marriage_date"><None></None></field>
+        <field type="CharField" name="marriage_location"></field>
+        <field type="CharField" name="education">She graduated from high school in Arizona.</field>
+        <field type="TextField" name="career_work_experience">and worked as a bartender at the Gas Lamp in Springfield and Mannie's Bar in Eugene.</field>
+        <field type="TextField" name="military_service"></field>
+        <field type="CharField" name="life_domestic_partner"></field>
+        <field type="CharField" name="length_of_relationship"></field>
+        <field type="CharField" name="memorial_contributions"></field>
+        <field type="CharField" name="family_contact">Person</field>
+        <field type="CharField" name="family_contact_phone">541-485-1234</field>
+        <field type="FileField" name="photo"></field>
+        <field type="CharField" name="spouse"></field>
+        <field type="DateField" name="spouse_death"><None></None></field>
+        <field type="CharField" name="parents"></field>
+        <field type="CharField" name="grandparents"></field>
+        <field type="IntegerField" name="number_of_grandchildren"><None></None></field>
+        <field type="IntegerField" name="number_of_great_grandchildren"><None></None></field>
+        <field type="IntegerField" name="number_of_great_great_grandchildren"><None></None></field>
+        <field type="TextField" name="preceded_in_death_by"></field>
+        <field type="BooleanField" name="obituary_has_run">False</field>
+        <field type="DateTimeField" name="obituary_created">2011-04-20 20:27:39</field>
+    </object>
 </django-objects>
