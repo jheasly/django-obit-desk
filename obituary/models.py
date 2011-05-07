@@ -65,12 +65,17 @@ class FuneralHomeProfile(models.Model):
             return '%s' % self.full_name
 
 class Death_notice(models.Model):
+    AGE_UNIT_CHOICES = (
+        (1, 'years',),
+        (2, 'days',),
+    )
     funeral_home = models.ForeignKey('auth.User')
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=95, blank=True, help_text='Middle name or initial.')
     nickname = models.CharField(max_length=90, blank=True, help_text='Just enter name, without double-quotes, i.e. Jack, not "Jack"')
     last_name = models.CharField(max_length=105)
     age = models.IntegerField()
+    age_unit = models.IntegerField(default=1, choices=AGE_UNIT_CHOICES)
     city_of_residence = models.CharField(max_length=110)
     death_date = models.DateField()
     death_notice_has_run = models.BooleanField()
