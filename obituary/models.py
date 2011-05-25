@@ -77,6 +77,7 @@ class Death_notice(models.Model):
     age = models.IntegerField()
     age_unit = models.IntegerField(default=1, choices=AGE_UNIT_CHOICES)
     city_of_residence = models.CharField(max_length=110)
+    formerly_of = models.CharField(max_length=126, blank=True)
     death_date = models.DateField()
     death_notice_has_run = models.BooleanField()
     death_notice_created = models.DateTimeField(auto_now_add=True)
@@ -89,6 +90,8 @@ class Death_notice(models.Model):
 
 class Service(models.Model):
     SERVICES = (
+        ('visitation', 'visitation',),
+        ('visitation followed by a funeral', 'visitation followed by a funeral',),
         ('celebration of life', 'celebration of life',),
         ('funeral', 'funeral',),
         ('funeral Mass', 'funeral Mass',),

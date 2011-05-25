@@ -50,6 +50,7 @@ def fh_index(request):
         'user': request.user,
     })
 
+@login_required
 def manage_death_notice(request, death_notice_id=None):
     if request.POST:
         if death_notice_id:

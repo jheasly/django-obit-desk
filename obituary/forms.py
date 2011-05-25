@@ -4,6 +4,32 @@ from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
 from obituary.models import Death_notice, Service, Obituary, Visitation
 
+class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
+    class Media:
+        css = {'all':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
+        js = (
+            'http://static.registerguard.com/timepicker/jquery.timepicker.addon.js',
+        )
+
+class ServiceForm(ModelForm):
+    
+    class Meta:
+        model = Service
+        widgets = {
+            'service_date_time': ObitsCalendarDateTimeWidget(),
+        }
+
+#     def __init__(self, *args, **kwargs):
+#         super(ServiceForm, self).__init__(*args, **kwargs)
+#         
+#         self.fields['service_date_time'].widget = MyCalendarDateTimeWidget()
+
+ServiceFormSet = inlineformset_factory(Death_notice, 
+    Service,
+    form = ServiceForm,
+    can_delete=True,
+    extra=1,)
+
 class CalendarWidget(forms.DateInput):
     class Media:
         css = {'all':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
@@ -11,11 +37,6 @@ class CalendarWidget(forms.DateInput):
             'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
             'http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
         )
-
-ServiceFormSet = inlineformset_factory(Death_notice, 
-    Service,
-    can_delete=True,
-    extra=1,)
 
 class Death_noticeForm(ModelForm):
 #     def __init__(self, request, *args, **kwargs):

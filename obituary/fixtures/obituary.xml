@@ -28,6 +28,13 @@
         <field type="CharField" name="state"></field>
         <field type="CharField" name="phone">541-747-1266</field>
     </object>
+    <object pk="22" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">248</field>
+        <field type="CharField" name="full_name">Burns's Riverside Chapel Florence Funeral Home</field>
+        <field type="CharField" name="city"></field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone"></field>
+    </object>
     <object pk="21" model="obituary.funeralhomeprofile">
         <field to="auth.user" name="user" rel="OneToOneRel">262</field>
         <field type="CharField" name="full_name">England's Eugene Memorial Chapel</field>
@@ -66,7 +73,7 @@
     <object pk="8" model="obituary.funeralhomeprofile">
         <field to="auth.user" name="user" rel="OneToOneRel">252</field>
         <field type="CharField" name="full_name">Oakridge Funeral Home Chapel of the Woods</field>
-        <field type="CharField" name="city"></field>
+        <field type="CharField" name="city">Oakland</field>
         <field type="CharField" name="state"></field>
         <field type="CharField" name="phone">541-782-4328</field>
     </object>
@@ -101,7 +108,7 @@
     <object pk="11" model="obituary.funeralhomeprofile">
         <field to="auth.user" name="user" rel="OneToOneRel">257</field>
         <field type="CharField" name="full_name">Springfield Memorial Gardens &amp; Funeral Home</field>
-        <field type="CharField" name="city"></field>
+        <field type="CharField" name="city">Springfield</field>
         <field type="CharField" name="state"></field>
         <field type="CharField" name="phone">541-746-5311</field>
     </object>
@@ -133,6 +140,7 @@
         <field type="CharField" name="nickname"></field>
         <field type="CharField" name="last_name">Black</field>
         <field type="IntegerField" name="age">88</field>
+        <field type="IntegerField" name="age_unit">1</field>
         <field type="CharField" name="city_of_residence">Eugene</field>
         <field type="DateField" name="death_date">2011-04-12</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
@@ -145,6 +153,7 @@
         <field type="CharField" name="nickname">Pearly Girl</field>
         <field type="CharField" name="last_name">Gartska</field>
         <field type="IntegerField" name="age">83</field>
+        <field type="IntegerField" name="age_unit">1</field>
         <field type="CharField" name="city_of_residence">Springfield</field>
         <field type="DateField" name="death_date">1927-12-10</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
@@ -157,10 +166,37 @@
         <field type="CharField" name="nickname"></field>
         <field type="CharField" name="last_name">Carothers</field>
         <field type="IntegerField" name="age">1</field>
+        <field type="IntegerField" name="age_unit">2</field>
         <field type="CharField" name="city_of_residence">Harrisburg</field>
         <field type="DateField" name="death_date">2011-05-03</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
         <field type="DateTimeField" name="death_notice_created">2011-05-06 20:21:59</field>
+    </object>
+    <object pk="6" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
+        <field type="CharField" name="first_name">Paul</field>
+        <field type="CharField" name="middle_name">E.</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Campion</field>
+        <field type="IntegerField" name="age">87</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="DateField" name="death_date">2011-05-08</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-09 19:42:25</field>
+    </object>
+    <object pk="7" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">248</field>
+        <field type="CharField" name="first_name">Sharon</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname">Posie</field>
+        <field type="CharField" name="last_name">Gray</field>
+        <field type="IntegerField" name="age">75</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Florence</field>
+        <field type="DateField" name="death_date">2011-05-19</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-24 14:43:52</field>
     </object>
     <object pk="1" model="obituary.obituary">
         <field type="CharField" name="cause_of_death">Age-related causes</field>
