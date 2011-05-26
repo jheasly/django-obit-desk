@@ -14,6 +14,11 @@ from obituary.models import Death_notice, Service, Obituary, Visitation
 from obituary.forms import Death_noticeForm, ServiceFormSet, ObituaryForm, \
     VisitationFormSet
 
+#
+# TODO:
+# Add delete option to FH home index view. (See Andreason's, "Nona Delles")
+# 
+
 # Create your views here.
 
 def deaths(request, model=None):
@@ -66,7 +71,10 @@ def manage_death_notice(request, death_notice_id=None):
             death_notice.save()
             formset = ServiceFormSet(request.POST, instance=death_notice)
             formset.save()
-            return HttpResponseRedirect(reverse('death_notice_index'))
+            if request.POST.has_key('add_another'):
+                return HttpResponseRedirect(reverse('add_death_notice'))
+            else:
+                return HttpResponseRedirect(reverse('death_notice_index'))
     else:
         if death_notice_id:
             death_notice = Death_notice.objects.get(pk=death_notice_id)
