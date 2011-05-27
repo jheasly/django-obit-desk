@@ -28,6 +28,13 @@
         <field type="CharField" name="state"></field>
         <field type="CharField" name="phone">541-747-1266</field>
     </object>
+    <object pk="21" model="obituary.funeralhomeprofile">
+        <field to="auth.user" name="user" rel="OneToOneRel">262</field>
+        <field type="CharField" name="full_name">England's Eugene Memorial Chapel</field>
+        <field type="CharField" name="city">Eugene</field>
+        <field type="CharField" name="state"></field>
+        <field type="CharField" name="phone">541-686-2035</field>
+    </object>
     <object pk="16" model="obituary.funeralhomeprofile">
         <field to="auth.user" name="user" rel="OneToOneRel">249</field>
         <field type="CharField" name="full_name">Lane Memorial Gardens &amp; Funeral Home</field>

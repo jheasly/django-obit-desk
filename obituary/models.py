@@ -65,25 +65,34 @@ class FuneralHomeProfile(models.Model):
             return '%s' % self.full_name
 
 class Death_notice(models.Model):
+    AGE_UNIT_CHOICES = (
+        (1, 'years',),
+        (2, 'days',),
+    )
     funeral_home = models.ForeignKey('auth.User')
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=95, blank=True, help_text='Middle name or initial.')
     nickname = models.CharField(max_length=90, blank=True, help_text='Just enter name, without double-quotes, i.e. Jack, not "Jack"')
     last_name = models.CharField(max_length=105)
     age = models.IntegerField()
+    age_unit = models.IntegerField(default=1, choices=AGE_UNIT_CHOICES)
     city_of_residence = models.CharField(max_length=110)
+    formerly_of = models.CharField(max_length=126, blank=True)
     death_date = models.DateField()
-    has_run = models.BooleanField()
-    created = models.DateTimeField(auto_now_add=True)
+    death_notice_in_system = models.BooleanField()
+    death_notice_has_run = models.BooleanField()
+    death_notice_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name = 'Death notice'
     
     def __unicode__(self):
-        return '%s %s' % (self.first_name, self.last_name)
+        return u'Death notice for %s %s' % (self.first_name, self.last_name)
 
 class Service(models.Model):
     SERVICES = (
+        ('visitation', 'visitation',),
+        ('visitation followed by a funeral', 'visitation followed by a funeral',),
         ('celebration of life', 'celebration of life',),
         ('funeral', 'funeral',),
         ('funeral Mass', 'funeral Mass',),
@@ -95,7 +104,7 @@ class Service(models.Model):
     service = models.CharField(choices=SERVICES, max_length=65)
     service_date_time = models.DateTimeField()
     service_location = models.CharField(max_length=75)
-    service_city = models.CharField(max_length=80)
+    service_city = models.CharField(max_length=80, blank=True)
     
     def __unicode__(self):
         return self.service
@@ -110,8 +119,7 @@ class Obituary(models.Model):
         (orig_name, orig_ext) = path.splitext(filename)
         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
-    funeral_home = models.ForeignKey('auth.User', blank=True)
-    death_notice = models.ForeignKey(Death_notice, unique=True)
+    death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75)
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
@@ -139,14 +147,14 @@ class Obituary(models.Model):
     number_of_great_great_grandchildren = models.IntegerField(blank=True, null=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     
-    has_run = models.BooleanField()
-    created = models.DateTimeField(auto_now_add=True)
+    obituary_has_run = models.BooleanField()
+    obituary_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name_plural = 'obituaries'
     
     def __unicode__(self):
-        return 'Obituary for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+        return u'Obituary for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
     
     def photo_file_name(self):
         if self.photo:

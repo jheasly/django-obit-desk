@@ -1,4 +1,11 @@
-<form action="" method="post">
+{% extends 'base.html' %}
+
+{% block js %}
+<script src="/media/js/admin/RelatedObjectLookups.js"></script>
+{% endblock %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
 <table>
 	{{ form }}
 	{{ formset }}
@@ -7,3 +14,4 @@
 	</tr>
 </table>
 </form>
+{% endblock content %}

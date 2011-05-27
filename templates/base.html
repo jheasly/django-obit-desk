@@ -1,2 +1,59 @@
-{% block content %}
-{% endblock content %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>{% block title %}{% endblock %}</title>
+	
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.0.0/build/cssfonts/fonts-min.css&3.0.0/build/cssreset/reset-min.css&3.0.0/build/cssbase/base-min.css">
+	
+	<style type="text/css">
+		<!--
+			th, td {
+				border: none;
+			}
+			
+			.errorlist {
+				color: #ee0000;
+			}
+			
+			a {
+				color: #c00;
+				text-decoration: none;
+			}
+			a:visited { color: #c00; }
+			a:visited:hover,
+			a:focus,
+			a:focus:hover,
+			a:hover,
+			a:active {
+				color: #f00;
+				text-decoration: underline;
+			}
+			
+			hr { display: none !important; }
+			/* http://perishablepress.com/press/2009/12/06/new-clearfix-hack/ */
+			.clear:after {
+				visibility: hidden;
+				display: block;
+				font-size: 0;
+				content: " ";
+				clear: both;
+				height: 0;
+			}
+			* html .clear { zoom: 1; } /* IE6 */
+			*:first-child+html .clear { zoom: 1; } /* IE7 */
+			
+		-->
+	</style>
+	
+	{{ form.media }}
+	{{ formset.media }}
+	
+	{% block js %}{% endblock %}
+	</head>
+	<body>
+		{% block content %}
+		{% endblock content %}
+	</body>
+</html>

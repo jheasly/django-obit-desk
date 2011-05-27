@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Example:
     # (r'^foo/', include('foo.foo.urls')),
     (r'^obituary/', include('obituary.urls')),
+    (r'^add/(?P<model_name>\w+)/$', 'obituary.views.add_new_model'),
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),
 
     # Uncomment the admin/doc line below to enable admin documentation:

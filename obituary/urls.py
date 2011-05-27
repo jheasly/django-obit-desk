@@ -4,7 +4,9 @@ from obituary.views import deaths, fh_index, logout_view, manage_death_notice, \
 
 urlpatterns = patterns('',
     url(r'^deaths/(?P<death_notice_id>\d+)/$', manage_death_notice, name='manage_death_notice'),
+    url(r'^deaths/(?P<death_notice_id>\d+)/delete$', manage_death_notice, name='delete_death_notice'),
     url(r'^deaths/$', manage_death_notice, name='add_death_notice'),
+    url(r'^obituaries/(?P<obituary_id>\d+)/$', manage_obituary, name='manage_obituary'),
     url(r'^obituaries/$', manage_obituary, name='add_obituary'),
     url(r'^funeral-home/$', fh_index, name='death_notice_index'),
     url(r'^logout/$', logout_view, name='logout'),
