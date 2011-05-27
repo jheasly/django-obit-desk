@@ -30,7 +30,13 @@ class SiblingsInline(admin.TabularInline):
     model = Siblings
 
 class Death_noticeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('__unicode__', 'death_notice_created', 'death_notice_in_system', 'death_notice_has_run',)
+    list_editable = ('death_notice_in_system', 'death_notice_has_run',)
+    list_filter = ('death_notice_in_system', 'death_notice_has_run',)
+    
+    inlines = [
+        ServiceInline,
+    ]
 admin.site.register(Death_notice, Death_noticeAdmin)
 
 class ObituaryAdmin(admin.ModelAdmin):

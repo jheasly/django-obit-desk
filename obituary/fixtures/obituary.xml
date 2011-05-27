@@ -1,5 +1,724 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
+    <object pk="10" model="contenttypes.contenttype">
+        <field type="CharField" name="name">Death notice</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">death_notice</field>
+    </object>
+    <object pk="14" model="contenttypes.contenttype">
+        <field type="CharField" name="name">bei</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">bei</field>
+    </object>
+    <object pk="16" model="contenttypes.contenttype">
+        <field type="CharField" name="name">children</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">children</field>
+    </object>
+    <object pk="5" model="contenttypes.contenttype">
+        <field type="CharField" name="name">content type</field>
+        <field type="CharField" name="app_label">contenttypes</field>
+        <field type="CharField" name="model">contenttype</field>
+    </object>
+    <object pk="18" model="contenttypes.contenttype">
+        <field type="CharField" name="name">foo</field>
+        <field type="CharField" name="app_label">foo</field>
+        <field type="CharField" name="model">foo</field>
+    </object>
+    <object pk="9" model="contenttypes.contenttype">
+        <field type="CharField" name="name">funeral home profile</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">funeralhomeprofile</field>
+    </object>
+    <object pk="2" model="contenttypes.contenttype">
+        <field type="CharField" name="name">group</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">group</field>
+    </object>
+    <object pk="8" model="contenttypes.contenttype">
+        <field type="CharField" name="name">log entry</field>
+        <field type="CharField" name="app_label">admin</field>
+        <field type="CharField" name="model">logentry</field>
+    </object>
+    <object pk="4" model="contenttypes.contenttype">
+        <field type="CharField" name="name">message</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">message</field>
+    </object>
+    <object pk="12" model="contenttypes.contenttype">
+        <field type="CharField" name="name">obituary</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">obituary</field>
+    </object>
+    <object pk="15" model="contenttypes.contenttype">
+        <field type="CharField" name="name">other_services</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">other_services</field>
+    </object>
+    <object pk="1" model="contenttypes.contenttype">
+        <field type="CharField" name="name">permission</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">permission</field>
+    </object>
+    <object pk="11" model="contenttypes.contenttype">
+        <field type="CharField" name="name">service</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">service</field>
+    </object>
+    <object pk="6" model="contenttypes.contenttype">
+        <field type="CharField" name="name">session</field>
+        <field type="CharField" name="app_label">sessions</field>
+        <field type="CharField" name="model">session</field>
+    </object>
+    <object pk="17" model="contenttypes.contenttype">
+        <field type="CharField" name="name">siblings</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">siblings</field>
+    </object>
+    <object pk="7" model="contenttypes.contenttype">
+        <field type="CharField" name="name">site</field>
+        <field type="CharField" name="app_label">sites</field>
+        <field type="CharField" name="model">site</field>
+    </object>
+    <object pk="3" model="contenttypes.contenttype">
+        <field type="CharField" name="name">user</field>
+        <field type="CharField" name="app_label">auth</field>
+        <field type="CharField" name="model">user</field>
+    </object>
+    <object pk="13" model="contenttypes.contenttype">
+        <field type="CharField" name="name">visitation</field>
+        <field type="CharField" name="app_label">obituary</field>
+        <field type="CharField" name="model">visitation</field>
+    </object>
+    <object pk="d329604e7157d77d24a5c1bc17278ddd" model="sessions.session">
+        <field type="TextField" name="session_data">M2IyOGY0NzBlYmFhMWZmZGU3ZjNkZTdiOWMxODdlMjQ3YWExODM0ZTqAAn1xAVUKdGVzdGNvb2tp
+ZXECVQZ3b3JrZWRxA3Mu</field>
+        <field type="DateTimeField" name="expire_date">2011-05-03 16:07:34</field>
+    </object>
+    <object pk="077a55f63181629c2a1e4248e7e628e6" model="sessions.session">
+        <field type="TextField" name="session_data">M2IyOGY0NzBlYmFhMWZmZGU3ZjNkZTdiOWMxODdlMjQ3YWExODM0ZTqAAn1xAVUKdGVzdGNvb2tp
+ZXECVQZ3b3JrZWRxA3Mu</field>
+        <field type="DateTimeField" name="expire_date">2011-05-23 19:50:46</field>
+    </object>
+    <object pk="4d078011ec48f00a09a67d0cc9b06c1c" model="sessions.session">
+        <field type="TextField" name="session_data">ZjdkZjAzMDU2NDNiZmQ3MjQzMDg4ODhhNDVhZWFjMzM3YjcxYmJhNzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+        <field type="DateTimeField" name="expire_date">2011-04-29 15:40:28</field>
+    </object>
+    <object pk="af244560a123461d63dc56199f71a9ce" model="sessions.session">
+        <field type="TextField" name="session_data">M2IyOGY0NzBlYmFhMWZmZGU3ZjNkZTdiOWMxODdlMjQ3YWExODM0ZTqAAn1xAVUKdGVzdGNvb2tp
+ZXECVQZ3b3JrZWRxA3Mu</field>
+        <field type="DateTimeField" name="expire_date">2011-05-04 19:28:12</field>
+    </object>
+    <object pk="b0f75395c43c77298dc5aed6ffa88896" model="sessions.session">
+        <field type="TextField" name="session_data">ZjdkZjAzMDU2NDNiZmQ3MjQzMDg4ODhhNDVhZWFjMzM3YjcxYmJhNzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+        <field type="DateTimeField" name="expire_date">2011-05-09 17:28:59</field>
+    </object>
+    <object pk="8555de519c7c048ec54b64cb90a20e15" model="sessions.session">
+        <field type="TextField" name="session_data">YzEwZmVkZmUxOTEyZmY4MzBjNmY4OTQyZTg2MDhjMTVmMmJhYmY0MDqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRL9nUu</field>
+        <field type="DateTimeField" name="expire_date">2011-04-29 16:29:56</field>
+    </object>
+    <object pk="9099f0809cd5221b82d1f192cc365c25" model="sessions.session">
+        <field type="TextField" name="session_data">MDNhMGM3MTcyYzkyYWRjMDYzMDBmMTE1NjNhYzFiNDgzZjliZjk3ZjqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRL8XUu</field>
+        <field type="DateTimeField" name="expire_date">2011-05-20 16:32:55</field>
+    </object>
+    <object pk="9e56bc81fd4bd7915ced0d7a4a3c39b2" model="sessions.session">
+        <field type="TextField" name="session_data">ZjdkZjAzMDU2NDNiZmQ3MjQzMDg4ODhhNDVhZWFjMzM3YjcxYmJhNzqAAn1xAShVEl9hdXRoX3Vz
+ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+VQ1fYXV0aF91c2VyX2lkcQRLAXUu</field>
+        <field type="DateTimeField" name="expire_date">2011-06-09 17:56:23</field>
+    </object>
+    <object pk="8a242102f995e97aa50d526603d579e6" model="sessions.session">
+        <field type="TextField" name="session_data">M2IyOGY0NzBlYmFhMWZmZGU3ZjNkZTdiOWMxODdlMjQ3YWExODM0ZTqAAn1xAVUKdGVzdGNvb2tp
+ZXECVQZ3b3JrZWRxA3Mu</field>
+        <field type="DateTimeField" name="expire_date">2011-06-07 19:04:00</field>
+    </object>
+    <object pk="e041ea0707199a3c527b8de6cc335450" model="sessions.session">
+        <field type="TextField" name="session_data">NjEzYzUxYmUzYmFlY2YyMzVjYzJkZDAzZWE3OGEwYzMzYzcwNzJkZTqAAn1xAS4=</field>
+        <field type="DateTimeField" name="expire_date">2011-06-07 19:08:43</field>
+    </object>
+    <object pk="b91f812f680f9844d126863fea4841f0" model="sessions.session">
+        <field type="TextField" name="session_data">NjEzYzUxYmUzYmFlY2YyMzVjYzJkZDAzZWE3OGEwYzMzYzcwNzJkZTqAAn1xAS4=</field>
+        <field type="DateTimeField" name="expire_date">2011-05-23 19:50:35</field>
+    </object>
+    <object pk="1" model="sites.site">
+        <field type="CharField" name="domain">example.com</field>
+        <field type="CharField" name="name">example.com</field>
+    </object>
+    <object pk="63" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 19:14:12</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">19</field>
+        <field type="CharField" name="object_repr">Death notice for Gary Bean</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_date.</field>
+    </object>
+    <object pk="62" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">1</field>
+        <field type="CharField" name="object_repr">Death notice for Frances Black</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="61" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">2</field>
+        <field type="CharField" name="object_repr">Death notice for Pearl Gartska</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="60" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">5</field>
+        <field type="CharField" name="object_repr">Death notice for Faith Carothers</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="59" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">6</field>
+        <field type="CharField" name="object_repr">Death notice for Paul Campion</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="58" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">7</field>
+        <field type="CharField" name="object_repr">Death notice for Sharon Gray</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="57" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">8</field>
+        <field type="CharField" name="object_repr">Death notice for Barbara Jackson</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="56" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">9</field>
+        <field type="CharField" name="object_repr">Death notice for Grace Beier</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="55" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">10</field>
+        <field type="CharField" name="object_repr">Death notice for Sarah De Leon</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="54" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">11</field>
+        <field type="CharField" name="object_repr">Death notice for Nona Delles</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="53" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">13</field>
+        <field type="CharField" name="object_repr">Death notice for Jay Pittsley</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="52" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-26 18:30:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">14</field>
+        <field type="CharField" name="object_repr">Death notice for Ronnie Reagh</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed death_notice_has_run.</field>
+    </object>
+    <object pk="51" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:06:00</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">261</field>
+        <field type="CharField" name="object_repr">whispering</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="50" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:53</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">260</field>
+        <field type="CharField" name="object_repr">westlawn</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="49" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:45</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">259</field>
+        <field type="CharField" name="object_repr">weddle</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="48" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:38</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">258</field>
+        <field type="CharField" name="object_repr">sunset</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="47" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:32</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">257</field>
+        <field type="CharField" name="object_repr">springfield</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="46" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:25</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">256</field>
+        <field type="CharField" name="object_repr">smithlundmills</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="45" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:17</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">255</field>
+        <field type="CharField" name="object_repr">resthaven</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="44" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:10</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">254</field>
+        <field type="CharField" name="object_repr">poolelarsen</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="43" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:05:02</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">253</field>
+        <field type="CharField" name="object_repr">peake</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="42" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:56</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">252</field>
+        <field type="CharField" name="object_repr">oakridge</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="41" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:49</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">241</field>
+        <field type="CharField" name="object_repr">musgrove</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="40" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:41</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">251</field>
+        <field type="CharField" name="object_repr">murphymusgrove</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="39" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:32</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">250</field>
+        <field type="CharField" name="object_repr">major</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="38" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:23</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">249</field>
+        <field type="CharField" name="object_repr">lane</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="37" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:14</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">262</field>
+        <field type="CharField" name="object_repr">englands</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">No fields changed.</field>
+    </object>
+    <object pk="36" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:04:04</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">262</field>
+        <field type="CharField" name="object_repr">englands</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="35" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:03:52</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">242</field>
+        <field type="CharField" name="object_repr">buell</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="34" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 13:03:42</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">247</field>
+        <field type="CharField" name="object_repr">aurora</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="33" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 12:55:08</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">246</field>
+        <field type="CharField" name="object_repr">andreasons</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="32" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 12:54:58</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">245</field>
+        <field type="CharField" name="object_repr">alpha</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="31" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 12:54:06</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">248</field>
+        <field type="CharField" name="object_repr">burns</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed is_staff.</field>
+    </object>
+    <object pk="30" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 12:53:11</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="TextField" name="object_id">22</field>
+        <field type="CharField" name="object_repr">Burns's Riverside Chapel Florence Funeral Home</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+        <field type="TextField" name="change_message"></field>
+    </object>
+    <object pk="29" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 12:51:57</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="TextField" name="object_id">11</field>
+        <field type="CharField" name="object_repr">Springfield Memorial Gardens &amp; Funeral Home in Springfield</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed city.</field>
+    </object>
+    <object pk="28" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-05-24 12:51:24</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="TextField" name="object_id">8</field>
+        <field type="CharField" name="object_repr">Oakridge Funeral Home Chapel of the Woods in Oakland</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed city.</field>
+    </object>
+    <object pk="27" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-25 17:30:51</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+        <field type="TextField" name="object_id">1</field>
+        <field type="CharField" name="object_repr">some image</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+        <field type="TextField" name="change_message"></field>
+    </object>
+    <object pk="26" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-19 15:42:13</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">246</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="TextField" name="object_id">1</field>
+        <field type="CharField" name="object_repr">Obituary for Frances Black</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+        <field type="TextField" name="change_message"></field>
+    </object>
+    <object pk="25" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-15 15:21:07</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">1</field>
+        <field type="CharField" name="object_repr">Frances Black</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">No fields changed.</field>
+    </object>
+    <object pk="24" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-15 15:21:05</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">1</field>
+        <field type="CharField" name="object_repr">Frances Black</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">No fields changed.</field>
+    </object>
+    <object pk="23" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:38:52</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">246</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="TextField" name="object_id">1</field>
+        <field type="CharField" name="object_repr">Frances Black</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+        <field type="TextField" name="change_message"></field>
+    </object>
+    <object pk="22" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:25:19</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">261</field>
+        <field type="CharField" name="object_repr">whispering</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="21" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:25:13</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">260</field>
+        <field type="CharField" name="object_repr">westlawn</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="20" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:25:07</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">259</field>
+        <field type="CharField" name="object_repr">weddle</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="19" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:48</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">258</field>
+        <field type="CharField" name="object_repr">sunset</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="18" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:42</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">257</field>
+        <field type="CharField" name="object_repr">springfield</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="17" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:37</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">256</field>
+        <field type="CharField" name="object_repr">smithlundmills</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="16" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:31</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">255</field>
+        <field type="CharField" name="object_repr">resthaven</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="15" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:26</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">254</field>
+        <field type="CharField" name="object_repr">poolelarsen</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="14" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:19</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">253</field>
+        <field type="CharField" name="object_repr">peake</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="13" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:12</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">252</field>
+        <field type="CharField" name="object_repr">oakridge</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="12" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:07</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">241</field>
+        <field type="CharField" name="object_repr">musgrove</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="11" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:24:01</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">251</field>
+        <field type="CharField" name="object_repr">murphymusgrove</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="10" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:55</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">250</field>
+        <field type="CharField" name="object_repr">major</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="9" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:49</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">249</field>
+        <field type="CharField" name="object_repr">lane</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="8" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:39</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">262</field>
+        <field type="CharField" name="object_repr">englands</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="7" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:32</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">248</field>
+        <field type="CharField" name="object_repr">burns</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="6" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:26</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">242</field>
+        <field type="CharField" name="object_repr">buell</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="5" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:20</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">247</field>
+        <field type="CharField" name="object_repr">aurora</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="4" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:14</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">246</field>
+        <field type="CharField" name="object_repr">andreasons</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="3" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:23:08</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="TextField" name="object_id">245</field>
+        <field type="CharField" name="object_repr">alpha</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed groups.</field>
+    </object>
+    <object pk="2" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:22:53</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="TextField" name="object_id">3</field>
+        <field type="CharField" name="object_repr">funeral home</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">2</field>
+        <field type="TextField" name="change_message">Changed permissions.</field>
+    </object>
+    <object pk="1" model="admin.logentry">
+        <field type="DateTimeField" name="action_time">2011-04-14 20:22:23</field>
+        <field to="auth.user" name="user" rel="ManyToOneRel">1</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="TextField" name="object_id">3</field>
+        <field type="CharField" name="object_repr">funeral home</field>
+        <field type="PositiveSmallIntegerField" name="action_flag">1</field>
+        <field type="TextField" name="change_message"></field>
+    </object>
     <object pk="1" model="obituary.funeralhomeprofile">
         <field to="auth.user" name="user" rel="OneToOneRel">245</field>
         <field type="CharField" name="full_name">Alpha Cremation Services</field>
@@ -133,57 +852,290 @@
         <field type="CharField" name="state"></field>
         <field type="CharField" name="phone">541-342-8281</field>
     </object>
-    <object pk="1" model="obituary.death_notice">
-        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
-        <field type="CharField" name="first_name">Frances</field>
+    <object pk="20" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">258</field>
+        <field type="CharField" name="first_name">Jerimiah</field>
         <field type="CharField" name="middle_name"></field>
         <field type="CharField" name="nickname"></field>
-        <field type="CharField" name="last_name">Black</field>
-        <field type="IntegerField" name="age">88</field>
-        <field type="IntegerField" name="age_unit">1</field>
-        <field type="CharField" name="city_of_residence">Eugene</field>
-        <field type="DateField" name="death_date">2011-04-12</field>
-        <field type="BooleanField" name="death_notice_has_run">False</field>
-        <field type="DateTimeField" name="death_notice_created">2011-04-14 22:38:52</field>
-    </object>
-    <object pk="2" model="obituary.death_notice">
-        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
-        <field type="CharField" name="first_name">Pearl</field>
-        <field type="CharField" name="middle_name"></field>
-        <field type="CharField" name="nickname">Pearly Girl</field>
-        <field type="CharField" name="last_name">Gartska</field>
-        <field type="IntegerField" name="age">83</field>
+        <field type="CharField" name="last_name">Cochran</field>
+        <field type="IntegerField" name="age">15</field>
         <field type="IntegerField" name="age_unit">1</field>
         <field type="CharField" name="city_of_residence">Springfield</field>
-        <field type="DateField" name="death_date">1927-12-10</field>
+        <field type="CharField" name="formerly_of">Bandon</field>
+        <field type="DateField" name="death_date">2011-05-15</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
-        <field type="DateTimeField" name="death_notice_created">2011-04-20 20:24:34</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:21:13</field>
     </object>
-    <object pk="5" model="obituary.death_notice">
-        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
-        <field type="CharField" name="first_name">Faith</field>
+    <object pk="21" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">258</field>
+        <field type="CharField" name="first_name">Donald</field>
         <field type="CharField" name="middle_name"></field>
         <field type="CharField" name="nickname"></field>
-        <field type="CharField" name="last_name">Carothers</field>
-        <field type="IntegerField" name="age">1</field>
-        <field type="IntegerField" name="age_unit">2</field>
-        <field type="CharField" name="city_of_residence">Harrisburg</field>
-        <field type="DateField" name="death_date">2011-05-03</field>
+        <field type="CharField" name="last_name">Forbess</field>
+        <field type="IntegerField" name="age">41</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-18</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
-        <field type="DateTimeField" name="death_notice_created">2011-05-06 20:21:59</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:21:54</field>
     </object>
-    <object pk="6" model="obituary.death_notice">
-        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
-        <field type="CharField" name="first_name">Paul</field>
-        <field type="CharField" name="middle_name">E.</field>
+    <object pk="22" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">258</field>
+        <field type="CharField" name="first_name">George</field>
+        <field type="CharField" name="middle_name"></field>
         <field type="CharField" name="nickname"></field>
-        <field type="CharField" name="last_name">Campion</field>
+        <field type="CharField" name="last_name">Moran</field>
+        <field type="IntegerField" name="age">76</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Lowell</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-21</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:22:36</field>
+    </object>
+    <object pk="23" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">258</field>
+        <field type="CharField" name="first_name">Mary</field>
+        <field type="CharField" name="middle_name">Ann</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Rodgers</field>
+        <field type="IntegerField" name="age">70</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-20</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:25:03</field>
+    </object>
+    <object pk="24" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">249</field>
+        <field type="CharField" name="first_name">Ione</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Gray</field>
+        <field type="IntegerField" name="age">91</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-24</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:31:09</field>
+    </object>
+    <object pk="25" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">249</field>
+        <field type="CharField" name="first_name">Basil</field>
+        <field type="CharField" name="middle_name">R.</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Thompson</field>
         <field type="IntegerField" name="age">87</field>
         <field type="IntegerField" name="age_unit">1</field>
         <field type="CharField" name="city_of_residence">Eugene</field>
-        <field type="DateField" name="death_date">2011-05-08</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-23</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
-        <field type="DateTimeField" name="death_notice_created">2011-05-09 19:42:25</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:31:36</field>
+    </object>
+    <object pk="26" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">247</field>
+        <field type="CharField" name="first_name">Cleveland</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname">Cleve</field>
+        <field type="CharField" name="last_name">Hedrick</field>
+        <field type="IntegerField" name="age">69</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-24</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:33:11</field>
+    </object>
+    <object pk="27" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
+        <field type="CharField" name="first_name">Dolores</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Hobart</field>
+        <field type="IntegerField" name="age">73</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-24</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:41:44</field>
+    </object>
+    <object pk="28" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">250</field>
+        <field type="CharField" name="first_name">Mary</field>
+        <field type="CharField" name="middle_name">Louise</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Ivie</field>
+        <field type="IntegerField" name="age">69</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-23</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:42:47</field>
+    </object>
+    <object pk="29" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">250</field>
+        <field type="CharField" name="first_name">Sean</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Marshall</field>
+        <field type="IntegerField" name="age">18</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-24</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:45:55</field>
+    </object>
+    <object pk="30" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">251</field>
+        <field type="CharField" name="first_name">Violet</field>
+        <field type="CharField" name="middle_name">Pearl</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Loeck</field>
+        <field type="IntegerField" name="age">88</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Junction City</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-24</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:47:03</field>
+    </object>
+    <object pk="31" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Colleen</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Naylor</field>
+        <field type="IntegerField" name="age">72</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Walton</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-25</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:47:57</field>
+    </object>
+    <object pk="32" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Clarence</field>
+        <field type="CharField" name="middle_name">F.</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Stichler</field>
+        <field type="IntegerField" name="age">76</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-23</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">False</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:48:43</field>
+    </object>
+    <object pk="14" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Ronnie</field>
+        <field type="CharField" name="middle_name">Allen</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Reagh</field>
+        <field type="IntegerField" name="age">52</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Harrisburg</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-22</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-25 19:06:11</field>
+    </object>
+    <object pk="13" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Jay</field>
+        <field type="CharField" name="middle_name">Edward</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Pittsley</field>
+        <field type="IntegerField" name="age">87</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-19</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-25 19:05:30</field>
+    </object>
+    <object pk="11" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Nona</field>
+        <field type="CharField" name="middle_name">W.</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Delles</field>
+        <field type="IntegerField" name="age">88</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-22</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-25 19:03:14</field>
+    </object>
+    <object pk="10" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Sarah</field>
+        <field type="CharField" name="middle_name">Naomi</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">De Leon</field>
+        <field type="IntegerField" name="age">33</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-20</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-25 18:55:41</field>
+    </object>
+    <object pk="9" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">249</field>
+        <field type="CharField" name="first_name">Grace</field>
+        <field type="CharField" name="middle_name">M.</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Beier</field>
+        <field type="IntegerField" name="age">92</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-24</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-25 18:54:23</field>
+    </object>
+    <object pk="8" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Barbara</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Jackson</field>
+        <field type="IntegerField" name="age">78</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Dillard</field>
+        <field type="CharField" name="formerly_of">Springfield</field>
+        <field type="DateField" name="death_date">2011-05-21</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-24 18:51:22</field>
     </object>
     <object pk="7" model="obituary.death_notice">
         <field to="auth.user" name="funeral_home" rel="ManyToOneRel">248</field>
@@ -194,9 +1146,93 @@
         <field type="IntegerField" name="age">75</field>
         <field type="IntegerField" name="age_unit">1</field>
         <field type="CharField" name="city_of_residence">Florence</field>
+        <field type="CharField" name="formerly_of"></field>
         <field type="DateField" name="death_date">2011-05-19</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-24 12:43:52</field>
+    </object>
+    <object pk="6" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
+        <field type="CharField" name="first_name">Paul</field>
+        <field type="CharField" name="middle_name">E.</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Campion</field>
+        <field type="IntegerField" name="age">87</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-08</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-09 17:42:25</field>
+    </object>
+    <object pk="5" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">241</field>
+        <field type="CharField" name="first_name">Faith</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Carothers</field>
+        <field type="IntegerField" name="age">1</field>
+        <field type="IntegerField" name="age_unit">2</field>
+        <field type="CharField" name="city_of_residence">Harrisburg</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-03</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-06 18:21:59</field>
+    </object>
+    <object pk="2" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Pearl</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname">Pearly Girl</field>
+        <field type="CharField" name="last_name">Gartska</field>
+        <field type="IntegerField" name="age">83</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Springfield</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">1927-12-10</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-04-20 18:24:34</field>
+    </object>
+    <object pk="1" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">246</field>
+        <field type="CharField" name="first_name">Frances</field>
+        <field type="CharField" name="middle_name"></field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Black</field>
+        <field type="IntegerField" name="age">88</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-04-12</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
+        <field type="BooleanField" name="death_notice_has_run">True</field>
+        <field type="DateTimeField" name="death_notice_created">2011-04-14 20:38:52</field>
+    </object>
+    <object pk="19" model="obituary.death_notice">
+        <field to="auth.user" name="funeral_home" rel="ManyToOneRel">245</field>
+        <field type="CharField" name="first_name">Gary</field>
+        <field type="CharField" name="middle_name">Alan</field>
+        <field type="CharField" name="nickname"></field>
+        <field type="CharField" name="last_name">Bean</field>
+        <field type="IntegerField" name="age">63</field>
+        <field type="IntegerField" name="age_unit">1</field>
+        <field type="CharField" name="city_of_residence">Eugene</field>
+        <field type="CharField" name="formerly_of"></field>
+        <field type="DateField" name="death_date">2011-05-23</field>
+        <field type="BooleanField" name="death_notice_in_system">False</field>
         <field type="BooleanField" name="death_notice_has_run">False</field>
-        <field type="DateTimeField" name="death_notice_created">2011-05-24 14:43:52</field>
+        <field type="DateTimeField" name="death_notice_created">2011-05-26 17:18:49</field>
+    </object>
+    <object pk="2" model="obituary.service">
+        <field to="obituary.death_notice" name="death_notice" rel="OneToOneRel">23</field>
+        <field type="CharField" name="service">celebration of life</field>
+        <field type="DateTimeField" name="service_date_time">2011-06-11 15:00:00</field>
+        <field type="CharField" name="service_location">Unitarian-Universalist Church of Eugene</field>
+        <field type="CharField" name="service_city">Eugene</field>
     </object>
     <object pk="1" model="obituary.obituary">
         <field type="CharField" name="cause_of_death">Age-related causes</field>
@@ -225,7 +1261,7 @@
         <field type="IntegerField" name="number_of_great_great_grandchildren"><None></None></field>
         <field type="TextField" name="preceded_in_death_by"></field>
         <field type="BooleanField" name="obituary_has_run">False</field>
-        <field type="DateTimeField" name="obituary_created">2011-04-19 17:42:12</field>
+        <field type="DateTimeField" name="obituary_created">2011-04-19 15:42:12</field>
     </object>
     <object pk="2" model="obituary.obituary">
         <field type="CharField" name="cause_of_death">age-related causes</field>
@@ -254,6 +1290,574 @@
         <field type="IntegerField" name="number_of_great_great_grandchildren"><None></None></field>
         <field type="TextField" name="preceded_in_death_by"></field>
         <field type="BooleanField" name="obituary_has_run">False</field>
-        <field type="DateTimeField" name="obituary_created">2011-04-20 20:27:39</field>
+        <field type="DateTimeField" name="obituary_created">2011-04-20 18:27:39</field>
+    </object>
+    <object pk="22" model="auth.permission">
+        <field type="CharField" name="name">Can add log entry</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="codename">add_logentry</field>
+    </object>
+    <object pk="23" model="auth.permission">
+        <field type="CharField" name="name">Can change log entry</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="codename">change_logentry</field>
+    </object>
+    <object pk="24" model="auth.permission">
+        <field type="CharField" name="name">Can delete log entry</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">8</field>
+        <field type="CharField" name="codename">delete_logentry</field>
+    </object>
+    <object pk="4" model="auth.permission">
+        <field type="CharField" name="name">Can add group</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="codename">add_group</field>
+    </object>
+    <object pk="5" model="auth.permission">
+        <field type="CharField" name="name">Can change group</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="codename">change_group</field>
+    </object>
+    <object pk="6" model="auth.permission">
+        <field type="CharField" name="name">Can delete group</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">2</field>
+        <field type="CharField" name="codename">delete_group</field>
+    </object>
+    <object pk="10" model="auth.permission">
+        <field type="CharField" name="name">Can add message</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="codename">add_message</field>
+    </object>
+    <object pk="11" model="auth.permission">
+        <field type="CharField" name="name">Can change message</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="codename">change_message</field>
+    </object>
+    <object pk="12" model="auth.permission">
+        <field type="CharField" name="name">Can delete message</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">4</field>
+        <field type="CharField" name="codename">delete_message</field>
+    </object>
+    <object pk="1" model="auth.permission">
+        <field type="CharField" name="name">Can add permission</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="codename">add_permission</field>
+    </object>
+    <object pk="2" model="auth.permission">
+        <field type="CharField" name="name">Can change permission</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="codename">change_permission</field>
+    </object>
+    <object pk="3" model="auth.permission">
+        <field type="CharField" name="name">Can delete permission</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">1</field>
+        <field type="CharField" name="codename">delete_permission</field>
+    </object>
+    <object pk="7" model="auth.permission">
+        <field type="CharField" name="name">Can add user</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="codename">add_user</field>
+    </object>
+    <object pk="8" model="auth.permission">
+        <field type="CharField" name="name">Can change user</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="codename">change_user</field>
+    </object>
+    <object pk="9" model="auth.permission">
+        <field type="CharField" name="name">Can delete user</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">3</field>
+        <field type="CharField" name="codename">delete_user</field>
+    </object>
+    <object pk="13" model="auth.permission">
+        <field type="CharField" name="name">Can add content type</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="codename">add_contenttype</field>
+    </object>
+    <object pk="14" model="auth.permission">
+        <field type="CharField" name="name">Can change content type</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="codename">change_contenttype</field>
+    </object>
+    <object pk="15" model="auth.permission">
+        <field type="CharField" name="name">Can delete content type</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">5</field>
+        <field type="CharField" name="codename">delete_contenttype</field>
+    </object>
+    <object pk="652" model="auth.permission">
+        <field type="CharField" name="name">Can add foo</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+        <field type="CharField" name="codename">add_foo</field>
+    </object>
+    <object pk="653" model="auth.permission">
+        <field type="CharField" name="name">Can change foo</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+        <field type="CharField" name="codename">change_foo</field>
+    </object>
+    <object pk="654" model="auth.permission">
+        <field type="CharField" name="name">Can delete foo</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">18</field>
+        <field type="CharField" name="codename">delete_foo</field>
+    </object>
+    <object pk="40" model="auth.permission">
+        <field type="CharField" name="name">Can add bei</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="codename">add_bei</field>
+    </object>
+    <object pk="41" model="auth.permission">
+        <field type="CharField" name="name">Can change bei</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="codename">change_bei</field>
+    </object>
+    <object pk="42" model="auth.permission">
+        <field type="CharField" name="name">Can delete bei</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">14</field>
+        <field type="CharField" name="codename">delete_bei</field>
+    </object>
+    <object pk="46" model="auth.permission">
+        <field type="CharField" name="name">Can add children</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="codename">add_children</field>
+    </object>
+    <object pk="47" model="auth.permission">
+        <field type="CharField" name="name">Can change children</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="codename">change_children</field>
+    </object>
+    <object pk="48" model="auth.permission">
+        <field type="CharField" name="name">Can delete children</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">16</field>
+        <field type="CharField" name="codename">delete_children</field>
+    </object>
+    <object pk="28" model="auth.permission">
+        <field type="CharField" name="name">Can add Death notice</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="codename">add_death_notice</field>
+    </object>
+    <object pk="29" model="auth.permission">
+        <field type="CharField" name="name">Can change Death notice</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="codename">change_death_notice</field>
+    </object>
+    <object pk="30" model="auth.permission">
+        <field type="CharField" name="name">Can delete Death notice</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">10</field>
+        <field type="CharField" name="codename">delete_death_notice</field>
+    </object>
+    <object pk="25" model="auth.permission">
+        <field type="CharField" name="name">Can add funeral home profile</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="codename">add_funeralhomeprofile</field>
+    </object>
+    <object pk="26" model="auth.permission">
+        <field type="CharField" name="name">Can change funeral home profile</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="codename">change_funeralhomeprofile</field>
+    </object>
+    <object pk="27" model="auth.permission">
+        <field type="CharField" name="name">Can delete funeral home profile</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">9</field>
+        <field type="CharField" name="codename">delete_funeralhomeprofile</field>
+    </object>
+    <object pk="34" model="auth.permission">
+        <field type="CharField" name="name">Can add obituary</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="codename">add_obituary</field>
+    </object>
+    <object pk="35" model="auth.permission">
+        <field type="CharField" name="name">Can change obituary</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="codename">change_obituary</field>
+    </object>
+    <object pk="36" model="auth.permission">
+        <field type="CharField" name="name">Can delete obituary</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">12</field>
+        <field type="CharField" name="codename">delete_obituary</field>
+    </object>
+    <object pk="43" model="auth.permission">
+        <field type="CharField" name="name">Can add other_services</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="codename">add_other_services</field>
+    </object>
+    <object pk="44" model="auth.permission">
+        <field type="CharField" name="name">Can change other_services</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="codename">change_other_services</field>
+    </object>
+    <object pk="45" model="auth.permission">
+        <field type="CharField" name="name">Can delete other_services</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">15</field>
+        <field type="CharField" name="codename">delete_other_services</field>
+    </object>
+    <object pk="31" model="auth.permission">
+        <field type="CharField" name="name">Can add service</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="codename">add_service</field>
+    </object>
+    <object pk="32" model="auth.permission">
+        <field type="CharField" name="name">Can change service</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="codename">change_service</field>
+    </object>
+    <object pk="33" model="auth.permission">
+        <field type="CharField" name="name">Can delete service</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">11</field>
+        <field type="CharField" name="codename">delete_service</field>
+    </object>
+    <object pk="49" model="auth.permission">
+        <field type="CharField" name="name">Can add siblings</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">17</field>
+        <field type="CharField" name="codename">add_siblings</field>
+    </object>
+    <object pk="50" model="auth.permission">
+        <field type="CharField" name="name">Can change siblings</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">17</field>
+        <field type="CharField" name="codename">change_siblings</field>
+    </object>
+    <object pk="51" model="auth.permission">
+        <field type="CharField" name="name">Can delete siblings</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">17</field>
+        <field type="CharField" name="codename">delete_siblings</field>
+    </object>
+    <object pk="37" model="auth.permission">
+        <field type="CharField" name="name">Can add visitation</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="codename">add_visitation</field>
+    </object>
+    <object pk="38" model="auth.permission">
+        <field type="CharField" name="name">Can change visitation</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="codename">change_visitation</field>
+    </object>
+    <object pk="39" model="auth.permission">
+        <field type="CharField" name="name">Can delete visitation</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">13</field>
+        <field type="CharField" name="codename">delete_visitation</field>
+    </object>
+    <object pk="16" model="auth.permission">
+        <field type="CharField" name="name">Can add session</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="codename">add_session</field>
+    </object>
+    <object pk="17" model="auth.permission">
+        <field type="CharField" name="name">Can change session</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="codename">change_session</field>
+    </object>
+    <object pk="18" model="auth.permission">
+        <field type="CharField" name="name">Can delete session</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">6</field>
+        <field type="CharField" name="codename">delete_session</field>
+    </object>
+    <object pk="19" model="auth.permission">
+        <field type="CharField" name="name">Can add site</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="codename">add_site</field>
+    </object>
+    <object pk="20" model="auth.permission">
+        <field type="CharField" name="name">Can change site</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="codename">change_site</field>
+    </object>
+    <object pk="21" model="auth.permission">
+        <field type="CharField" name="name">Can delete site</field>
+        <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel">7</field>
+        <field type="CharField" name="codename">delete_site</field>
+    </object>
+    <object pk="3" model="auth.group">
+        <field type="CharField" name="name">funeral home</field>
+        <field to="auth.permission" name="permissions" rel="ManyToManyRel"><object pk="40"></object><object pk="41"></object><object pk="42"></object><object pk="46"></object><object pk="47"></object><object pk="48"></object><object pk="28"></object><object pk="29"></object><object pk="30"></object><object pk="34"></object><object pk="35"></object><object pk="36"></object><object pk="43"></object><object pk="44"></object><object pk="45"></object><object pk="31"></object><object pk="32"></object><object pk="33"></object><object pk="49"></object><object pk="50"></object><object pk="51"></object><object pk="37"></object><object pk="38"></object><object pk="39"></object></field>
+    </object>
+    <object pk="257" model="auth.user">
+        <field type="CharField" name="username">springfield</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$9979e$b9c931a068eb892ddd94b9f4f6bcd123e582c1c6</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:41:13</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:41:13</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="251" model="auth.user">
+        <field type="CharField" name="username">murphymusgrove</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$cae7f$8fc953f98a2e58e9d6a1f03e42e549f3c8d041aa</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:46:23</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:36:47</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="246" model="auth.user">
+        <field type="CharField" name="username">andreasons</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$00d0d$90779bd0f5eab3d2ebc5f7b09406388be9f6f41a</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:47:33</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 13:56:24</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="1" model="auth.user">
+        <field type="CharField" name="username">jheasly</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email">john.heasly@registerguard.com</field>
+        <field type="CharField" name="password">sha1$9da12$f6fbb23abc6581b7ffce47583631011c5df9adc6</field>
+        <field type="BooleanField" name="is_staff">True</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">True</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:56:23</field>
+        <field type="DateTimeField" name="date_joined">2011-04-08 19:22:19</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="259" model="auth.user">
+        <field type="CharField" name="username">weddle</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$0ebef$a8b0b1f5fae474a47cefa927157f772eeef801bc</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:42:42</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:42:42</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="260" model="auth.user">
+        <field type="CharField" name="username">westlawn</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$6572b$98aec5dc2ba569ab1bec9bcbb893633a81b244a9</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:43:23</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:43:23</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="261" model="auth.user">
+        <field type="CharField" name="username">whispering</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$d61b2$9910a21dc2a7d9b717f0e6a5f2951b42e7c40bd9</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:43:54</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:43:54</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="248" model="auth.user">
+        <field type="CharField" name="username">burns</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$4b2a6$228371b46a68abfd2a75e3873d3c70b8e130ae52</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-24 16:59:21</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 13:59:40</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="245" model="auth.user">
+        <field type="CharField" name="username">alpha</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$51fdd$112ee72203ff99e1d82b2af1ba2dc90a9979f5c4</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:18:23</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 13:51:01</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="258" model="auth.user">
+        <field type="CharField" name="username">sunset</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$2a019$72da125b81c1e334cef5545b0f0d1f20959d5eac</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:20:17</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:42:11</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="249" model="auth.user">
+        <field type="CharField" name="username">lane</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$54271$bd93678f3f8b461d2c7d0322af69fa6134e16c6b</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:27:25</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:11:58</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="247" model="auth.user">
+        <field type="CharField" name="username">aurora</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$0cdd8$223c2497decc6f0774e47bd7b74efe7d72d99528</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:32:25</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 13:57:03</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="241" model="auth.user">
+        <field type="CharField" name="username">musgrove</field>
+        <field type="CharField" name="first_name">Wayne</field>
+        <field type="CharField" name="last_name">Musgrove</field>
+        <field type="CharField" name="email">wayne@musgroves.com</field>
+        <field type="CharField" name="password">sha1$be0ef$09c28cf25d0a6f1218124cf07ac60e15dc96973f</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:33:43</field>
+        <field type="DateTimeField" name="date_joined">2009-11-05 11:24:57</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="242" model="auth.user">
+        <field type="CharField" name="username">buell</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$ad6ff$b1b4db39f987460c1d8dce341188c76a3154439a</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-09-10 16:05:34</field>
+        <field type="DateTimeField" name="date_joined">2009-11-19 10:47:15</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="250" model="auth.user">
+        <field type="CharField" name="username">major</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$dcfc3$725d14e7be859924fb9be8b0f91c24ccbbb8ac50</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2011-05-26 17:42:09</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:29:41</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="262" model="auth.user">
+        <field type="CharField" name="username">englands</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$34f86$8c1bcc9e6fa6499ba0652742305478dd518a17ab</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-11 17:54:05</field>
+        <field type="DateTimeField" name="date_joined">2010-11-11 17:52:17</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="252" model="auth.user">
+        <field type="CharField" name="username">oakridge</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$1db54$12e88713004a0fac94c54cbee0b5c978ec0c598d</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:37:51</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:37:51</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="253" model="auth.user">
+        <field type="CharField" name="username">peake</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$eb136$58e2c809be40a09d81538b5da0c35353571d1ca1</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:38:28</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:38:28</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="254" model="auth.user">
+        <field type="CharField" name="username">poolelarsen</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$373d7$623f76a3a87788bb8c2a7dd4def83cae32a5eac3</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-11 17:58:40</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:39:03</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="255" model="auth.user">
+        <field type="CharField" name="username">resthaven</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$1e1d1$8eaf683ed03d1a19d5d4152d45784c3eccb29eef</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-09 14:39:54</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:39:54</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
+    </object>
+    <object pk="256" model="auth.user">
+        <field type="CharField" name="username">smithlundmills</field>
+        <field type="CharField" name="first_name"></field>
+        <field type="CharField" name="last_name"></field>
+        <field type="CharField" name="email"></field>
+        <field type="CharField" name="password">sha1$3f493$167014e25d97f07e2797adb7a7c160ef60e42b18</field>
+        <field type="BooleanField" name="is_staff">False</field>
+        <field type="BooleanField" name="is_active">True</field>
+        <field type="BooleanField" name="is_superuser">False</field>
+        <field type="DateTimeField" name="last_login">2010-11-12 12:28:09</field>
+        <field type="DateTimeField" name="date_joined">2010-11-09 14:40:24</field>
+        <field to="auth.group" name="groups" rel="ManyToManyRel"><object pk="3"></object></field>
+        <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
     </object>
 </django-objects>

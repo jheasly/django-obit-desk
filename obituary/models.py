@@ -79,6 +79,7 @@ class Death_notice(models.Model):
     city_of_residence = models.CharField(max_length=110)
     formerly_of = models.CharField(max_length=126, blank=True)
     death_date = models.DateField()
+    death_notice_in_system = models.BooleanField()
     death_notice_has_run = models.BooleanField()
     death_notice_created = models.DateTimeField(auto_now_add=True)
     
@@ -103,7 +104,7 @@ class Service(models.Model):
     service = models.CharField(choices=SERVICES, max_length=65)
     service_date_time = models.DateTimeField()
     service_location = models.CharField(max_length=75)
-    service_city = models.CharField(max_length=80)
+    service_city = models.CharField(max_length=80, blank=True)
     
     def __unicode__(self):
         return self.service

@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}Manage death notice{% endblock %}
+
 {% block content %}
+<p><a href="{% url death_notice_index %}">Home</a></p>
 <p>Hello {{ user.funeralhomeprofile.full_name }}</p>
 
 <form action="" method="post">{% csrf_token %}
@@ -9,7 +12,9 @@
 	{{ form }}
 	{{ formset }}
 	<tr>
-		<td><input type="submit" name="submit" value="Save" /> <input type="submit" name="add_another" value="Save and add another"></td>
+		<td><input type="submit" name="submit" value="Save" /> 
+		<input type="submit" name="add_another" value="Save and add another"> 
+		<input type="submit" name="delete_death_notice" value="Delete"></td>
 	</tr>
 </table>
 </form>
@@ -26,7 +31,6 @@
   // http://trentrichardson.com/examples/timepicker/
   $(function(){
     $("#id_service-0-service_date_time").datetimepicker({
-      ampm: true,
       stepMinute: 5,
       hourMin: 6,
       hourMax: 23
