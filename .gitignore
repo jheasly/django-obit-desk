@@ -1,4 +1,4 @@
 *.pyc
 *.DS_Store
 local_settings.py
-obituary/fixtures/obituary.xml
+obituary/fixtures/*
