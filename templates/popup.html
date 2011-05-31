@@ -2,6 +2,7 @@
 <head>
 <title>Add {{ field }}</title>
 <script src="/media/js/admin/RelatedObjectLookups.js"></script>
+{{ form.media }}
 </head>
 <body>
 <h1>Add {{ field }}</h1>
@@ -12,5 +13,19 @@
         </table>
 <p><input type="submit" /> | <a href="javascript:window.close()">Cancel</a></p>
 </form>
+
+<script type="text/javascript"> 
+  $(function(){
+    $("#id_death_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-110:c+0',
+            dateFormat: 'yy-mm-dd'
+        });
+  });
+
+  document.getElementById('id_first_name').focus()
+</script>
+
 </body>
 </html>

@@ -39,15 +39,11 @@ class CalendarWidget(forms.DateInput):
         )
 
 class Death_noticeForm(ModelForm):
-#     def __init__(self, request, *args, **kwargs):
-#         super(Death_noticeForm, self).__init__(*args, **kwargs)
-#         self.fields['funeral_home'].queryset = Death_notice.objects.filter(funeral_home=request.user).order_by('last_name',)
-    
     death_date = forms.DateField(widget=CalendarWidget())
     
     class Meta:
          model = Death_notice
-         exclude = ('funeral_home', 'death_notice_has_run',)
+         exclude = ('funeral_home', 'death_notice_in_system', 'death_notice_has_run',)
 
 VisitationFormSet = inlineformset_factory(Obituary,
     Visitation,
@@ -55,12 +51,14 @@ VisitationFormSet = inlineformset_factory(Obituary,
     extra=1,)
 
 class ObituaryForm(ModelForm):
-#     def __init__(self, request, *args, **kwargs):
-#         super(ObituaryForm, self).__init__(*args, **kwargs)
-#         self.fields['death_notice'].queryset = Death_notice.objects.filter(funeral_home=request.user).order_by('last_name',)
+    def __init__(self, request, *args, **kwargs):
+        super(ObituaryForm, self).__init__(*args, **kwargs)
+        self.fields['death_notice'].queryset = Death_notice.objects.filter(funeral_home=request.user).order_by('last_name',)
     
     death_notice = forms.ModelChoiceField(Death_notice.objects, widget = SelectWithPopUp)
+    date_of_birth = forms.DateField(widget=CalendarWidget())
+    marriage_date = forms.DateField(widget=CalendarWidget())
     
     class Meta:
         model = Obituary
-        exclude = ('first_name', 'funeral_home', 'death_notice_has_run', 'obituary_has_run',)
+        exclude = ('funeral_home', 'obituary_has_run',)

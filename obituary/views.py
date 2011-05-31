@@ -13,8 +13,8 @@ from django.utils.html import escape
 from django.utils.translation import ugettext
 from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Service, Obituary, Visitation
-from obituary.forms import Death_noticeForm, ServiceFormSet, ObituaryForm, \
-    VisitationFormSet
+from obituary.forms import Death_noticeForm, \
+    ServiceFormSet, ObituaryForm, VisitationFormSet
 
 # Create your views here.
 
@@ -95,19 +95,23 @@ def manage_death_notice(request, death_notice_id=None):
 
 # http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
 def manage_obituary(request, obituary_id=None):
-    if obituary_id:
-        obituary = Obituary.objects.get(pk=obituary_id)
-        form = ObituaryForm(request.POST, request.FILES, instance=obituary)
-    if request.POST:
-        form = ObituaryForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        form = ObituaryForm(request, request.POST, request.FILES)
         formset = VisitationFormSet(request.POST, request.FILES)
         if form.is_valid() and formset.is_valid():
             
             form.save()
             formset.save()
     else:
-        form = ObituaryForm()
-        formset = VisitationFormSet(instance=Obituary())
+        if obituary_id:
+            obituary = Obituary.objects.get(pk=obituary_id)
+            print 'obituary', obituary
+#             form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
+            form = ObituaryForm(request, instance=obituary)
+            formset = VisitationFormSet(instance=obituary)
+        else:
+            form = ObituaryForm(request)
+            formset = VisitationFormSet(instance=Obituary())
     
     return render_to_response('manage_obituary.html', {
         'form': form,
@@ -170,7 +174,12 @@ def add_new_model(request, model_name):
                     form = form(request.POST)
                     if form.is_valid():
                         try:
-                            new_obj = form.save()
+                            if normal_model_name == 'Death_notice':
+                                new_obj = form.save(commit=False)
+                                new_obj.funeral_home = request.user
+                                new_obj.save()
+                            else:
+                                new_obj = form.save()
                         except forms.ValidationError, error:
                             new_obj = None
                         

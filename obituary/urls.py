@@ -9,6 +9,6 @@ urlpatterns = patterns('',
     url(r'^obituaries/$', manage_obituary, name='add_obituary'),
     url(r'^funeral-home/$', fh_index, name='death_notice_index'),
     url(r'^logout/$', logout_view, name='logout'),
-    (r'^deaths/print/$', deaths, {'model': 'Death_notice'},),
+    (r'^deaths/print/$', deaths, {'model': 'Death_notice'}),
     (r'^obits/print/$', deaths, {'model': 'Obituary'},),
 )

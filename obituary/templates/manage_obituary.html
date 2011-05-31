@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block content %}
+<p><a href="{% url death_notice_index %}">Home</a></p>
+<p>Hello {{ user.funeralhomeprofile.full_name }}</p>
+
+{% if form.is_multipart %}
+<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+{% else %}
 <form action="" method="post">{% csrf_token %}
+{% endif %}
 <table>
 	{{ form }}
 	{{ formset }}
@@ -14,4 +21,37 @@
 	</tr>
 </table>
 </form>
+
+<script type="text/javascript"> 
+  $(function(){
+    $("#id_date_of_birth").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-110:c+0',
+            dateFormat: 'yy-mm-dd'
+        });
+  });
+
+  $(function(){
+    $("#id_marriage_date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-110:c+0',
+            dateFormat: 'yy-mm-dd'
+        });
+  });
+
+
+  // http://trentrichardson.com/examples/timepicker/
+  $(function(){
+    $("#id_service-0-service_date_time").datetimepicker({
+      stepMinute: 5,
+      hourMin: 6,
+      hourMax: 23
+    });
+  });
+
+  document.getElementById('id_first_name').focus()
+</script>
+
 {% endblock content %}
