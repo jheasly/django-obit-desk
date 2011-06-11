@@ -14,7 +14,7 @@ from django.utils.translation import ugettext
 from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Service, Obituary, Visitation
 from obituary.forms import Death_noticeForm, \
-    ServiceFormSet, ObituaryForm, VisitationFormSet
+    ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormsSet
 
 # Create your views here.
 
@@ -61,6 +61,7 @@ def manage_death_notice(request, death_notice_id=None):
 #             messages.success(request, msg, fail_silently=True)
             messages.success(request, msg, fail_silently=False)
             return HttpResponseRedirect(reverse('death_notice_index'))
+        
         if death_notice_id:
             death_notice = Death_notice.objects.get(pk=death_notice_id)
             form = Death_noticeForm(request.POST, request.FILES, instance=death_notice)
@@ -68,6 +69,7 @@ def manage_death_notice(request, death_notice_id=None):
         else:
             form = Death_noticeForm(request.POST, request.FILES)
             formset = ServiceFormSet(request.POST)
+        
         if form.is_valid() and formset.is_valid():
             death_notice = form.save(commit=False)
             death_notice.funeral_home = request.user
@@ -97,11 +99,19 @@ def manage_death_notice(request, death_notice_id=None):
 def manage_obituary(request, obituary_id=None):
     if request.method == 'POST':
         form = ObituaryForm(request, request.POST, request.FILES)
-        formset = VisitationFormSet(request.POST, request.FILES)
+        formset = VisitationFormSet(request.POST)
+        bei_formset = BEI_FormsSet(request.POST)
         if form.is_valid() and formset.is_valid():
             
             form.save()
             formset.save()
+        if obituary_id:
+            obituary = Obituary.objects.get(pk=obituary_id)
+            form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
+            formset = VisitationFormSet(request.POST, instance=obituary)
+        
+        if form.is_valid() and formset.is_valid():
+            obituary.save()
     else:
         if obituary_id:
             obituary = Obituary.objects.get(pk=obituary_id)

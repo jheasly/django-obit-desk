@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
-from obituary.models import Death_notice, Service, Obituary, Visitation
+from obituary.models import Death_notice, Service, Obituary, Visitation, 
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:
@@ -39,6 +39,9 @@ class CalendarWidget(forms.DateInput):
         )
 
 class Death_noticeForm(ModelForm):
+    error_css_class = 'error'
+    required_css_class = 'required'
+    
     death_date = forms.DateField(widget=CalendarWidget())
     
     class Meta:
@@ -50,10 +53,18 @@ VisitationFormSet = inlineformset_factory(Obituary,
     can_delete=True,
     extra=1,)
 
+BEI_FormSet = inlineformset_factory(Obituary,
+    BEI,
+    can_delete=True,
+    extra=1,)
+
 class ObituaryForm(ModelForm):
     def __init__(self, request, *args, **kwargs):
         super(ObituaryForm, self).__init__(*args, **kwargs)
         self.fields['death_notice'].queryset = Death_notice.objects.filter(funeral_home=request.user).order_by('last_name',)
+    
+    error_css_class = 'error'
+    required_css_class = 'required'
     
     death_notice = forms.ModelChoiceField(Death_notice.objects, widget = SelectWithPopUp)
     date_of_birth = forms.DateField(widget=CalendarWidget())

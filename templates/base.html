@@ -6,6 +6,8 @@
 	<title>{% block title %}{% endblock %}</title>
 	
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.0.0/build/cssfonts/fonts-min.css&3.0.0/build/cssreset/reset-min.css&3.0.0/build/cssbase/base-min.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/vader/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="http://rg-assets.s3.amazonaws.com/v4.0/schedule/1.0/css/schedule.css" type="text/css" media="screen">
 	
 	<style type="text/css">
 		<!--
@@ -51,6 +53,7 @@
 	{{ formset.media }}
 	
 	{% block js %}{% endblock %}
+	{% block css %}{% endblock %}
 	</head>
 	<body>
 		{% block content %}

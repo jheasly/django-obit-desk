@@ -4,9 +4,24 @@
 <script src="/media/js/admin/RelatedObjectLookups.js"></script>
 {% endblock %}
 
+{% block css %}
+<style type="text/css">
+	<!--
+	table {
+		margin-left: 10px;
+		margin-top: 10px;
+		border: 1px solid #000000;
+		width: 500px;
+	}
+	-->
+</style>
+{% endblock %}
+
 {% block content %}
-<p><a href="{% url death_notice_index %}">Home</a></p>
-<p>Hello {{ user.funeralhomeprofile.full_name }}</p>
+<table>
+	<tr><td><a href="{% url death_notice_index %}">Home</a></td></tr>
+	<tr><td>Hello {{ user.funeralhomeprofile.full_name }}</td></tr>
+</table>
 
 {% if form.is_multipart %}
 <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
@@ -15,13 +30,16 @@
 {% endif %}
 <table>
 	{{ form }}
+</table>
+<table>
 	{{ formset }}
+</table>
+<table>
 	<tr>
 		<td><input type="submit" name="submit" value="Submit" /></td>
 	</tr>
 </table>
 </form>
-
 <script type="text/javascript"> 
   $(function(){
     $("#id_date_of_birth").datepicker({
@@ -51,7 +69,7 @@
     });
   });
 
-  document.getElementById('id_first_name').focus()
+  document.getElementById('id_death_notice').focus()
 </script>
 
 {% endblock content %}

@@ -1,3 +1,4 @@
+from django.core.mail import send_mail, send_mass_mail
 from django.db import models
 from os import path
 
@@ -88,6 +89,23 @@ class Death_notice(models.Model):
     
     def __unicode__(self):
         return u'Death notice for %s %s' % (self.first_name, self.last_name)
+    
+    def save(self):
+        from_email = 'rgnews.registerguard.@gmail.com'
+        to_email = ['john.heasly@registerguard.com']
+        message_email = 'Go to the death notice admin page for further information.'
+        
+        if(self.id):
+            datatuple = (
+                ('Change made to %s %s death notice' % (self.first_name, self.last_name), message_email, from_email, to_email),
+            )
+        else:
+            # a new Death_notice
+            datatuple = (
+                ('Death notice created for %s %s' % (self.first_name, self.last_name), message_email, from_email, to_email),
+            )
+        send_mass_mail(datatuple)
+        super(Death_notice, self).save()
 
 class Service(models.Model):
     SERVICES = (

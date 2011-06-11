@@ -7,6 +7,12 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'rgnews.registerguard@gmail.com'
+EMAIL_HOST_PASSWORD = 'rgnews2009'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 MANAGERS = ADMINS
 
 DATABASES = {
