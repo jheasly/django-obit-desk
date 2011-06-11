@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
-from obituary.models import Death_notice, Service, Obituary, Visitation, 
+from obituary.models import Death_notice, Service, Obituary, Visitation, BEI 
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:

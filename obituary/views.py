@@ -14,7 +14,7 @@ from django.utils.translation import ugettext
 from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Service, Obituary, Visitation
 from obituary.forms import Death_noticeForm, \
-    ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormsSet
+    ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormSet
 
 # Create your views here.
 
@@ -100,8 +100,8 @@ def manage_obituary(request, obituary_id=None):
     if request.method == 'POST':
         form = ObituaryForm(request, request.POST, request.FILES)
         formset = VisitationFormSet(request.POST)
-        bei_formset = BEI_FormsSet(request.POST)
-        if form.is_valid() and formset.is_valid():
+        bei_formset = BEI_FormSet(request.POST)
+        if form.is_valid() and formset.is_valid() and bei_formset.is_valid():
             
             form.save()
             formset.save()
@@ -119,46 +119,17 @@ def manage_obituary(request, obituary_id=None):
 #             form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
             form = ObituaryForm(request, instance=obituary)
             formset = VisitationFormSet(instance=obituary)
+            bei_formset = BEI_FormSet(instance=obituary)
         else:
             form = ObituaryForm(request)
             formset = VisitationFormSet(instance=Obituary())
+            bei_formset = BEI_FormSet(instance=Obituary())
     
     return render_to_response('manage_obituary.html', {
         'form': form,
         'formset': formset,
+        'bei_formset': bei_formset,
     }, context_instance=RequestContext(request))
-
-# def manage_death_notice(request, death_notice_id=None):
-#     if death_notice_id is not None:
-#         death_notice = Death_notice.objects.get(pk=death_notice_id)
-#         formset = ServiceInlineFormset(instance=death_notice)
-#     
-#     if request.method == 'POST':
-#         form = Death_noticeForm(request.POST, request.FILES, instance=death_notice)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('death_notice_index'))
-#     else:
-#         form = Death_noticeForm()
-#         formset = ServiceInlineFormset(instance=death_notice)
-#     return render_to_response('obituary/manage_death_notice.html', {
-#         'form': form,
-#         'formset': formset,
-#     })
-
-# def manage_death_notice(request, death_notice_id=None):
-#     if death_notice_id is not None:
-#         death_notice = Death_notice.objects.get(pk=death_notice_id)
-#     ServiceInlineFormSet = inlineformset_factory(Death_notice, Service)
-#     if request.method == 'POST':
-#         formset = ServiceInlineFormSet(request.POST, request.FILES, instance=death_notice)
-#         if formset.is_valid():
-#             formset.save()
-#     else:
-#         formset = ServiceInlineFormSet(instance=death_notice)
-#     return render_to_response('obituary/manage_death_notice.html', {
-#         'formset': formset,
-#     })
 
 def logout_view(request):
     logout(request)
