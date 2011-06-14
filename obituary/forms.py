@@ -2,7 +2,8 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
-from obituary.models import Death_notice, Service, Obituary, Visitation, BEI 
+from obituary.models import Death_notice, Service, Obituary, Visitation, BEI, \
+    Other_services
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:
@@ -48,16 +49,6 @@ class Death_noticeForm(ModelForm):
          model = Death_notice
          exclude = ('funeral_home', 'death_notice_in_system', 'death_notice_has_run',)
 
-VisitationFormSet = inlineformset_factory(Obituary,
-    Visitation,
-    can_delete=True,
-    extra=1,)
-
-BEI_FormSet = inlineformset_factory(Obituary,
-    BEI,
-    can_delete=True,
-    extra=1,)
-
 class ObituaryForm(ModelForm):
     def __init__(self, request, *args, **kwargs):
         super(ObituaryForm, self).__init__(*args, **kwargs)
@@ -73,3 +64,27 @@ class ObituaryForm(ModelForm):
     class Meta:
         model = Obituary
         exclude = ('funeral_home', 'obituary_has_run',)
+
+VisitationFormSet = inlineformset_factory(Obituary,
+    Visitation,
+    can_delete=True,
+    extra=1,)
+
+BEI_FormSet = inlineformset_factory(Obituary,
+    BEI,
+    can_delete=True,
+    extra=1,)
+
+class Other_servicesForm(ModelForm):
+    
+    class Meta:
+        model = Other_services
+        widget = {
+            'other_services_date_time': ObitsCalendarDateTimeWidget(),
+        }
+
+Other_servicesFormSet = inlineformset_factory(Obituary,
+    Other_services,
+    form = Other_servicesForm,
+    can_delete=True,
+    extra=1,)

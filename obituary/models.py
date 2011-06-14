@@ -97,12 +97,12 @@ class Death_notice(models.Model):
         
         if(self.id):
             datatuple = (
-                ('Change made to %s %s death notice' % (self.first_name, self.last_name), message_email, from_email, to_email),
+                ('Change made by %s to %s %s death notice' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
             )
         else:
             # a new Death_notice
             datatuple = (
-                ('Death notice created for %s %s' % (self.first_name, self.last_name), message_email, from_email, to_email),
+                ('Death notice created by %s for %s %s' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
             )
         send_mass_mail(datatuple)
         super(Death_notice, self).save()
@@ -173,6 +173,23 @@ class Obituary(models.Model):
     
     def __unicode__(self):
         return u'Obituary for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+    
+    def save(self):
+        from_email = 'rgnews.registerguard.@gmail.com'
+        to_email = ['john.heasly@registerguard.com']
+        message_email = 'Go to the obituary admin page for further information.'
+        
+        if(self.pk):
+            datatuple = (
+                ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
+            )
+        else:
+            # a new Death_notice
+            datatuple = (
+                ('Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
+            )
+        send_mass_mail(datatuple)
+        super(Obituary, self).save()
     
     def photo_file_name(self):
         if self.photo:

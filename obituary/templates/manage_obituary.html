@@ -38,6 +38,9 @@
 	{{ bei_formset }}
 </table>
 <table>
+	{{ os_formset }}
+</table>
+<table>
 	<tr>
 		<td><input type="submit" name="submit" value="Submit" /></td>
 	</tr>
@@ -62,10 +65,18 @@
         });
   });
 
+  $(function(){
+    $("#id_spouse_death").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-110:c+0',
+            dateFormat: 'yy-mm-dd'
+        });
+  });
 
   // http://trentrichardson.com/examples/timepicker/
   $(function(){
-    $("#id_service-0-service_date_time").datetimepicker({
+    $("#id_other_services-0-other_services_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,
       hourMax: 23

@@ -14,7 +14,8 @@ from django.utils.translation import ugettext
 from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Service, Obituary, Visitation
 from obituary.forms import Death_noticeForm, \
-    ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormSet
+    ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormSet, \
+    Other_servicesFormSet
 
 # Create your views here.
 
@@ -97,38 +98,39 @@ def manage_death_notice(request, death_notice_id=None):
 
 # http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
 def manage_obituary(request, obituary_id=None):
+    if obituary_id:
+        obituary = Obituary.objects.get(pk=obituary_id)
+    
     if request.method == 'POST':
-        form = ObituaryForm(request, request.POST, request.FILES)
-        formset = VisitationFormSet(request.POST)
-        bei_formset = BEI_FormSet(request.POST)
-        if form.is_valid() and formset.is_valid() and bei_formset.is_valid():
+        form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
+        formset = VisitationFormSet(request.POST, instance=obituary)
+        bei_formset = BEI_FormSet(request.POST, instance=obituary)
+        os_formset = Other_servicesFormSet(request.POST, instance=obituary)
+        if form.is_valid() and formset.is_valid() and bei_formset.is_valid() and \
+            os_formset.is_valid():
             
             form.save()
             formset.save()
-        if obituary_id:
-            obituary = Obituary.objects.get(pk=obituary_id)
-            form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
-            formset = VisitationFormSet(request.POST, instance=obituary)
-        
-        if form.is_valid() and formset.is_valid():
-            obituary.save()
+            bei_formset.save()
+            os_formset.save()
+        return HttpResponseRedirect(reverse('obituary.views.manage_obituary', args=(obituary.pk,)))
     else:
         if obituary_id:
-            obituary = Obituary.objects.get(pk=obituary_id)
-            print 'obituary', obituary
-#             form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
             form = ObituaryForm(request, instance=obituary)
             formset = VisitationFormSet(instance=obituary)
             bei_formset = BEI_FormSet(instance=obituary)
+            os_formset = Other_servicesFormSet(instance=obituary)
         else:
             form = ObituaryForm(request)
             formset = VisitationFormSet(instance=Obituary())
             bei_formset = BEI_FormSet(instance=Obituary())
+            os_formset = Other_servicesFormSet(instance=Obituary())
     
     return render_to_response('manage_obituary.html', {
         'form': form,
         'formset': formset,
         'bei_formset': bei_formset,
+        'os_formset': os_formset,
     }, context_instance=RequestContext(request))
 
 def logout_view(request):
