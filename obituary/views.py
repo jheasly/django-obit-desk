@@ -100,6 +100,8 @@ def manage_death_notice(request, death_notice_id=None):
 def manage_obituary(request, obituary_id=None):
     if obituary_id:
         obituary = Obituary.objects.get(pk=obituary_id)
+    else:
+        obituary = None
     
     if request.method == 'POST':
         form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
@@ -113,7 +115,7 @@ def manage_obituary(request, obituary_id=None):
             formset.save()
             bei_formset.save()
             os_formset.save()
-        return HttpResponseRedirect(reverse('obituary.views.manage_obituary', args=(obituary.pk,)))
+            return HttpResponseRedirect(reverse('obituary.views.manage_obituary', args=(obituary.pk,)))
     else:
         if obituary_id:
             form = ObituaryForm(request, instance=obituary)

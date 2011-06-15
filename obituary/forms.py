@@ -20,11 +20,6 @@ class ServiceForm(ModelForm):
             'service_date_time': ObitsCalendarDateTimeWidget(),
         }
 
-#     def __init__(self, *args, **kwargs):
-#         super(ServiceForm, self).__init__(*args, **kwargs)
-#         
-#         self.fields['service_date_time'].widget = MyCalendarDateTimeWidget()
-
 ServiceFormSet = inlineformset_factory(Death_notice, 
     Service,
     form = ServiceForm,
@@ -59,7 +54,7 @@ class ObituaryForm(ModelForm):
     
     death_notice = forms.ModelChoiceField(Death_notice.objects, widget = SelectWithPopUp)
     date_of_birth = forms.DateField(widget=CalendarWidget())
-    marriage_date = forms.DateField(widget=CalendarWidget())
+    marriage_date = forms.DateField(widget=CalendarWidget(), required=False)
     
     class Meta:
         model = Obituary
@@ -79,7 +74,7 @@ class Other_servicesForm(ModelForm):
     
     class Meta:
         model = Other_services
-        widget = {
+        widgets = {
             'other_services_date_time': ObitsCalendarDateTimeWidget(),
         }
 
