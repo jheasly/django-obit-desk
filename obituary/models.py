@@ -205,7 +205,7 @@ class Visitation(models.Model):
     visitation_location = models.CharField(max_length=126)
     
     class Meta:
-        verbose_name_plural = 'visitation'
+        verbose_name = 'Visitation'
     
     def __unicode__(self):
         return self.description
@@ -223,7 +223,7 @@ class BEI(models.Model):
     bei_location = models.CharField(u'burial, entombment or inurnment location', max_length=126)
     
     class Meta:
-        verbose_name_plural = 'burial, entombment or inurnment'
+        verbose_name = 'Burial, entombment or inurnment'
     
     def __unicode__(self):
         return self.bei
@@ -235,7 +235,7 @@ class Other_services(models.Model):
     other_services_location = models.CharField(max_length=126)
     
     class Meta:
-         verbose_name_plural = 'other services'
+         verbose_name = 'Other services'
     
     def __unicode__(self):
         return self.description
@@ -254,7 +254,7 @@ class Children(models.Model):
     residence = models.CharField(max_length=126)
     
     class Meta:
-        verbose_name_plural = 'children'
+        verbose_name = 'Surviving children'
     
     def __unicode__(self):
         return '%s %s' % (self.gender ,self.name)
@@ -271,7 +271,7 @@ class Siblings(models.Model):
     residence = models.CharField(max_length=126)
     
     class Meta:
-        verbose_name_plural = 'siblings'
+        verbose_name = 'Surviving siblings'
     
     def __unicode__(self):
         return '%s %s' % (self.gender, self.name )

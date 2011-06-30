@@ -124,6 +124,11 @@ def manage_obituary(request, obituary_id=None):
         child_formset = ChildrenFormSet(request.POST, instance=obituary)
         sib_formset = SiblingsFormSet(request.POST, instance=obituary)
         
+        print 'dir(formset)', dir(formset), '\n'
+        print 'dir(formset.model)', dir(formset.model), '\n'
+        print 'dir(formset.model._meta)', dir(formset.model._meta), '\n'
+        print formset.model._meta.verbose_name
+        
         if form.is_valid() and formset.is_valid() and bei_formset.is_valid() and \
             os_formset.is_valid() and child_formset.is_valid() and sib_formset.is_valid():
             
@@ -157,10 +162,15 @@ def manage_obituary(request, obituary_id=None):
     
     return render_to_response('manage_obituary.html', {
         'form': form,
+        'formset_name': formset.model._meta.verbose_name,
         'formset': formset,
+        'bei_formset_name': bei_formset.model._meta.verbose_name,
         'bei_formset': bei_formset,
+        'os_formset_name': os_formset.model._meta.verbose_name,
         'os_formset': os_formset,
+        'child_formset_name': child_formset.model._meta.verbose_name,
         'child_formset': child_formset,
+        'sib_formset_name': sib_formset.model._meta.verbose_name,
         'sib_formset': sib_formset,
     }, context_instance=RequestContext(request))
 

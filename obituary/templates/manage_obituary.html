@@ -32,18 +32,33 @@
 	{{ form }}
 </table>
 <table>
+	<tr>
+		<td>{{ formset_name }}</td>
+	</tr>
 	{{ formset }}
 </table>
 <table>
+	<tr>
+		<td>{{ bei_formset_name }}</td>
+	</tr>
 	{{ bei_formset }}
 </table>
 <table>
+	<tr>
+		<td>{{ os_formset_name }}</td>
+	</tr>
 	{{ os_formset }}
 </table>
 <table>
+	<tr>
+		<td>{{ child_formset_name }}</td>
+	</tr>
 	{{ child_formset }}
 </table>
 <table>
+	<tr>
+		<td>{{ sib_formset_name }}</td>
+	</tr>
 	{{ sib_formset }}
 </table>
 <table>
@@ -63,7 +78,7 @@
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-110:c+0',
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'yy-mm-dd',
         });
   });
 
@@ -72,7 +87,7 @@
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-110:c+0',
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'yy-mm-dd',
         });
   });
 
@@ -81,7 +96,8 @@
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-110:c+0',
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'yy-mm-dd',
+            constrainInput: false,
         });
   });
 
@@ -90,7 +106,7 @@
     $("#id_other_services-0-other_services_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,
-      hourMax: 23
+      hourMax: 23,
     });
   });
 

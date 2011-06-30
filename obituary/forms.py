@@ -84,8 +84,14 @@ Other_servicesFormSet = inlineformset_factory(Obituary,
     can_delete=True,
     extra=1,)
 
+class ChildrenForm(ModelForm):
+    
+    class Meta:
+        model = Children
+
 ChildrenFormSet = inlineformset_factory(Obituary,
     Children,
+    form = ChildrenForm,
     can_delete=True,
     extra=1,)
 
