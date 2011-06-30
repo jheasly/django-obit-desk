@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db import IntegrityError
 from django.db.models.loading import get_models, get_app, get_apps
 from django.forms.models import modelform_factory
 # from django.forms.models import modelformset_factory, inlineformset_factory
@@ -12,10 +13,10 @@ from django.template import RequestContext
 from django.utils.html import escape
 from django.utils.translation import ugettext
 from django.views.generic.list_detail import object_list
-from obituary.models import Death_notice, Service, Obituary, Visitation
+from obituary.models import Death_notice, Obituary
 from obituary.forms import Death_noticeForm, \
     ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormSet, \
-    Other_servicesFormSet
+    Other_servicesFormSet, ChildrenFormSet, SiblingsFormSet
 
 # Create your views here.
 
@@ -99,40 +100,68 @@ def manage_death_notice(request, death_notice_id=None):
 # http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
 def manage_obituary(request, obituary_id=None):
     if obituary_id:
-        obituary = Obituary.objects.get(pk=obituary_id)
+        obituary = get_object_or_404(Obituary, pk=obituary_id)
     else:
         obituary = None
     
     if request.method == 'POST':
+        if request.POST.has_key('delete') and obituary_id:
+            current_obit = Obituary.objects.filter(death_notice__funeral_home__username=request.user.username).get(pk=obituary_id)
+            current_obit.delete()
+            msg = ugettext('The %(verbose_name)s for %(first)s %(last)s was deleted.') % \
+                {
+                    'verbose_name': Obituary._meta.verbose_name,
+                    'first': current_obit.death_notice,
+                    'last': current_obit.death_notice.last_name,
+                }
+            messages.success(request, msg, fail_silently=False)
+            return HttpResponseRedirect(reverse('death_notice_index'))
+        
         form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
         formset = VisitationFormSet(request.POST, instance=obituary)
         bei_formset = BEI_FormSet(request.POST, instance=obituary)
         os_formset = Other_servicesFormSet(request.POST, instance=obituary)
+        child_formset = ChildrenFormSet(request.POST, instance=obituary)
+        sib_formset = SiblingsFormSet(request.POST, instance=obituary)
+        
         if form.is_valid() and formset.is_valid() and bei_formset.is_valid() and \
-            os_formset.is_valid():
+            os_formset.is_valid() and child_formset.is_valid() and sib_formset.is_valid():
             
-            form.save()
+            obituary = form.save()
             formset.save()
             bei_formset.save()
             os_formset.save()
-            return HttpResponseRedirect(reverse('obituary.views.manage_obituary', args=(obituary.pk,)))
+            child_formset.save()
+            sib_formset.save()
+            if request.POST.has_key('submit'):
+                return HttpResponseRedirect(reverse('death_notice_index'))
+            elif request.POST.has_key('submit_add'):
+                return HttpResponseRedirect(reverse('add_obituary'))
+            else:
+                return HttpResponseRedirect(reverse('obituary.views.manage_obituary', args=(obituary.pk,)))
     else:
         if obituary_id:
             form = ObituaryForm(request, instance=obituary)
             formset = VisitationFormSet(instance=obituary)
             bei_formset = BEI_FormSet(instance=obituary)
             os_formset = Other_servicesFormSet(instance=obituary)
+            child_formset = ChildrenFormSet(instance=obituary)
+            sib_formset = SiblingsFormSet(instance=obituary)
         else:
             form = ObituaryForm(request)
             formset = VisitationFormSet(instance=Obituary())
             bei_formset = BEI_FormSet(instance=Obituary())
             os_formset = Other_servicesFormSet(instance=Obituary())
+            child_formset = ChildrenFormSet(instance=Obituary())
+            sib_formset = SiblingsFormSet(instance=Obituary())
     
     return render_to_response('manage_obituary.html', {
         'form': form,
         'formset': formset,
         'bei_formset': bei_formset,
         'os_formset': os_formset,
+        'child_formset': child_formset,
+        'sib_formset': sib_formset,
     }, context_instance=RequestContext(request))
 
 def logout_view(request):

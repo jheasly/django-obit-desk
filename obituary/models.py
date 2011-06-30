@@ -86,6 +86,7 @@ class Death_notice(models.Model):
     
     class Meta:
         verbose_name = 'Death notice'
+        unique_together = ('first_name', 'last_name', 'age', 'death_date',)
     
     def __unicode__(self):
         return u'Death notice for %s %s' % (self.first_name, self.last_name)
@@ -147,8 +148,8 @@ class Obituary(models.Model):
     marriage_date = models.DateField(blank=True, null=True, help_text=u'YYYY-MM-DD format')
     marriage_location = models.CharField(max_length=126, blank=True)
     education = models.CharField(max_length=256, blank=True)
-    career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
+    career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
     life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
     length_of_relationship = models.CharField(max_length=12, blank=True)
     memorial_contributions = models.CharField(max_length=256, blank=True)
@@ -157,18 +158,20 @@ class Obituary(models.Model):
     photo = models.ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
     spouse = models.CharField(max_length=126, blank=True, help_text=u'Life/domestic partner')
-    spouse_death = models.DateField(blank=True, null=True, help_text=u'Date in YYYY-MM-DD format, if applicable')
+    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date, if known')
     parents = models.CharField(max_length=255, blank=True, help_text=u'If living')
     grandparents = models.CharField(max_length=255, blank=True, help_text=u'If living')
     number_of_grandchildren = models.IntegerField(blank=True, null=True)
     number_of_great_grandchildren = models.IntegerField(blank=True, null=True)
     number_of_great_great_grandchildren = models.IntegerField(blank=True, null=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
+    rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     
     obituary_has_run = models.BooleanField()
     obituary_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
+        verbose_name = 'Obituary'
         verbose_name_plural = 'obituaries'
     
     def __unicode__(self):
@@ -216,7 +219,7 @@ class BEI(models.Model):
     
     obituary = models.OneToOneField(Obituary)
     bei = models.CharField(u'burial, entombment or inurnment', choices=BEI, max_length=10)
-    bei_date_time = models.DateTimeField(u'burial, entombment or inurnment date and time')
+    bei_date_time = models.DateTimeField(u'burial, entombment or inurnment date and time', blank=True, null=True)
     bei_location = models.CharField(u'burial, entombment or inurnment location', max_length=126)
     
     class Meta:

@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
 from obituary.models import Death_notice, Service, Obituary, Visitation, BEI, \
-    Other_services
+    Other_services, Children, Siblings
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:
@@ -81,5 +81,15 @@ class Other_servicesForm(ModelForm):
 Other_servicesFormSet = inlineformset_factory(Obituary,
     Other_services,
     form = Other_servicesForm,
+    can_delete=True,
+    extra=1,)
+
+ChildrenFormSet = inlineformset_factory(Obituary,
+    Children,
+    can_delete=True,
+    extra=1,)
+
+SiblingsFormSet = inlineformset_factory(Obituary,
+    Siblings,
     can_delete=True,
     extra=1,)

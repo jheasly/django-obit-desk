@@ -41,8 +41,19 @@
 	{{ os_formset }}
 </table>
 <table>
+	{{ child_formset }}
+</table>
+<table>
+	{{ sib_formset }}
+</table>
+<table>
 	<tr>
-		<td><input type="submit" name="submit" value="Submit" /></td>
+		<td>
+			<input type="submit" name="delete" value="Delete" /> 
+			<input type="submit" name="submit_add" value="Save and add another" /> 
+			<input type="submit" name="submit_continue" value="Save and continue editing" /> 
+			<input type="submit" name="submit" value="Save" />
+		</td>
 	</tr>
 </table>
 </form>
