@@ -23,7 +23,10 @@ from obituary.forms import Death_noticeForm, \
 def deaths(request, model=None):
     if request.META['HTTP_USER_AGENT'].count('Macintosh'):
         request_machine = 'MAC'
-        template_name = 'obituary_list_mac.html'    # saved in UTF-8 format
+        if model == Death_notice:
+            template_name = 'death_list_mac.html'    # saved in UTF-8 format
+        else:
+            template_name = 'obituary_list_mac.html'    # saved in UTF-8 format
     else:
         request_machine = 'WIN'
         template_name = 'obituary_list_win.html'    # saved in DOS format
@@ -31,7 +34,7 @@ def deaths(request, model=None):
     if model == Death_notice:
         queryset = model.objects.filter(death_notice_has_run=False).order_by('last_name')
     else:
-        queryset = model.objects.filter(has_run=False).order_by('death_notice__last_name')
+        queryset = model.objects.filter(obituary_has_run=False).order_by('death_notice__last_name')
 
     return object_list(
         request,

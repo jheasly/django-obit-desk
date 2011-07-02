@@ -163,6 +163,7 @@ class Obituary(models.Model):
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     
+    obituary_in_system = models.BooleanField()
     obituary_has_run = models.BooleanField()
     obituary_created = models.DateTimeField(auto_now_add=True)
     
@@ -239,6 +240,7 @@ class Other_services(models.Model):
     
     class Meta:
          verbose_name = 'Other services'
+         verbose_name_plural = 'Other services'
     
     def __unicode__(self):
         return self.description

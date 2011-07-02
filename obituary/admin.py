@@ -43,9 +43,8 @@ class Death_noticeAdmin(admin.ModelAdmin):
 admin.site.register(Death_notice, Death_noticeAdmin)
 
 class ObituaryAdmin(admin.ModelAdmin):
-    pass
-#     list_display = ('death_notice', 'gender', 'date_of_birth', 'obituary_created', 'photo_file_name',)
-#     
+    list_display = ('death_notice', 'gender', 'date_of_birth', 'obituary_created', 'photo_file_name', 'obituary_in_system', 'obituary_has_run',)
+    
     inlines = [
         MarriageInline,
         VisitationInline,
