@@ -140,13 +140,11 @@ class Obituary(models.Model):
     
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75)
+    service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
     place_of_birth = models.CharField(max_length=75)
     parents_names = models.CharField(max_length=75, blank=True)
-    married = models.CharField(max_length=126, blank=True)
-    marriage_date = models.DateField(blank=True, null=True, help_text=u'YYYY-MM-DD format')
-    marriage_location = models.CharField(max_length=126, blank=True)
     education = models.CharField(max_length=256, blank=True)
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
@@ -157,8 +155,6 @@ class Obituary(models.Model):
     family_contact_phone = models.CharField(max_length=12)
     photo = models.ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
-    spouse = models.CharField(max_length=126, blank=True, help_text=u'Life/domestic partner')
-    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date, if known')
     parents = models.CharField(max_length=255, blank=True, help_text=u'If living')
     grandparents = models.CharField(max_length=255, blank=True, help_text=u'If living')
     number_of_grandchildren = models.IntegerField(blank=True, null=True)
@@ -197,6 +193,13 @@ class Obituary(models.Model):
     def photo_file_name(self):
         if self.photo:
             return path.basename(self.photo.name)
+
+class Marriage(models.Model):
+    obituary =  models.ForeignKey(Obituary)
+    married = models.CharField(max_length=126, blank=True)
+    marriage_date = models.DateField(blank=True, null=True, help_text=u'YYYY-MM-DD format')
+    marriage_location = models.CharField(max_length=126, blank=True)
+    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date, if known')
 
 class Visitation(models.Model):
     obituary = models.OneToOneField(Obituary)
@@ -249,12 +252,13 @@ class Children(models.Model):
     )
     
     obituary = models.ForeignKey(Obituary)
-    gender = models.CharField(choices=CHILD_GENDER, max_length=12)
+    gender = models.CharField(choices=CHILD_GENDER, max_length=12, blank=True, null=True)
     name = models.CharField(max_length=126)
-    residence = models.CharField(max_length=126)
+    residence = models.CharField(max_length=126, blank=True)
     
     class Meta:
         verbose_name = 'Surviving children'
+        verbose_name_plural = 'Surviving children'
     
     def __unicode__(self):
         return '%s %s' % (self.gender ,self.name)
@@ -266,12 +270,13 @@ class Siblings(models.Model):
     )
     
     obituary = models.ForeignKey(Obituary)
-    gender = models.CharField(choices=SIBLING_GENDER, max_length=8)
+    gender = models.CharField(choices=SIBLING_GENDER, max_length=8, blank=True, null=True)
     name = models.CharField(max_length=126)
-    residence = models.CharField(max_length=126)
+    residence = models.CharField(max_length=126, blank=True)
     
     class Meta:
         verbose_name = 'Surviving siblings'
+        verbose_name_plural = 'Surviving siblings'
     
     def __unicode__(self):
         return '%s %s' % (self.gender, self.name )

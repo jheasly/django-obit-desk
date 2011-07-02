@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
 from obituary.models import Death_notice, Service, Obituary, Visitation, BEI, \
-    Other_services, Children, Siblings
+    Other_services, Children, Siblings, Marriage
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:
@@ -54,7 +54,6 @@ class ObituaryForm(ModelForm):
     
     death_notice = forms.ModelChoiceField(Death_notice.objects, widget = SelectWithPopUp)
     date_of_birth = forms.DateField(widget=CalendarWidget())
-    marriage_date = forms.DateField(widget=CalendarWidget(), required=False)
     
     class Meta:
         model = Obituary
@@ -97,5 +96,21 @@ ChildrenFormSet = inlineformset_factory(Obituary,
 
 SiblingsFormSet = inlineformset_factory(Obituary,
     Siblings,
+    can_delete=True,
+    extra=1,)
+
+class MarriageForm(ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(MarriageForm, self).__init__(*args, **kwargs)
+        self.fields['marriage_date'].widget.attrs['class'] = 'marriage_date_picker'
+        self.fields['spouse_death'].widget.attrs['class'] = 'spouse_death_picker'
+    
+    class Meta:
+        model = Marriage
+
+MarriageFormSet = inlineformset_factory(Obituary,
+    Marriage,
+    form = MarriageForm,
     can_delete=True,
     extra=1,)

@@ -16,7 +16,7 @@ from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Obituary
 from obituary.forms import Death_noticeForm, \
     ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormSet, \
-    Other_servicesFormSet, ChildrenFormSet, SiblingsFormSet
+    Other_servicesFormSet, ChildrenFormSet, SiblingsFormSet, MarriageFormSet
 
 # Create your views here.
 
@@ -123,14 +123,11 @@ def manage_obituary(request, obituary_id=None):
         os_formset = Other_servicesFormSet(request.POST, instance=obituary)
         child_formset = ChildrenFormSet(request.POST, instance=obituary)
         sib_formset = SiblingsFormSet(request.POST, instance=obituary)
-        
-        print 'dir(formset)', dir(formset), '\n'
-        print 'dir(formset.model)', dir(formset.model), '\n'
-        print 'dir(formset.model._meta)', dir(formset.model._meta), '\n'
-        print formset.model._meta.verbose_name
+        wed_formset = MarriageFormSet(request.POST, instance=obituary)
         
         if form.is_valid() and formset.is_valid() and bei_formset.is_valid() and \
-            os_formset.is_valid() and child_formset.is_valid() and sib_formset.is_valid():
+            os_formset.is_valid() and child_formset.is_valid() and \
+            sib_formset.is_valid() and wed_formset.is_valid():
             
             obituary = form.save()
             formset.save()
@@ -138,6 +135,7 @@ def manage_obituary(request, obituary_id=None):
             os_formset.save()
             child_formset.save()
             sib_formset.save()
+            wed_formset.save()
             if request.POST.has_key('submit'):
                 return HttpResponseRedirect(reverse('death_notice_index'))
             elif request.POST.has_key('submit_add'):
@@ -152,6 +150,7 @@ def manage_obituary(request, obituary_id=None):
             os_formset = Other_servicesFormSet(instance=obituary)
             child_formset = ChildrenFormSet(instance=obituary)
             sib_formset = SiblingsFormSet(instance=obituary)
+            wed_formset = MarriageFormSet(instance=obituary)
         else:
             form = ObituaryForm(request)
             formset = VisitationFormSet(instance=Obituary())
@@ -159,6 +158,7 @@ def manage_obituary(request, obituary_id=None):
             os_formset = Other_servicesFormSet(instance=Obituary())
             child_formset = ChildrenFormSet(instance=Obituary())
             sib_formset = SiblingsFormSet(instance=Obituary())
+            wed_formset = MarriageFormSet(instance=Obituary())
     
     return render_to_response('manage_obituary.html', {
         'form': form,
@@ -172,6 +172,7 @@ def manage_obituary(request, obituary_id=None):
         'child_formset': child_formset,
         'sib_formset_name': sib_formset.model._meta.verbose_name,
         'sib_formset': sib_formset,
+        'wed_formset': wed_formset,
     }, context_instance=RequestContext(request))
 
 def logout_view(request):

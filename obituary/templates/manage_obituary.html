@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block js %}
-<script src="/media/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/media/js/admin/RelatedObjectLookups.js"></script>
 {% endblock %}
 
 {% block css %}
@@ -32,6 +32,21 @@
 	{{ form }}
 </table>
 <table>
+	{{ wed_formset }}
+</table>
+<table>
+	<tr>
+		<td>{{ child_formset_name }}</td>
+	</tr>
+	{{ child_formset }}
+</table>
+<table>
+	<tr>
+		<td>{{ sib_formset_name }}</td>
+	</tr>
+	{{ sib_formset }}
+</table>
+<table>
 	<tr>
 		<td>{{ formset_name }}</td>
 	</tr>
@@ -48,18 +63,6 @@
 		<td>{{ os_formset_name }}</td>
 	</tr>
 	{{ os_formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ child_formset_name }}</td>
-	</tr>
-	{{ child_formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ sib_formset_name }}</td>
-	</tr>
-	{{ sib_formset }}
 </table>
 <table>
 	<tr>
@@ -83,7 +86,7 @@
   });
 
   $(function(){
-    $("#id_marriage_date").datepicker({
+    $(".marriage_date_picker").datepicker({
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-110:c+0',
@@ -92,7 +95,7 @@
   });
 
   $(function(){
-    $("#id_spouse_death").datepicker({
+    $(".spouse_death_picker").datepicker({
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-110:c+0',
@@ -111,6 +114,7 @@
   });
 
   document.getElementById('id_death_notice').focus()
+
 </script>
 
 {% endblock content %}
