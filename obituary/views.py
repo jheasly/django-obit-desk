@@ -1,3 +1,4 @@
+import codecs
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import logout
@@ -9,7 +10,7 @@ from django.forms.models import modelform_factory
 # from django.forms.models import modelformset_factory, inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.template import RequestContext, loader
 from django.utils.html import escape
 from django.utils.translation import ugettext
 from django.views.generic.list_detail import object_list
@@ -22,29 +23,36 @@ from obituary.forms import Death_noticeForm, \
 
 def deaths(request, model=None):
     if request.META['HTTP_USER_AGENT'].count('Macintosh'):
-        request_machine = 'MAC'
-        if model == Death_notice:
-            template_name = 'death_list_mac.html'    # saved in UTF-8 format
-        else:
-            template_name = 'obituary_list_mac.html'    # saved in UTF-8 format
+        template_name = 'obituary_list_unix_line_endings.html'
     else:
-        request_machine = 'WIN'
-        template_name = 'obituary_list_win.html'    # saved in DOS format
+        template_name = 'obituary_list_windows_line_endings.html'
     model = eval(model)
     if model == Death_notice:
-        queryset = model.objects.filter(death_notice_has_run=False).order_by('last_name')
+        queryset = model.objects.filter(death_notice_in_system=False).order_by('last_name')
     else:
-        queryset = model.objects.filter(obituary_has_run=False).order_by('death_notice__last_name')
-
+        queryset = model.objects.filter(obituary_in_system=False).order_by('death_notice__last_name')
+    
+    t = loader.get_template(template_name)
+    c = RequestContext(request, {'object_list': queryset})
+    f = codecs.open('/tmp/dt_text.txt', encoding='utf-16-le', mode='w')
+    f.write(t.render(c))
+    f.close()
+    
     return object_list(
         request,
         queryset = queryset,
-        mimetype = 'text/plain;charset=UTF-8',
+        mimetype = 'text/plain;charset=utf-8',
         template_name = template_name,
-        extra_context = {
-            'request_machine': request_machine,
-        },
     )
+
+    r = object_list(
+        request,
+        queryset = queryset,
+        mimetype = 'text/plain;charset=utf-16le',
+        template_name = template_name,
+    )
+    r['Content-Disposition'] = 'attachment; filename=obituary.txt'
+    return r
 
 @login_required
 def fh_index(request):
@@ -197,15 +205,19 @@ def add_new_model(request, model_name):
                 
                 if normal_model_name == 'Death_notice':
                     form = Death_noticeForm
+                    service_form = ServiceFormSet
                 
                 if request.method == 'POST':
                     form = form(request.POST)
-                    if form.is_valid():
+                    service_form = service_form(request.POST)
+                    if form.is_valid() and service_form.is_valid():
                         try:
                             if normal_model_name == 'Death_notice':
                                 new_obj = form.save(commit=False)
                                 new_obj.funeral_home = request.user
                                 new_obj.save()
+                                service_form = ServiceFormSet(request.POST, instance=new_obj)
+                                service_form.save()
                             else:
                                 new_obj = form.save()
                         except forms.ValidationError, error:
@@ -217,5 +229,5 @@ def add_new_model(request, model_name):
                 else:
                    form = form()
                 
-                page_context = {'form': form, 'field': normal_model_name}
+                page_context = {'form': form, 'service_form': service_form,'field': normal_model_name}
                 return render_to_response('popup.html', page_context, context_instance=RequestContext(request))

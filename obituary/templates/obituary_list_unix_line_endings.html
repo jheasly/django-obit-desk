@@ -5,5 +5,5 @@
 <dps:BodyText\:BodyText\_Tagline=<Nextstyle:BodyText\:BodyText\_Tagline><ct:Italic><cs:9.500000><clig:0><phll:2><pfli:13.000000><palp:1.000000><cl:10.000000><pmcah:3><phz:24.000000><psb:20.000000><cf:MillerDailyTwo><pdws:1.750000><pmaws:2.000000><pmiws:1.000000><pmaxl:1.000000><ch:Baseline><cct:100.000000><csk:-0.000000><prac:Black><pras:0.500000><prao:15.000000><prali:48.000000><prari:48.000000><praon:1><cotff:1><pta:JustifyLeft><phwt:0><cotfcalt:0><bnc:None><nmf:\<TextFont\>>>
 <sstable:=<RG\_Oxford:STRIPE:0,0.45,0.46,0.08999999999999997>>
 {% for ob in object_list %}<pstyle:Headlines\:DigestHead>{{ ob.death_notice.first_name }} {{ ob.death_notice.last_name }}
-<pstyle:BodyText\:BodyText\_No\_BL>{{ ob.death_notice.first_name }} {{ ob.death_notice.last_name }} died {{ ob.death_notice.death_date|date:"N j" }}
+<pstyle:BodyText\:BodyText\_No\_BL>{{ ob.dateline }}{{ob.service}}{{ ob.death_notice.first_name }} {{ ob.death_notice.last_name }} died {{ ob.death_notice.death_date|date:"N j" }}
 {% endfor %}

@@ -3,6 +3,7 @@
 <title>Add {{ field }}</title>
 <script src="/media/js/admin/RelatedObjectLookups.js"></script>
 {{ form.media }}
+{{ service_form.media }}
 </head>
 <body>
 <h1>Add {{ field }}</h1>
@@ -11,7 +12,11 @@
         <table>
         {{ form }}
         </table>
-<p><input type="submit" /> | <a href="javascript:window.close()">Cancel</a></p>
+        <table>
+        {{ service_form }}
+        </table>
+        
+<p><input type="submit" value="Save" /> | <a href="javascript:window.close()">Cancel</a></p>
 </form>
 
 <script type="text/javascript"> 
@@ -21,6 +26,14 @@
             changeYear: true,
             yearRange: 'c-110:c+0',
             dateFormat: 'yy-mm-dd'
+        });
+  });
+
+  $(function(){
+    $("#id_service-0-service_date_time").datetimepicker({
+          stepMinute: 5,
+          hourMin: 6,
+          hourMax: 23,
         });
   });
 

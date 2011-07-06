@@ -57,15 +57,24 @@ class ObituaryForm(ModelForm):
     
     class Meta:
         model = Obituary
-        exclude = ('funeral_home', 'obituary_has_run',)
+        exclude = ('funeral_home', 'obituary_in_system', 'obituary_has_run',)
 
 VisitationFormSet = inlineformset_factory(Obituary,
     Visitation,
     can_delete=True,
     extra=1,)
 
+class BEI_Form(ModelForm):
+    
+    class Meta:
+        model = BEI
+        widgets = {
+            'bei_date_time': ObitsCalendarDateTimeWidget(),
+        }
+
 BEI_FormSet = inlineformset_factory(Obituary,
     BEI,
+    form = BEI_Form,
     can_delete=True,
     extra=1,)
 

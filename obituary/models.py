@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.core.mail import send_mail, send_mass_mail
 from django.db import models
 from os import path
@@ -194,6 +196,26 @@ class Obituary(models.Model):
     def photo_file_name(self):
         if self.photo:
             return path.basename(self.photo.name)
+    
+    '''
+    TODO: Combine dateline, service into first_sentence, which will handle the 
+    major variants until the second sentence: "He/she was XX."
+    '''
+    def dateline(self):
+        local_cities = (
+            'Eugene',
+            'Springfield',
+        )
+        if self.death_notice.city_of_residence not in local_cities:
+            return u'%s — ' % self.death_notice.city_of_residence.upper()
+        else:
+            return u''
+    
+    def service(self):
+        if self.death_notice.service:
+            return u'The %s will be ' % self.death_notice.service
+        else:
+            return u''
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
