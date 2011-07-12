@@ -2,6 +2,7 @@
 
 from django.core.mail import send_mail, send_mass_mail
 from django.db import models
+from django.template.defaultfilters import date
 from os import path
 
 # Create your models here.
@@ -112,16 +113,16 @@ class Death_notice(models.Model):
 
 class Service(models.Model):
     SERVICES = (
-        ('visitation', 'visitation',),
-        ('visitation followed by a funeral', 'visitation followed by a funeral',),
-        ('celebration of life', 'celebration of life',),
-        ('funeral', 'funeral',),
-        ('funeral Mass', 'funeral Mass',),
-        ('memorial service', 'memorial service',),
-        ('military graveside funeral', 'military graveside funeral',),
+        ('A visitation', 'visitation',),
+        ('A visitation followed by a funeral', 'visitation followed by a funeral',),
+        ('A celebration of life', 'The celebration of life',),
+        ('The funeral', 'funeral',),
+        ('The funeral Mass', 'funeral Mass',),
+        ('A memorial service', 'memorial service',),
+        ('A military graveside funeral', 'military graveside funeral',),
     )
     
-    death_notice = models.OneToOneField(Death_notice, blank=True)
+    death_notice = models.OneToOneField(Death_notice, blank=True, null=True)
     service = models.CharField(choices=SERVICES, max_length=65)
     service_date_time = models.DateTimeField()
     service_location = models.CharField(max_length=75)
@@ -141,13 +142,13 @@ class Obituary(models.Model):
         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
-    cause_of_death = models.CharField(max_length=75)
-    service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
+    cause_of_death = models.CharField(max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
+    no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
-    place_of_birth = models.CharField(max_length=75)
+    place_of_birth = models.CharField(max_length=75, help_text=u'City, State')
     parents_names = models.CharField(max_length=75, blank=True)
-    education = models.CharField(max_length=256, blank=True)
+    education = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
     life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
@@ -157,11 +158,11 @@ class Obituary(models.Model):
     family_contact_phone = models.CharField(max_length=12)
     photo = models.ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
-    parents = models.CharField(max_length=255, blank=True, help_text=u'If living')
-    grandparents = models.CharField(max_length=255, blank=True, help_text=u'If living')
-    number_of_grandchildren = models.IntegerField(blank=True, null=True)
-    number_of_great_grandchildren = models.IntegerField(blank=True, null=True)
-    number_of_great_great_grandchildren = models.IntegerField(blank=True, null=True)
+    parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
+    grandparents = models.CharField(u'Surviving grandparents', max_length=255, blank=True, help_text=u'If living')
+    number_of_grandchildren = models.IntegerField(u'Number of surviving grandchildren', blank=True, null=True)
+    number_of_great_grandchildren = models.IntegerField(u'Number of surviving great-grandchildren', blank=True, null=True)
+    number_of_great_great_grandchildren = models.IntegerField(u'Number of surviving great-great-grandchildren', blank=True, null=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     
@@ -197,25 +198,106 @@ class Obituary(models.Model):
         if self.photo:
             return path.basename(self.photo.name)
     
-    '''
-    TODO: Combine dateline, service into first_sentence, which will handle the 
-    major variants until the second sentence: "He/she was XX."
-    '''
-    def dateline(self):
+    def pronoun(self):
+        if self.gender == 'F':
+            return u'She'
+        else:
+            return u'He'
+    
+    def intro(self):
+        '''
+        Navigates all the permutations of the first paragraph.
+        '''
+        ##
+        ## DATELINE
+        ##
         local_cities = (
             'Eugene',
             'Springfield',
         )
         if self.death_notice.city_of_residence not in local_cities:
-            return u'%s — ' % self.death_notice.city_of_residence.upper()
+            dateline =  u'%s — ' % self.death_notice.city_of_residence.upper()
         else:
-            return u''
-    
-    def service(self):
-        if self.death_notice.service:
-            return u'The %s will be ' % self.death_notice.service
+            dateline = u''
+        
+        ##
+        ## CITY
+        ##
+        if self.death_notice.formerly_of:
+            city = u'%s, formerly of %s' % (self.death_notice.city_of_residence.strip(), self.death_notice.formerly_of.strip())
         else:
-            return u''
+            city = self.death_notice.city_of_residence.strip()
+        
+        ##
+        ## NAME
+        ##
+        if self.death_notice.nickname:
+            nickname = '"%s"' % self.death_notice.nickname
+        else:
+            nickname = self.death_notice.nickname
+        name_list = ([self.death_notice.first_name, 
+            self.death_notice.middle_name, 
+            nickname, 
+            self.death_notice.last_name])
+        
+        # get rid of empty elements
+        vetted_list = filter(lambda x : x, name_list)
+        full_name = ' '.join(vetted_list)
+        
+        ##
+        ## SERVICE
+        ##
+        if self.no_service_planned:
+            no_service = u' No service is planned.'
+        else:
+            no_service = u''
+        
+        ##
+        ## DEATH // AGE // CAUSE
+        ##
+        if self.cause_of_death:
+            date_age_cause = u'died %s of %s. %s was %s.' % (
+                date(self.death_notice.death_date, "N j"),
+                self.cause_of_death.strip(),
+                self.pronoun(),
+                self.death_notice.age,
+            )
+        else:
+            date_age_cause = u'died %s at age %s. The family chose not to list the cause of death.' % (
+                date(self.death_notice.death_date, "N j"),
+                self.death_notice.age,
+            )
+        
+        ##
+        ## SERVICE INTRO
+        ##
+        try:
+            self.death_notice.service
+            
+            if self.death_notice.service.service:
+                if self.death_notice.service.service.lower().count('mass'):
+                    celebrated = u'celebrated'
+                else:
+                    celebrated = u'held'
+                
+                service = u'%s will be %s at %s at %s in %s, for %s of %s, %s' % (
+                    self.death_notice.service.service.strip(), 
+                    celebrated, 
+                    date(self.death_notice.service.service_date_time, "P l, N j,"),
+                    self.death_notice.service.service_location.strip(),
+                    city,
+                    full_name, 
+                    self.death_notice.city_of_residence.strip(),
+                    u'who ' + date_age_cause,
+                )
+        except Service.DoesNotExist:
+            service = u'%s of %s %s' % (
+                full_name, 
+                self.death_notice.city_of_residence,
+                date_age_cause,
+            )
+            
+        return dateline + service + no_service
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
