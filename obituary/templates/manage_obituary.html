@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block js %}
 <script type="text/javascript" src="/media/js/admin/RelatedObjectLookups.js"></script>
@@ -8,73 +8,78 @@
 <style type="text/css">
 	<!--
 	table {
-		margin-left: 10px;
-		margin-top: 10px;
+		margin: 10px 0 10px 0;
 		border: 1px solid #000000;
-		width: 500px;
+		width: 100%;
+	}
+	#wrapper {
+		background: none;
 	}
 	-->
 </style>
 {% endblock %}
 
 {% block content %}
-<table>
-	<tr><td><a href="{% url death_notice_index %}">Home</a></td></tr>
-	<tr><td>Hello {{ user.funeralhomeprofile.full_name }}</td></tr>
-</table>
+<div class="wrapper">
+	<table>
+		<tr><td><a href="{% url death_notice_index %}">Home</a></td></tr>
+		<tr><td>Hello {{ user.funeralhomeprofile.full_name }}</td></tr>
+	</table>
+	
+	{% if form.is_multipart %}
+	<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+	{% else %}
+	<form action="" method="post">{% csrf_token %}
+	{% endif %}
+	<table>
+		{{ form }}
+	</table>
+	<table>
+		{{ wed_formset }}
+	</table>
+	<table>
+		<tr>
+			<td>{{ child_formset_name }}</td>
+		</tr>
+		{{ child_formset }}
+	</table>
+	<table>
+		<tr>
+			<td>{{ sib_formset_name }}</td>
+		</tr>
+		{{ sib_formset }}
+	</table>
+	<table>
+		<tr>
+			<td>{{ formset_name }}</td>
+		</tr>
+		{{ formset }}
+	</table>
+	<table>
+		<tr>
+			<td>{{ bei_formset_name }}</td>
+		</tr>
+		{{ bei_formset }}
+	</table>
+	<table>
+		<tr>
+			<td>{{ os_formset_name }}</td>
+		</tr>
+		{{ os_formset }}
+	</table>
+	<table>
+		<tr>
+			<td>
+				<input type="submit" name="delete" value="Delete" /> 
+				<input type="submit" name="submit_add" value="Save and add another" /> 
+				<input type="submit" name="submit_continue" value="Save and continue editing" /> 
+				<input type="submit" name="submit" value="Save" />
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
 
-{% if form.is_multipart %}
-<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
-{% else %}
-<form action="" method="post">{% csrf_token %}
-{% endif %}
-<table>
-	{{ form }}
-</table>
-<table>
-	{{ wed_formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ child_formset_name }}</td>
-	</tr>
-	{{ child_formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ sib_formset_name }}</td>
-	</tr>
-	{{ sib_formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ formset_name }}</td>
-	</tr>
-	{{ formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ bei_formset_name }}</td>
-	</tr>
-	{{ bei_formset }}
-</table>
-<table>
-	<tr>
-		<td>{{ os_formset_name }}</td>
-	</tr>
-	{{ os_formset }}
-</table>
-<table>
-	<tr>
-		<td>
-			<input type="submit" name="delete" value="Delete" /> 
-			<input type="submit" name="submit_add" value="Save and add another" /> 
-			<input type="submit" name="submit_continue" value="Save and continue editing" /> 
-			<input type="submit" name="submit" value="Save" />
-		</td>
-	</tr>
-</table>
-</form>
 <script type="text/javascript"> 
   $(function(){
     $("#id_date_of_birth").datepicker({

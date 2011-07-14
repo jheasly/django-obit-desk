@@ -101,12 +101,12 @@ ChildrenFormSet = inlineformset_factory(Obituary,
     Children,
     form = ChildrenForm,
     can_delete=True,
-    extra=1,)
+    extra=3,)
 
 SiblingsFormSet = inlineformset_factory(Obituary,
     Siblings,
     can_delete=True,
-    extra=1,)
+    extra=2,)
 
 class MarriageForm(ModelForm):
     

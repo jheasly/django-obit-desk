@@ -29,6 +29,7 @@ def deaths(request, model=None):
     model = eval(model)
     if model == Death_notice:
         queryset = model.objects.filter(death_notice_in_system=False).order_by('last_name')
+        template_name = 'death_list_mac.html'
     else:
         queryset = model.objects.filter(obituary_in_system=False).order_by('death_notice__last_name')
     
@@ -204,6 +205,7 @@ def add_new_model(request, model_name):
                 form = modelform_factory(model)
                 
                 if normal_model_name == 'Death_notice':
+                    dn_name = model._meta.verbose_name
                     form = Death_noticeForm
                     service_form = ServiceFormSet
                 
@@ -229,5 +231,5 @@ def add_new_model(request, model_name):
                 else:
                    form = form()
                 
-                page_context = {'form': form, 'service_form': service_form,'field': normal_model_name}
+                page_context = {'form': form, 'service_form': service_form,'field': normal_model_name, 'dn_verbose_name': dn_name }
                 return render_to_response('popup.html', page_context, context_instance=RequestContext(request))

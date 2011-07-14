@@ -58,7 +58,13 @@
 	{% block css %}{% endblock %}
 	</head>
 	<body>
-		{% block content %}
-		{% endblock content %}
+		<div id="wrapper">
+			<div id="header" class="clear">
+			</div>
+			<div id="content">
+				{% block content %}
+				{% endblock content %}
+			</div>
+		</div>
 	</body>
 </html>

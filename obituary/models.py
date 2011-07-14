@@ -115,10 +115,12 @@ class Service(models.Model):
     SERVICES = (
         ('A visitation', 'visitation',),
         ('A visitation followed by a funeral', 'visitation followed by a funeral',),
-        ('A celebration of life', 'The celebration of life',),
+        ('A celebration of life', 'celebration of life',),
         ('The funeral', 'funeral',),
         ('The funeral Mass', 'funeral Mass',),
+        ('A graveside service', 'graveside service',),
         ('A memorial service', 'memorial service',),
+        ('A memorial service is planned', 'memorial service is planned',),
         ('A military graveside funeral', 'military graveside funeral',),
     )
     
@@ -128,13 +130,35 @@ class Service(models.Model):
     service_location = models.CharField(max_length=75)
     service_city = models.CharField(max_length=80, blank=True)
     
+    class Meta:
+        ordering = ('-service_date_time',)
+    
     def __unicode__(self):
         return self.service
+    
+    def full_description(self):
+        if self.service_extra_info:
+            return u'%s %s' % (self.service, self.service_extra_info)
+        else:
+            return u'%s' % (self.service)
 
 class Obituary(models.Model):
     GENDERS =  (
         ('M', 'M',),
         ('F', 'F',),
+    )
+    
+    COPIES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
     )
     
     def obit_file_name(instance, filename):
@@ -144,6 +168,7 @@ class Obituary(models.Model):
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
+    service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." (If specifcs are known, use Service section of Death Notice form.)')
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
     place_of_birth = models.CharField(max_length=75, help_text=u'City, State')
@@ -156,13 +181,15 @@ class Obituary(models.Model):
     memorial_contributions = models.CharField(max_length=256, blank=True)
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
+    mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
+    number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.')
     photo = models.ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
     parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
     grandparents = models.CharField(u'Surviving grandparents', max_length=255, blank=True, help_text=u'If living')
     number_of_grandchildren = models.IntegerField(u'Number of surviving grandchildren', blank=True, null=True)
-    number_of_great_grandchildren = models.IntegerField(u'Number of surviving great-grandchildren', blank=True, null=True)
-    number_of_great_great_grandchildren = models.IntegerField(u'Number of surviving great-great-grandchildren', blank=True, null=True)
+    number_of_great_grandchildren = models.CharField(u'Number of surviving great-grandchildren', max_length=75, blank=True)
+    number_of_great_great_grandchildren = models.CharField(u'Number of surviving great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     
@@ -179,25 +206,41 @@ class Obituary(models.Model):
     
     def save(self):
         from_email = 'rgnews.registerguard.@gmail.com'
-        to_email = ['john.heasly@registerguard.com']
+        to_email = ['john.heasly@registerguard.com', 'lisa.crossley@registerguard.com', 'jheasly@earthlink.net']
         message_email = 'Go to the obituary admin page for further information.'
         
         if(self.pk):
-            datatuple = (
-                ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
-            )
+            datatuple = None
+#             datatuple = (
+#                 ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
+#             )
         else:
             # a new Death_notice
             datatuple = (
                 ('Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
             )
-        send_mass_mail(datatuple)
+        if datatuple:
+            send_mass_mail(datatuple)
         super(Obituary, self).save()
     
+    ##
+    ## MODEL ATTRIBUTES FOR THE OBITUARY ADMIN
+    ##
     def photo_file_name(self):
         if self.photo:
             return path.basename(self.photo.name)
     
+    def service_date(self):
+        try:
+            self.death_notice.service
+            if self.death_notice.service.service_date_time:
+                return u'%s' % date(self.death_notice.service.service_date_time, "P l, N j,")
+        except Service.DoesNotExist:
+            return u'No service scheduled.'
+    
+    ##
+    ## MODE ATTRIBUTES FOR OBITUARY TEMPLATING
+    ##
     def pronoun(self):
         if self.gender == 'F':
             return u'She'
@@ -245,12 +288,15 @@ class Obituary(models.Model):
         full_name = ' '.join(vetted_list)
         
         ##
-        ## SERVICE
+        ## NO_SERVICE_PLANNED // SERVICE PLANS INDEFINITE
         ##
         if self.no_service_planned:
-            no_service = u' No service is planned.'
+            no_service_indefinite = u' No service is planned.'
         else:
-            no_service = u''
+            if self.service_plans_indefinite:
+                no_service_indefinite = u' %s' % self.service_plans_indefinite
+            else:
+                no_service_indefinite = u''
         
         ##
         ## DEATH // AGE // CAUSE
@@ -285,9 +331,9 @@ class Obituary(models.Model):
                     celebrated, 
                     date(self.death_notice.service.service_date_time, "P l, N j,"),
                     self.death_notice.service.service_location.strip(),
-                    city,
+                    self.death_notice.service.service_city.strip(),
                     full_name, 
-                    self.death_notice.city_of_residence.strip(),
+                    city,
                     u'who ' + date_age_cause,
                 )
         except Service.DoesNotExist:
@@ -297,14 +343,32 @@ class Obituary(models.Model):
                 date_age_cause,
             )
             
-        return dateline + service + no_service
+        return dateline + service + no_service_indefinite
+    
+    ##
+    ## MARRIAGE
+    ##
+    
+    def marriage(self):
+        if self.marriage_set.all():
+            marriage_str = u'%s married %s' % (
+                self.pronoun(), 
+                ', '.join([', '.join((wedding.married, wedding.marriage_date, wedding.marriage_location, wedding.spouse_death)) for wedding in self.marriage_set.all()]),
+            )
+        else:
+            marriage_str = u''
+        return marriage_str
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
     married = models.CharField(max_length=126, blank=True)
-    marriage_date = models.DateField(blank=True, null=True, help_text=u'YYYY-MM-DD format')
+#     marriage_date = models.DateField(blank=True, null=True, help_text=u'YYYY-MM-DD format')
+    marriage_date = models.CharField(max_length=32, blank=True, help_text=u'YYYY-MM-DD format')
     marriage_location = models.CharField(max_length=126, blank=True)
-    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date, if known')
+    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date of death, if known. If they divorced, fill in year and date, if known.')
+    
+    class Meta:
+        ordering = ('marriage_date', 'id',)
 
 class Visitation(models.Model):
     obituary = models.OneToOneField(Obituary)
