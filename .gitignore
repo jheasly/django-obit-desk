@@ -3,3 +3,7 @@
 local_settings.py
 obituary/fixtures/*
 obit_images/*
+__init__.py
+manage.py
+settings.py
+urls.py
