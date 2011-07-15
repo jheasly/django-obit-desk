@@ -144,6 +144,12 @@ class Service(models.Model):
             return u'%s' % (self.service)
 
 class Obituary(models.Model):
+    STATUS = (
+        ('live','Live',),
+        ('drft','Draft',),
+        ('hidn','Hidden',),
+    )
+    
     GENDERS =  (
         ('M', 'M',),
         ('F', 'F',),
@@ -183,7 +189,7 @@ class Obituary(models.Model):
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
     mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
-    number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.')
+    number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.', default=10)
     photo = models.ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
     parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
@@ -193,6 +199,7 @@ class Obituary(models.Model):
     number_of_great_great_grandchildren = models.CharField(u'Number of surviving great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
+    status = models.CharField(max_length=4, default='live')
     
     obituary_in_system = models.BooleanField()
     obituary_has_run = models.BooleanField()
