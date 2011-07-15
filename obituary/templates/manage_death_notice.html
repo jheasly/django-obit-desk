@@ -2,22 +2,29 @@
 
 {% block title %}Manage death notice{% endblock %}
 
-{% block content %}
-<p><a href="{% url death_notice_index %}">Home</a></p>
-<p>Hello {{ user.funeralhomeprofile.full_name }}</p>
+{% block css %}
+{% include "snippets/css.html" %}
+{% endblock %}
 
-<form action="" method="post">{% csrf_token %}
-<table>
-	{{ form.non_field_errors }}
-	{{ form }}
-	{{ formset }}
-	<tr>
-		<td><input type="submit" name="submit" value="Save" /> 
-		<input type="submit" name="add_another" value="Save and add another"> 
-		<input type="submit" name="delete_death_notice" value="Delete"></td>
-	</tr>
-</table>
-</form>
+{% block content %}
+<div class="wrapper">
+	<p><a href="{% url death_notice_index %}">Home</a></p>
+	<p>Hello {{ user.funeralhomeprofile.full_name }}</p>
+	
+	<form action="" method="post">{% csrf_token %}
+	<table>
+		{{ form.non_field_errors }}
+		{{ form }}
+		{{ formset }}
+		<tr>
+			<td colspan="2"><input type="submit" name="submit" value="Save" /> 
+			<input type="submit" name="add_another" value="Save and add another"> 
+			<input type="submit" name="delete_death_notice" value="Delete"></td>
+		</tr>
+	</table>
+	</form>
+</div> <!-- /.wrapper -->
+
 <script type="text/javascript"> 
   $(function(){
     $("#id_death_date").datepicker({

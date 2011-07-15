@@ -90,6 +90,7 @@ class Death_notice(models.Model):
     class Meta:
         verbose_name = 'Death notice'
         unique_together = ('first_name', 'last_name', 'age', 'death_date',)
+        ordering = ('-death_notice_created',)
     
     def __unicode__(self):
         return u'Death notice for %s %s' % (self.first_name, self.last_name)
@@ -168,7 +169,7 @@ class Obituary(models.Model):
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
-    service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." (If specifcs are known, use Service section of Death Notice form.)')
+    service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifcs are known, use Service section of Death Notice form.)')
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
     place_of_birth = models.CharField(max_length=75, help_text=u'City, State')
@@ -200,6 +201,7 @@ class Obituary(models.Model):
     class Meta:
         verbose_name = 'Obituary'
         verbose_name_plural = 'obituaries'
+        ordering = ('-obituary_created',)
     
     def __unicode__(self):
         return u'Obituary for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
