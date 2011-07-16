@@ -367,6 +367,29 @@ class Obituary(models.Model):
         else:
             marriage_str = u''
         return marriage_str
+    
+    ##
+    ## SURVIVORS
+    ##
+    def surviving_siblings(self):
+        brother_list = []
+        sister_list = []
+        if self.siblings_set.all():
+            brother_set = self.siblings_set.filter(gender='brother')
+            sister_set = self.siblings_set.filter(gender='sister')
+            if brother_set:
+                for brother in brother_set:
+                    brother_list.append(u'%s, %s' % (brother.name, brother.residence))
+                    brother_str = ', '.join(brother_list)
+                brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
+            if sister_set:
+                for sister in sister_set:
+                    sister_list.append(u'%s, %s' % (sister.name, sister.residence))
+                    sister_str = ', '.join(sister_list)
+                sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
+            return u'%s; %s' % (brothers, sisters)
+        else:
+            return u''
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)

@@ -112,9 +112,11 @@ def manage_death_notice(request, death_notice_id=None):
 # http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
 def manage_obituary(request, obituary_id=None):
     if obituary_id:
+        # Editing existing record ... 
         obituary = get_object_or_404(Obituary, pk=obituary_id)
     else:
-        obituary = None
+        # Creating new record ... 
+        obituary = Obituary()
     
     if request.method == 'POST':
         if request.POST.has_key('delete') and obituary_id:
@@ -141,16 +143,6 @@ def manage_obituary(request, obituary_id=None):
             os_formset.is_valid() and child_formset.is_valid() and \
             sib_formset.is_valid() and wed_formset.is_valid():
             
-            '''
-            problems here on the saves below when child_formset, sib_formset (i.e., ForeignKey relationships) are present:
-            
-            DoesNotExist at /obituary/obituaries/
-            No exception supplied
-            
-            ... and information entered into inline forms is not saved.
-            
-            But it works on a view with an Obit ID to lookup. Hrm...
-            '''
             obituary = form.save()
             formset.save()
             bei_formset.save()
