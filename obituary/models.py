@@ -379,12 +379,12 @@ class Obituary(models.Model):
             sister_set = self.siblings_set.filter(gender='sister')
             if brother_set:
                 for brother in brother_set:
-                    brother_list.append(u'%s, %s' % (brother.name, brother.residence))
+                    brother_list.append(u'%s of %s' % (brother.name, brother.residence))
                     brother_str = ', '.join(brother_list)
                 brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
             if sister_set:
                 for sister in sister_set:
-                    sister_list.append(u'%s, %s' % (sister.name, sister.residence))
+                    sister_list.append(u'%s of %s' % (sister.name, sister.residence))
                     sister_str = ', '.join(sister_list)
                 sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
             return u'%s; %s' % (brothers, sisters)
