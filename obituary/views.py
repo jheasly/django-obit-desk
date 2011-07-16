@@ -141,6 +141,16 @@ def manage_obituary(request, obituary_id=None):
             os_formset.is_valid() and child_formset.is_valid() and \
             sib_formset.is_valid() and wed_formset.is_valid():
             
+            '''
+            problems here on the saves below when child_formset, sib_formset (i.e., ForeignKey relationships) are present:
+            
+            DoesNotExist at /obituary/obituaries/
+            No exception supplied
+            
+            ... and information entered into inline forms is not saved.
+            
+            But it works on a view with an Obit ID to lookup. Hrm...
+            '''
             obituary = form.save()
             formset.save()
             bei_formset.save()

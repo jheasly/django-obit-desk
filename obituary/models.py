@@ -75,7 +75,7 @@ class Death_notice(models.Model):
     )
     funeral_home = models.ForeignKey('auth.User')
     first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=95, blank=True, help_text='Middle name or initial.')
+    middle_name = models.CharField(u'Middle name or initial', max_length=95, blank=True)
     nickname = models.CharField(max_length=90, blank=True, help_text='Just enter name, without double-quotes, i.e. Jack, not "Jack"')
     last_name = models.CharField(max_length=105)
     age = models.IntegerField()
@@ -201,7 +201,7 @@ class Obituary(models.Model):
     rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     status = models.CharField(max_length=4, choices=STATUS, default='live')
     
-    obituary_in_system = models.BooleanField()
+    obituary_in_system = models.BooleanField(u'Obituary in DT system')
     obituary_has_run = models.BooleanField()
     obituary_created = models.DateTimeField(auto_now_add=True)
     
@@ -370,8 +370,7 @@ class Obituary(models.Model):
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
-    married = models.CharField(max_length=126, blank=True)
-#     marriage_date = models.DateField(blank=True, null=True, help_text=u'YYYY-MM-DD format')
+    married = models.CharField(max_length=126, blank=True, help_text=u'Enter spouse\'s name.')
     marriage_date = models.CharField(max_length=32, blank=True, help_text=u'YYYY-MM-DD format')
     marriage_location = models.CharField(max_length=126, blank=True)
     spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date of death, if known. If they divorced, fill in year and date, if known.')
@@ -450,8 +449,8 @@ class Siblings(models.Model):
     
     obituary = models.ForeignKey(Obituary)
     gender = models.CharField(choices=SIBLING_GENDER, max_length=8, blank=True, null=True)
-    name = models.CharField(max_length=126)
-    residence = models.CharField(max_length=126, blank=True)
+    name = models.CharField(max_length=126, help_text=u'First and last, no middle initial')
+    residence = models.CharField(max_length=126, blank=True, help_text=u'City and state')
     
     class Meta:
         verbose_name = 'Surviving siblings'
