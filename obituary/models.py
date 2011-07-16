@@ -199,7 +199,7 @@ class Obituary(models.Model):
     number_of_great_great_grandchildren = models.CharField(u'Number of surviving great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
-    status = models.CharField(max_length=4, ,choices=STATUS, default='live')
+    status = models.CharField(max_length=4, choices=STATUS, default='live')
     
     obituary_in_system = models.BooleanField()
     obituary_has_run = models.BooleanField()
