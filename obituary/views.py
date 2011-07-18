@@ -17,7 +17,8 @@ from django.views.generic.list_detail import object_list
 from obituary.models import Death_notice, Obituary
 from obituary.forms import Death_noticeForm, \
     ServiceFormSet, ObituaryForm, VisitationFormSet, BEI_FormSet, \
-    Other_servicesFormSet, ChildrenFormSet, SiblingsFormSet, MarriageFormSet
+    Other_servicesFormSet, ChildrenFormSet, SiblingsFormSet, MarriageFormSet, \
+    DeathNoticeOtherServicesFormSet
 
 # Create your views here.
 
@@ -80,16 +81,19 @@ def manage_death_notice(request, death_notice_id=None):
             death_notice = Death_notice.objects.get(pk=death_notice_id)
             form = Death_noticeForm(request.POST, request.FILES, instance=death_notice)
             formset = ServiceFormSet(request.POST, instance=death_notice)
+            dn_os_formset = DeathNoticeOtherServicesFormSet(request.POST, instance=death_notice)
         else:
             form = Death_noticeForm(request.POST, request.FILES)
             formset = ServiceFormSet(request.POST)
+            dn_os_formset = DeathNoticeOtherServicesFormSet(request.POST)
         
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid() and formset.is_valid() and dn_os_formset.is_valid():
             death_notice = form.save(commit=False)
             death_notice.funeral_home = request.user
             death_notice.save()
             formset = ServiceFormSet(request.POST, instance=death_notice)
             formset.save()
+            dn_os_formset.save()
             if request.POST.has_key('add_another'):
                 return HttpResponseRedirect(reverse('add_death_notice'))
             else:
@@ -98,14 +102,17 @@ def manage_death_notice(request, death_notice_id=None):
         if death_notice_id:
             death_notice = Death_notice.objects.get(pk=death_notice_id)
             form = Death_noticeForm(instance=death_notice)
-            formset =ServiceFormSet(instance=death_notice)
+            formset = ServiceFormSet(instance=death_notice)
+            dn_os_formset = DeathNoticeOtherServicesFormSet(instance=death_notice)
         else:
             form = Death_noticeForm()
             formset = ServiceFormSet(instance=Death_notice())
+            dn_os_formset = DeathNoticeOtherServicesFormSet(instance=Death_notice())
     
     return render_to_response('manage_death_notice.html', {
         'form': form,
         'formset': formset,
+        'other_services_formset': dn_os_formset,
         'death_notice_id': death_notice_id,
     }, context_instance=RequestContext(request))
 

@@ -6,6 +6,23 @@ from django.template.defaultfilters import date
 from os import path
 
 # Create your models here.
+
+class baseOtherServices(models.Model):
+    '''
+    Abstract base class for both Death Notice and Obituary.
+    '''
+    description = models.CharField(max_length=256)
+    other_services_date_time = models.DateTimeField()
+    other_services_location = models.CharField(max_length=126)
+    
+    class Meta:
+        abstract = True
+        verbose_name = 'Other services'
+        verbose_name_plural = 'Other services'
+    
+    def __unicode__(self):
+        return self.description
+
 class FuneralHomeProfile(models.Model):
     STATES = (
         ('Alaska', 'Alaska',),
@@ -142,6 +159,9 @@ class Service(models.Model):
             return u'%s %s' % (self.service, self.service_extra_info)
         else:
             return u'%s' % (self.service)
+
+class DeathNoticeOtherServices(baseOtherServices):
+    death_notice = models.OneToOneField(Death_notice)
 
 class Obituary(models.Model):
     STATUS = (
@@ -431,18 +451,8 @@ class BEI(models.Model):
     def __unicode__(self):
         return self.bei
 
-class Other_services(models.Model):
+class Other_services(baseOtherServices):
     obituary = models.OneToOneField(Obituary)
-    description = models.CharField(max_length=256)
-    other_services_date_time = models.DateTimeField()
-    other_services_location = models.CharField(max_length=126)
-    
-    class Meta:
-         verbose_name = 'Other services'
-         verbose_name_plural = 'Other services'
-    
-    def __unicode__(self):
-        return self.description
 
 class Children(models.Model):
     CHILD_GENDER = (
