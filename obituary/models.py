@@ -205,7 +205,7 @@ class Obituary(models.Model):
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
     life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
     length_of_relationship = models.CharField(max_length=12, blank=True)
-    memorial_contributions = models.CharField(max_length=256, blank=True)
+    remembrances = models.CharField(u'Remembrances to:', max_length=255, blank=True)
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
     mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
@@ -221,7 +221,6 @@ class Obituary(models.Model):
     number_of_great_great_grandchildren = models.CharField(u'Number of surviving great-great-grandchildren', max_length=75, blank=True)
     number_of_step_great_great_grandchildren = models.CharField(u'Number of surviving step great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
-    rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     status = models.CharField(max_length=4, choices=STATUS, default='live')
     
     obituary_in_system = models.BooleanField(u'Obituary in DT system')
