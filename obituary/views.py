@@ -217,11 +217,13 @@ def add_new_model(request, model_name):
                     dn_name = model._meta.verbose_name
                     form = Death_noticeForm
                     service_form = ServiceFormSet
+                    dn_os_formset = DeathNoticeOtherServicesFormSet
                 
                 if request.method == 'POST':
                     form = form(request.POST)
                     service_form = service_form(request.POST)
-                    if form.is_valid() and service_form.is_valid():
+                    dn_os_formset = DeathNoticeOtherServicesFormSet(request.POST)
+                    if form.is_valid() and service_form.is_valid() and dn_os_formset.is_valid():
                         try:
                             if normal_model_name == 'Death_notice':
                                 new_obj = form.save(commit=False)
@@ -229,6 +231,8 @@ def add_new_model(request, model_name):
                                 new_obj.save()
                                 service_form = ServiceFormSet(request.POST, instance=new_obj)
                                 service_form.save()
+                                dn_os_formset = DeathNoticeOtherServicesFormSet(request.POST, instance=new_obj)
+                                dn_os_formset.save()
                             else:
                                 new_obj = form.save()
                         except forms.ValidationError, error:
@@ -240,5 +244,5 @@ def add_new_model(request, model_name):
                 else:
                    form = form()
                 
-                page_context = {'form': form, 'service_form': service_form,'field': normal_model_name, 'dn_verbose_name': dn_name }
+                page_context = {'form': form, 'service_form': service_form, 'other_services_formset': dn_os_formset, 'field': normal_model_name, 'dn_verbose_name': dn_name }
                 return render_to_response('popup.html', page_context, context_instance=RequestContext(request))

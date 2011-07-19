@@ -6,7 +6,6 @@
 <script src="/media/js/admin/RelatedObjectLookups.js"></script>
 {{ form.media }}
 {{ service_form.media }}
-{{ other_services_formset.media }}
 {% endblock %}
 
 {% block css %}
@@ -29,6 +28,9 @@
         <table>
         {{ service_form }}
         </table>
+        <table>
+        {{ other_services_formset }}
+        </table>
         
 <p><input type="submit" value="Save" /> | <a href="javascript:window.close()">Cancel</a></p>
 </form>
@@ -49,6 +51,15 @@
           hourMin: 6,
           hourMax: 23,
         });
+  });
+
+  // http://trentrichardson.com/examples/timepicker/
+  $(function(){
+    $("#id_deathnoticeotherservices-0-other_services_date_time").datetimepicker({
+      stepMinute: 5,
+      hourMin: 6,
+      hourMax: 23
+    });
   });
 
   document.getElementById('id_first_name').focus()
