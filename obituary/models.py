@@ -6,6 +6,23 @@ from django.template.defaultfilters import date
 from os import path
 
 # Create your models here.
+
+class baseOtherServices(models.Model):
+    '''
+    Abstract base class for both Death Notice and Obituary.
+    '''
+    description = models.CharField(max_length=256)
+    other_services_date_time = models.DateTimeField()
+    other_services_location = models.CharField(max_length=126)
+    
+    class Meta:
+        abstract = True
+        verbose_name = 'Other services'
+        verbose_name_plural = 'Other services'
+    
+    def __unicode__(self):
+        return self.description
+
 class FuneralHomeProfile(models.Model):
     STATES = (
         ('Alaska', 'Alaska',),
@@ -143,6 +160,9 @@ class Service(models.Model):
         else:
             return u'%s' % (self.service)
 
+class DeathNoticeOtherServices(baseOtherServices):
+    death_notice = models.OneToOneField(Death_notice)
+
 class Obituary(models.Model):
     STATUS = (
         ('live','Live',),
@@ -185,7 +205,7 @@ class Obituary(models.Model):
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
     life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
     length_of_relationship = models.CharField(max_length=12, blank=True)
-    memorial_contributions = models.CharField(max_length=256, blank=True)
+    remembrances = models.CharField(u'Remembrances to:', max_length=255, blank=True)
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
     mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
@@ -195,10 +215,12 @@ class Obituary(models.Model):
     parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
     grandparents = models.CharField(u'Surviving grandparents', max_length=255, blank=True, help_text=u'If living')
     number_of_grandchildren = models.IntegerField(u'Number of surviving grandchildren', blank=True, null=True)
+    number_of_step_grandchildren = models.IntegerField(u'Number of surviving step grandchildren', blank=True, null=True)
     number_of_great_grandchildren = models.CharField(u'Number of surviving great-grandchildren', max_length=75, blank=True)
+    number_of_step_great_grandchildren = models.CharField(u'Number of surviving step great-grandchildren', max_length=75, blank=True)
     number_of_great_great_grandchildren = models.CharField(u'Number of surviving great-great-grandchildren', max_length=75, blank=True)
+    number_of_step_great_great_grandchildren = models.CharField(u'Number of surviving step great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
-    rememberances = models.CharField(u'Rememberances to:', max_length=255, blank=True)
     status = models.CharField(max_length=4, choices=STATUS, default='live')
     
     obituary_in_system = models.BooleanField(u'Obituary in DT system')
@@ -382,11 +404,15 @@ class Obituary(models.Model):
                     brother_list.append(u'%s of %s' % (brother.name, brother.residence))
                     brother_str = ', '.join(brother_list)
                 brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
+            else:
+                brothers = u''
             if sister_set:
                 for sister in sister_set:
                     sister_list.append(u'%s of %s' % (sister.name, sister.residence))
                     sister_str = ', '.join(sister_list)
                 sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
+            else:
+                sisters = u''
             return u'%s; %s' % (brothers, sisters)
         else:
             return u''
@@ -431,18 +457,8 @@ class BEI(models.Model):
     def __unicode__(self):
         return self.bei
 
-class Other_services(models.Model):
+class Other_services(baseOtherServices):
     obituary = models.OneToOneField(Obituary)
-    description = models.CharField(max_length=256)
-    other_services_date_time = models.DateTimeField()
-    other_services_location = models.CharField(max_length=126)
-    
-    class Meta:
-         verbose_name = 'Other services'
-         verbose_name_plural = 'Other services'
-    
-    def __unicode__(self):
-        return self.description
 
 class Children(models.Model):
     CHILD_GENDER = (

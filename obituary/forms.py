@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
 from obituary.widgets import SelectWithPopUp
 from obituary.models import Death_notice, Service, Obituary, Visitation, BEI, \
-    Other_services, Children, Siblings, Marriage
+    Other_services, Children, Siblings, Marriage, DeathNoticeOtherServices
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:
@@ -33,6 +33,20 @@ class CalendarWidget(forms.DateInput):
             'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
             'http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',
         )
+
+class DeathNoticeOtherServicesForm(ModelForm):
+    
+    class Meta:
+        model = DeathNoticeOtherServices
+        widgets = {
+             'other_services_date_time' : ObitsCalendarDateTimeWidget(),
+        }
+
+DeathNoticeOtherServicesFormSet = inlineformset_factory(Death_notice,
+    DeathNoticeOtherServices,
+    form = DeathNoticeOtherServicesForm,
+    can_delete = True,
+    extra =1,)
 
 class Death_noticeForm(ModelForm):
     error_css_class = 'error'

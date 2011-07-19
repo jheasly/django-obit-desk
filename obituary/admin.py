@@ -4,7 +4,8 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from obituary.models import Death_notice, Obituary, FuneralHomeProfile, \
-    Service, Visitation, BEI, Other_services, Children, Siblings, Marriage
+    Service, Visitation, BEI, Other_services, Children, Siblings, Marriage, \
+    DeathNoticeOtherServices
 
 class FuneralHomeProfileAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'city', 'state', 'phone',)
@@ -32,6 +33,9 @@ class SiblingsInline(admin.TabularInline):
 class MarriageInline(admin.TabularInline):
     model = Marriage
 
+class DeathNoticeOtherServicesInline(admin.TabularInline):
+    model = DeathNoticeOtherServices
+
 class Death_noticeAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'death_notice_created', 'death_notice_in_system', 'death_notice_has_run',)
     list_editable = ('death_notice_in_system', 'death_notice_has_run',)
@@ -39,6 +43,7 @@ class Death_noticeAdmin(admin.ModelAdmin):
     
     inlines = [
         ServiceInline,
+        DeathNoticeOtherServicesInline,
     ]
 admin.site.register(Death_notice, Death_noticeAdmin)
 
