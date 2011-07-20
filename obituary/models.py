@@ -127,7 +127,8 @@ class Death_notice(models.Model):
             datatuple = (
                 ('Death notice created by %s for %s %s' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
             )
-        send_mass_mail(datatuple)
+        if datatuple:
+            send_mass_mail(datatuple)
         super(Death_notice, self).save()
 
 class Service(models.Model):
