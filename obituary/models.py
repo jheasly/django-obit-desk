@@ -118,9 +118,10 @@ class Death_notice(models.Model):
         message_email = 'Go to the death notice admin page for further information.'
         
         if(self.id):
-            datatuple = (
-                ('Change made by %s to %s %s death notice' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
-            )
+            datatuple = None
+#             datatuple = (
+#                 ('Change made by %s to %s %s death notice' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
+#             )
         else:
             # a new Death_notice
             datatuple = (
