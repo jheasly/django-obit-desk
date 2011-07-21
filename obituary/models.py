@@ -301,6 +301,7 @@ class Obituary(models.Model):
         ##
         if self.death_notice.formerly_of:
             city = u'%s, formerly of %s' % (self.death_notice.city_of_residence.strip(), self.death_notice.formerly_of.strip())
+            print 'Formerly of!', self.death_notice.last_name
         else:
             city = self.death_notice.city_of_residence.strip()
         
@@ -370,9 +371,9 @@ class Obituary(models.Model):
                     u'who ' + date_age_cause,
                 )
         except Service.DoesNotExist:
-            service = u'%s of %s %s' % (
+            service = u'%s of %s, %s' % (
                 full_name, 
-                self.death_notice.city_of_residence,
+                city,
                 date_age_cause,
             )
             
@@ -490,7 +491,7 @@ class Siblings(models.Model):
     
     obituary = models.ForeignKey(Obituary)
     gender = models.CharField(choices=SIBLING_GENDER, max_length=8, blank=True, null=True)
-    name = models.CharField(max_length=126, help_text=u'First and last, no middle initial')
+    name = models.CharField(max_length=126, blank=True, help_text=u'First and last, no middle initial')
     residence = models.CharField(max_length=126, blank=True, help_text=u'City and state')
     
     class Meta:

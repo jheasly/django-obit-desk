@@ -6,7 +6,7 @@
 <sstable:=<RG\_Oxford:STRIPE:0,0.45,0.46,0.08999999999999997>>
 {% for ob in object_list %}<pstyle:Headlines\:DigestHead>{{ ob.death_notice.first_name }} {{ ob.death_notice.last_name }}
 <pstyle:BodyText\:BodyText\_No\_BL>{{ ob.intro|safe }}{% if ob.other_services %} {{ ob.other_services.description }} will be at {{ ob.other_services.other_services_date_time|date:"P l, N j," }} at {{ ob.other_services.other_services_location }}.{% endif %}
-<pstyle:BodyText\:BodyText\_No\_BL>{{ ob.pronoun }} was born {{ ob.date_of_birth }}, in {{ ob.place_of_birth }} to {{ ob.parents_names }}. {{ ob.marriage }}
+<pstyle:BodyText\:BodyText\_No\_BL>{{ ob.pronoun }} was born {{ ob.date_of_birth }}, in {{ ob.place_of_birth }}, to {{ ob.parents_names }}. {{ ob.marriage }}
 <pstyle:BodyText\:BodyText\_No\_BL>{{ ob.education|safe }} {{ ob.military_service|safe }} {{ ob.career_work_experience|safe }}
 <pstyle:BodyText\:BodyText\_No\_BL>Survivors include {{ ob.parents }}. {{ ob.surviving_siblings }}. {% if ob.preceded_in_death_by %} {{ ob.pronoun }} was preceded in death by {{ ob.preceded_in_death_by }}.{% endif %}
 <pstyle:BodyText\:BodyText\_No\_BL>{{ ob.bei.bei|capfirst }} will be at {{ ob.bei.bei_date_time|date:"P l, N j," }} in {{ ob.bei.bei_location|safe }}
