@@ -29,7 +29,7 @@ def deaths(request, model=None):
         template_name = 'obituary_list_windows_line_endings.html'
     model = eval(model)
     if model == Death_notice:
-        queryset = model.objects.filter(death_notice_in_system=False).order_by('last_name')
+        queryset = model.objects.filter(death_notice_in_system=False, obituary__isnull=True).order_by('last_name')
         template_name = 'death_list_mac.html'
     else:
         queryset = model.objects.filter(obituary_in_system=False).order_by('death_notice__last_name')
