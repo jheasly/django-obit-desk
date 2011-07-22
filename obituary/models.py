@@ -4,6 +4,7 @@ from django.core.mail import send_mail, send_mass_mail
 from django.db import models
 from django.template.defaultfilters import date
 from os import path
+import datetime
 
 # Create your models here.
 
@@ -192,7 +193,8 @@ class Obituary(models.Model):
     
     def obit_file_name(instance, filename):
         (orig_name, orig_ext) = path.splitext(filename)
-        return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
+#         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
+        return 'obits/%s/%s/ob.%s.%s%s' % (datetime.date.today().year, datetime.date.today().month, instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
@@ -256,12 +258,23 @@ class Obituary(models.Model):
             send_mass_mail(datatuple)
         super(Obituary, self).save()
     
+    def admin_thumbnail(self):
+        if self.photo:
+            return u'<img src="%s%s" width="60" />' % (u'http://uploads.registerguard.com/', self.photo.name)
+        else:
+            return u'(No photo)'
+    admin_thumbnail.short_description = u'Thumbnail'
+    admin_thumbnail.allow_tags = True
+    
     ##
     ## MODEL ATTRIBUTES FOR THE OBITUARY ADMIN
     ##
-    def photo_file_name(self):
+    def display_photo_file_name(self):
         if self.photo:
-            return path.basename(self.photo.name)
+            return self.photo.name
+        else:
+            return u'(No photo)'
+    display_photo_file_name.short_description = u'File path'
     
     def service_date(self):
         try:
