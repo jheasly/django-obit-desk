@@ -3,6 +3,7 @@
 from django.core.mail import send_mail, send_mass_mail
 from django.db import models
 from django.template.defaultfilters import date
+from sorl.thumbnail import ImageField
 from os import path
 import datetime
 
@@ -215,6 +216,7 @@ class Obituary(models.Model):
     mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
     number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.', default=10)
     photo = models.ImageField(upload_to=obit_file_name, blank=True)
+    alt_photo = ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
     parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
     grandparents = models.CharField(u'Surviving grandparents', max_length=255, blank=True, help_text=u'If living')
