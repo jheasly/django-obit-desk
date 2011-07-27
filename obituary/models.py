@@ -3,7 +3,7 @@
 from django.core.mail import send_mail, send_mass_mail
 from django.db import models
 from django.template.defaultfilters import date
-from sorl.thumbnail import ImageField
+from sorl.thumbnail import get_thumbnail, ImageField
 from os import path
 import datetime
 
@@ -215,8 +215,7 @@ class Obituary(models.Model):
     family_contact_phone = models.CharField(max_length=12)
     mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
     number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.', default=10)
-    photo = models.ImageField(upload_to=obit_file_name, blank=True)
-    alt_photo = ImageField(upload_to=obit_file_name, blank=True)
+    photo = ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
     parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
     grandparents = models.CharField(u'Surviving grandparents', max_length=255, blank=True, help_text=u'If living')
@@ -262,7 +261,8 @@ class Obituary(models.Model):
     
     def admin_thumbnail(self):
         if self.photo:
-            return u'<img src="%s%s" width="60" />' % (u'http://uploads.registerguard.com/', self.photo.name)
+            im = get_thumbnail(self.photo, '60')
+            return u'<img src="%s" width="60" alt="%s %s" />' % (im.url, self.death_notice.first_name, self.death_notice.last_name)
         else:
             return u'(No photo)'
     admin_thumbnail.short_description = u'Thumbnail'

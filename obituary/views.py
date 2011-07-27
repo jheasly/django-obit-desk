@@ -93,6 +93,7 @@ def manage_death_notice(request, death_notice_id=None):
             death_notice.save()
             formset = ServiceFormSet(request.POST, instance=death_notice)
             formset.save()
+            dn_os_formset = DeathNoticeOtherServicesFormSet(request.POST, instance=death_notice)
             dn_os_formset.save()
             if request.POST.has_key('add_another'):
                 return HttpResponseRedirect(reverse('add_death_notice'))
