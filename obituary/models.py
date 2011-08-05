@@ -2,6 +2,7 @@
 
 from django.core.mail import send_mail, send_mass_mail
 from django.db import models
+from django.contrib.humanize.templatetags.humanize import apnumber
 from django.template.defaultfilters import date
 from sorl.thumbnail import get_thumbnail, ImageField
 from os import path
@@ -398,11 +399,19 @@ class Obituary(models.Model):
     ## MARRIAGE
     ##
     
+    def date_or_what(self, wed_date_str):
+        from datetime import datetime
+        try:
+            date_obj = datetime.strptime(wed_date_str, '%Y-%m-%d')
+            return date(date_obj, "N j, Y")
+        except (AttributeError, ValueError,):
+            return wed_date_str
+    
     def marriage(self):
         if self.marriage_set.all():
             marriage_str = u'%s married %s' % (
                 self.pronoun(), 
-                ', '.join([', '.join((wedding.married, wedding.marriage_date, wedding.marriage_location, wedding.spouse_death)) for wedding in self.marriage_set.all()]),
+                ', '.join([', '.join((wedding.married, self.date_or_what(wedding.marriage_date), wedding.marriage_location, wedding.spouse_death)) for wedding in self.marriage_set.all()]),
             )
         else:
             marriage_str = u''
@@ -411,6 +420,20 @@ class Obituary(models.Model):
     ##
     ## SURVIVORS
     ##
+    def surviving_children(self):
+        child_list = []
+        genders = ('son', 'daughter',)
+        if self.children_set.all():
+            for gender in genders:
+                gender_set = self.children_set.filter(gender=gender)
+                gender_set.reverse()
+                if gender_set:
+                    for child in gender_set:
+                        child_list.append(u'%s of %s' % (child.name, child.residence))
+                        child_str = ', '.join(child_list)
+                    child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+            return child_str
+        
     def surviving_siblings(self):
         brother_list = []
         sister_list = []
@@ -434,6 +457,9 @@ class Obituary(models.Model):
             return u'%s; %s' % (brothers, sisters)
         else:
             return u''
+    
+    def surviving_grands(self):
+        return u'and %s grandchildren' % apnumber(self.number_of_grandchildren)
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
@@ -492,6 +518,7 @@ class Children(models.Model):
     residence = models.CharField(max_length=126, blank=True)
     
     class Meta:
+        ordering = ('id',)
         verbose_name = 'Surviving children'
         verbose_name_plural = 'Surviving children'
     
@@ -510,6 +537,7 @@ class Siblings(models.Model):
     residence = models.CharField(max_length=126, blank=True, help_text=u'City and state')
     
     class Meta:
+        ordering = ('id',)
         verbose_name = 'Surviving siblings'
         verbose_name_plural = 'Surviving siblings'
     
