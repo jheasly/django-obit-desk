@@ -14,7 +14,7 @@ class baseOtherServices(models.Model):
     '''
     Abstract base class for both Death Notice and Obituary.
     '''
-    description = models.CharField(max_length=256)
+    description = models.CharField(u'Description of other service', max_length=256)
     other_services_date_time = models.DateTimeField()
     other_services_location = models.CharField(max_length=126)
     
@@ -167,6 +167,9 @@ class Service(models.Model):
 
 class DeathNoticeOtherServices(baseOtherServices):
     death_notice = models.OneToOneField(Death_notice)
+#     description = models.CharField(max_length=256)
+#     other_services_date_time = models.CharField(max_length=150, blank=True, help_text=u'YYYY-MM-DD format')
+#     other_services_location = models.CharField(max_length=126, blank=True)
 
 class Obituary(models.Model):
     STATUS = (
@@ -201,7 +204,7 @@ class Obituary(models.Model):
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
-    service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifcs are known, use Service section of Death Notice form.)')
+    service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
     place_of_birth = models.CharField(max_length=75, help_text=u'City, State')

@@ -1,9 +1,4 @@
 <UNICODE-MAC>
-<vsn:6><fset:InDesign-Roman><ctable:=<Black:COLOR:CMYK:Process:0,0,0,1>>
-<dps:Headlines\:DigestHead=<Nextstyle:Headlines\:DigestHead><ct:Black><clig:0><cl:13.000000><ph:0><psb:10.000000><psa:4.000000><cf:PoynterGothicTextCond><pbl:1><bnc:None><nmf:\<TextFont\>>>
-<dps:BodyText\:BodyText\_No\_BL=<Nextstyle:BodyText\:BodyText\_No\_BL><cs:9.500000><clig:0><phll:2><pfli:13.000000><palp:1.000000><cl:10.000000><pmcah:3><phz:24.000000><cf:MillerDailyTwo><pdws:1.750000><pmaws:2.000000><pmiws:1.000000><pmaxl:1.000000><ch:Baseline><cct:100.000000><csk:-0.000000><cotff:1><pta:JustifyLeft><phwt:0><cotfcalt:0><bnc:None><nmf:\<TextFont\>>>
-<dps:BodyText\:BodyText\_Tagline=<Nextstyle:BodyText\:BodyText\_Tagline><ct:Italic><cs:9.500000><clig:0><phll:2><pfli:13.000000><palp:1.000000><cl:10.000000><pmcah:3><phz:24.000000><psb:20.000000><cf:MillerDailyTwo><pdws:1.750000><pmaws:2.000000><pmiws:1.000000><pmaxl:1.000000><ch:Baseline><cct:100.000000><csk:-0.000000><prac:Black><pras:0.500000><prao:15.000000><prali:48.000000><prari:48.000000><praon:1><cotff:1><pta:JustifyLeft><phwt:0><cotfcalt:0><bnc:None><nmf:\<TextFont\>>>
-<sstable:=<RG\_Oxford:STRIPE:0,0.45,0.46,0.08999999999999997>>
 {% for ob in object_list %}<pstyle:Headlines\:DigestHead>{{ ob.death_notice.first_name }} {{ ob.death_notice.last_name }}
 <pstyle:BodyText\:BodyText\_No\_BL>{{ ob.intro|safe }}{% if ob.other_services %} {{ ob.other_services.description }} will be at {{ ob.other_services.other_services_date_time|date:"P l, N j," }} at {{ ob.other_services.other_services_location }}.{% endif %}
 <pstyle:BodyText\:BodyText\_No\_BL>{{ ob.pronoun }} was born {{ ob.date_of_birth }}, in {{ ob.place_of_birth }}, to {{ ob.parents_names }}. {{ ob.marriage }}
