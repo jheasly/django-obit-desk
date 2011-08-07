@@ -91,7 +91,8 @@ class FuneralHomeProfile(models.Model):
 class Death_notice(models.Model):
     AGE_UNIT_CHOICES = (
         (1, 'years',),
-        (2, 'days',),
+        (2, 'months',),
+        (3, 'days',),
     )
     funeral_home = models.ForeignKey('auth.User')
     first_name = models.CharField(max_length=100)
