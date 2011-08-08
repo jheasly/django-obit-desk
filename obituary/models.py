@@ -203,7 +203,7 @@ class Obituary(models.Model):
         return 'obits/%s/%s/ob.%s.%s%s' % (datetime.date.today().year, datetime.date.today().month, instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
-    cause_of_death = models.CharField(max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
+    cause_of_death = models.CharField(u'Died of ... ', max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
     gender = models.CharField(choices=GENDERS, max_length=1)
@@ -213,7 +213,7 @@ class Obituary(models.Model):
     education = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
-    remembrances = models.CharField(u'Remembrances to:', max_length=255, blank=True)
+    remembrances = models.CharField(u'Remembrances to ... ', max_length=255, blank=True)
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
     mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
@@ -404,19 +404,52 @@ class Obituary(models.Model):
     ##
     
     def date_or_what(self, wed_date_str):
+        '''
+        Takes a string; if it's in YYYY-MM-DD format, a date object is 
+        returned, otherwise the the original string is returned.
+        '''
         from datetime import datetime
         try:
             date_obj = datetime.strptime(wed_date_str, '%Y-%m-%d')
-            return date(date_obj, "N j, Y")
+            return date_obj
+#             return date(date_obj, "N j, Y")
         except (AttributeError, ValueError,):
             return wed_date_str
     
+    def other_gender(self, the_one):
+        if the_one == 'M':
+            return u'she'
+        else:
+            return u'he'
+    
     def marriage(self):
         if self.marriage_set.all():
-            marriage_str = u'%s married %s' % (
-                self.pronoun(), 
-                ', '.join([', '.join((wedding.married, self.date_or_what(wedding.marriage_date), wedding.marriage_location, wedding.spouse_death)) for wedding in self.marriage_set.all()]),
-            )
+            wedding_list = []
+            for wedding in self.marriage_set.all():
+                if self.date_or_what(wedding.marriage_date) and wedding.marriage_location:
+                    wedding_str = u'%s married %s on %s in %s' % (
+                        self.pronoun(), 
+                        wedding.married, 
+                        date(self.date_or_what(wedding.marriage_date), "N j, Y"), 
+                        wedding.marriage_location, 
+                    )
+                elif not self.date_or_what(wedding.marriage_date) and not wedding.marriage_location:
+                    wedding_str = u'%s married %s' % (
+                        self.pronoun(), 
+                        wedding.married, 
+                    )
+                
+                if wedding.spouse_death:
+                    # See if the 'spouse_death" is a date (a death) or a string, something else ... 
+                    if isinstance(self.date_or_what(wedding.spouse_death), datetime.datetime):
+                        wedding_str += u'. %s died %s' % (
+                            self.other_gender(self.gender).capitalize(), 
+                            date(self.date_or_what(wedding.spouse_death), "N j, Y"), 
+                        )
+                    else:
+                        wedding_str += u'. %s' % self.date_or_what(wedding.spouse_death)
+                wedding_list.append(wedding_str)
+            marriage_str = '. '.join(wedding_list) + u'.'
         else:
             marriage_str = u''
         return marriage_str
@@ -436,7 +469,10 @@ class Obituary(models.Model):
     
     def surviving_parents(self):
         if self.parents:
-            surv_par_str = '%s' % self.parents
+            if self.gender == 'M':
+                surv_par_str = u'his %s; ' % self.parents
+            else:
+                surv_par_str = u'her %s; ' % self.parents
         else:
             surv_par_str = u''
         return surv_par_str
@@ -449,18 +485,26 @@ class Obituary(models.Model):
                 child_list = []
                 gender_set = self.children_set.filter(gender=gender)
                 if gender_set:
+                    # build gender-based list
                     for child in gender_set:
-                        child_list.append(u'%s of %s' % (child.name, child.residence))
-                        if len(child_list) == 1:
-                            child_str = ', '.join(child_list)
+                        if child.residence:
+                            child_list.append(u'%s of %s' % (child.name, child.residence))
                         else:
-                            child_list[-1] = u'and ' + child_list[-1]
-                            child_str = ', '.join(child_list)
-                        
-                        if len(gender_set) == 1:
-                            child_str = u'a %s, %s' % (gender, child_str)
-                        else:
-                            child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+                            child_list.append(u'%s' % (child.name))
+                    
+                    if len(child_list) == 1:
+                        child_str = ', '.join(child_list)
+                    else:
+                        # insert 'and" in front of last item
+                        child_list[-1] = u'and ' + child_list[-1]
+                        # merge last two items
+                        child_list[-2:] = [ ' '.join(child_list[-2:]) ]
+                        child_str = ', '.join(child_list)
+                    
+                    if len(gender_set) == 1:
+                        child_str = u'a %s, %s' % (gender, child_str)
+                    else:
+                        child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
                     gender_sub_list.append(child_str)
             child_display = '; '.join(gender_sub_list)
         else:
@@ -468,34 +512,66 @@ class Obituary(models.Model):
         return child_display
         
     def surviving_siblings(self):
-        brother_list = []
-        sister_list = []
-        if self.siblings_set.all():
-            brother_set = self.siblings_set.filter(gender='brother')
-            sister_set = self.siblings_set.filter(gender='sister')
-            if brother_set:
-                for brother in brother_set:
-                    brother_list.append(u'%s of %s' % (brother.name, brother.residence))
-                    brother_str = ', '.join(brother_list)
-                if len(brother_set) == 1:
-                    brothers = u'a brother, %s' % (brother_str)
-                else:
-                    brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
-            else:
-                brothers = u''
-            if sister_set:
-                for sister in sister_set:
-                    sister_list.append(u'%s of %s' % (sister.name, sister.residence))
-                    sister_str = ', '.join(sister_list)
-                if len(sister_set) == 1:
-                    sisters = u'a sister, %s' % (sister_str)
-                else:
-                    sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
-            else:
-                sisters = u''
-            return u'%s; %s' % (brothers, sisters)
+        genders = ('brother', 'sister',)
+        if self.children_set.all():
+            gender_sub_list = []
+            for gender in genders:
+                child_list = []
+                gender_set = self.siblings_set.filter(gender=gender)
+                if gender_set:
+                    # build gender-based list
+                    for child in gender_set:
+                        if child.residence:
+                            child_list.append(u'%s of %s' % (child.name, child.residence))
+                        else:
+                            child_list.append(u'%s' % (child.name))
+                    
+                    if len(child_list) == 1:
+                        child_str = ', '.join(child_list)
+                    else:
+                        # insert 'and" in front of last item
+                        child_list[-1] = u'and ' + child_list[-1]
+                        # merge last two items
+                        child_list[-2:] = [ ' '.join(child_list[-2:]) ]
+                        child_str = ', '.join(child_list)
+                    
+                    if len(gender_set) == 1:
+                        child_str = u'; a %s, %s' % (gender, child_str)
+                    else:
+                        child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+                    gender_sub_list.append(child_str)
+            child_display = '; '.join(gender_sub_list)
         else:
-            return u''
+            child_display = u''
+        return child_display
+#         brother_list = []
+#         sister_list = []
+#         if self.siblings_set.all():
+#             brother_set = self.siblings_set.filter(gender='brother')
+#             sister_set = self.siblings_set.filter(gender='sister')
+#             if brother_set:
+#                 for brother in brother_set:
+#                     brother_list.append(u'%s of %s' % (brother.name, brother.residence))
+#                     brother_str = ', '.join(brother_list)
+#                 if len(brother_set) == 1:
+#                     brothers = u'a brother, %s' % (brother_str)
+#                 else:
+#                     brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
+#             else:
+#                 brothers = u''
+#             if sister_set:
+#                 for sister in sister_set:
+#                     sister_list.append(u'%s of %s' % (sister.name, sister.residence))
+#                     sister_str = ', '.join(sister_list)
+#                 if len(sister_set) == 1:
+#                     sisters = u'a sister, %s' % (sister_str)
+#                 else:
+#                     sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
+#             else:
+#                 sisters = u''
+#             return u'%s; %s' % (brothers, sisters)
+#         else:
+#             return u''
     
     def surviving_grands(self):
         grand_list = (

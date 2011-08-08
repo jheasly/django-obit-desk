@@ -1,18 +1,4 @@
 ===========
-IMMEDIATE TO DO
-===========
-• Preceded in death (by wife). <- create logic for; if spouse death date
-is length of relationship ever used?
-• serial comma on survivor lists; if 2, merge items, if >2, merge items -2 and -1
-• Figure out e-mail's not going out to everyone on list.
-• Break up form.
-
-===========
-OTHER TO DO
-===========
-1. Form factory for FH index view?
-
-===========
 Django Obit
 ===========
 
@@ -21,3 +7,29 @@ to supply a given local newspaper with clean, reliable death notice and
 obituary information that can be quickly and easily formatted and distributed 
 both online and in print. A few Adobe InDesign templates are included as 
 examples.
+
+Add this to your urls.py:
+(r'^add/(?P<model_name>\w+)/$', 'obituary.views.add_new_model'),
+
+Make sure you can send out an e-mail. (Elsewise, it'll bust on save().)
+
+===========
+Immediate To Do
+===========
+- Preceded in death (by wife). <- create logic for; if spouse death date
+is length of relationship ever used?
+- serial comma on survivor lists; if 2, merge items, if >2, merge items -2 and -1
+- Figure out e-mail's not going out to everyone on list.
+- Break up form.
+- Status on User's index page.
+
+===========
+Other To Do
+===========
+1. Form factory for FH index view?
+
+===========
+Odd Areas
+===========
+- "Length of residence in Lane County area:"
+- "Length of relationship:"
