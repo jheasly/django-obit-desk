@@ -213,8 +213,6 @@ class Obituary(models.Model):
     education = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
-    life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
-    length_of_relationship = models.CharField(max_length=12, blank=True)
     remembrances = models.CharField(u'Remembrances to:', max_length=255, blank=True)
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
@@ -222,6 +220,8 @@ class Obituary(models.Model):
     number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.', default=10)
     photo = ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
+    life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
+    length_of_relationship = models.CharField(max_length=12, blank=True)
     parents = models.CharField(u'Surviving parents', max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
     grandparents = models.CharField(u'Surviving grandparents', max_length=255, blank=True, help_text=u'If living')
     number_of_grandchildren = models.IntegerField(u'Number of surviving grandchildren', blank=True, null=True)
@@ -424,19 +424,40 @@ class Obituary(models.Model):
     ##
     ## SURVIVORS
     ##
+    def surviving_sig_ot(self):
+        if self.life_domestic_partner:
+            if self.gender == 'M':
+                sig_ot_str = u' his wife; '
+            else:
+                sig_ot_str = u' her husband; '
+        else:
+            sig_ot_str = u' '
+        return sig_ot_str
+    
+    def surviving_parents(self):
+        if self.parents:
+            surv_par_str = '%s' % self.parents
+        else:
+            surv_par_str = u''
+        return surv_par_str
+    
     def surviving_children(self):
-        child_list = []
         genders = ('son', 'daughter',)
         if self.children_set.all():
+            gender_sub_list = []
             for gender in genders:
+                child_list = []
                 gender_set = self.children_set.filter(gender=gender)
-                gender_set.reverse()
                 if gender_set:
                     for child in gender_set:
                         child_list.append(u'%s of %s' % (child.name, child.residence))
                         child_str = ', '.join(child_list)
-                    child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
-            return child_str
+                        child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+                    gender_sub_list.append(child_str)
+            child_display = '; '.join(gender_sub_list)
+        else:
+            child_display = u''
+        return child_display
         
     def surviving_siblings(self):
         brother_list = []
@@ -464,6 +485,16 @@ class Obituary(models.Model):
     
     def surviving_grands(self):
         return u'and %s grandchildren' % apnumber(self.number_of_grandchildren)
+    
+    ##
+    ## BURIAL, ENTOMBMENT, INURNMENT
+    ##
+    def bei_display(self):
+        try:
+            bei_str = u'<pstyle:BodyText\:BodyText\_No\_BL>%s will be at %s in %s.\n' % ( self.bei.bei.capitalize(), date(self.bei.bei_date_time,"P l, N j,"), self.bei.bei_location)
+        except BEI.DoesNotExist:
+            bei_str = u''
+        return bei_str
 
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
