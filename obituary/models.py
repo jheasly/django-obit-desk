@@ -209,7 +209,7 @@ class Obituary(models.Model):
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
     place_of_birth = models.CharField(max_length=75, help_text=u'City, State')
-    parents_names = models.CharField(max_length=75, blank=True)
+    parents_names = models.CharField(max_length=75, blank=True, help_text=u'Use this format: "[Father\'s first name] and [Mother\'s first name] [Mother\'s maiden name] [Married last name]" e.g.: Thomas and Bernice Davis Baker')
     education = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
@@ -451,8 +451,16 @@ class Obituary(models.Model):
                 if gender_set:
                     for child in gender_set:
                         child_list.append(u'%s of %s' % (child.name, child.residence))
-                        child_str = ', '.join(child_list)
-                        child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+                        if len(child_list) == 1:
+                            child_str = ', '.join(child_list)
+                        else:
+                            child_list[-1] = u'and ' + child_list[-1]
+                            child_str = ', '.join(child_list)
+                        
+                        if len(gender_set) == 1:
+                            child_str = u'a %s, %s' % (gender, child_str)
+                        else:
+                            child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
                     gender_sub_list.append(child_str)
             child_display = '; '.join(gender_sub_list)
         else:
@@ -469,14 +477,20 @@ class Obituary(models.Model):
                 for brother in brother_set:
                     brother_list.append(u'%s of %s' % (brother.name, brother.residence))
                     brother_str = ', '.join(brother_list)
-                brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
+                if len(brother_set) == 1:
+                    brothers = u'a brother, %s' % (brother_str)
+                else:
+                    brothers = u'%s brothers, %s' % (len(brother_set), brother_str)
             else:
                 brothers = u''
             if sister_set:
                 for sister in sister_set:
                     sister_list.append(u'%s of %s' % (sister.name, sister.residence))
                     sister_str = ', '.join(sister_list)
-                sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
+                if len(sister_set) == 1:
+                    sisters = u'a sister, %s' % (sister_str)
+                else:
+                    sisters = u'%s sisters, %s' % (len(sister_set), sister_str)
             else:
                 sisters = u''
             return u'%s; %s' % (brothers, sisters)
@@ -484,7 +498,27 @@ class Obituary(models.Model):
             return u''
     
     def surviving_grands(self):
-        return u'and %s grandchildren' % apnumber(self.number_of_grandchildren)
+        grand_list = (
+            (self.number_of_grandchildren,                  u'grandchildren'),
+            (self.number_of_step_grandchildren,             u'step granchildren',),
+            (self.number_of_great_grandchildren,            u'great-grandchildren',),
+            (self.number_of_step_great_grandchildren,       u'step great-grandchildren',),
+            (self.number_of_great_great_grandchildren,      u'great-great-great grandchildren',),
+            (self.number_of_step_great_great_grandchildren, u'step great-great-great grandchildren',),
+        )
+        grand_display_list = [ (apnumber(grand[0]), grand[1]) for grand in grand_list if grand[0] ]
+        if grand_display_list:
+            
+            if len(grand_display_list) == 1:                # SINGLE-ITEM grand_display_list: [(u'eight', u'grandchildren')]
+                grand_display = u'and %s %s' % grand_display_list[0]
+            else:                                           # MULTI grand_display_list: [(14, u'grandchildren'), (14, u'great-grandchildren')]
+                grand_display_list = ['%s %s' % grand_display for grand_display in grand_display_list]
+                grand_display_list[-1] = u'and ' + grand_display_list[-1]
+                grand_display = '; '.join( grand_display_list )
+            grand_display = u'; ' + grand_display
+        else:
+            grand_display = u''
+        return grand_display
     
     ##
     ## BURIAL, ENTOMBMENT, INURNMENT

@@ -1,4 +1,18 @@
 ===========
+IMMEDIATE TO DO
+===========
+• Preceded in death (by wife). <- create logic for; if spouse death date
+is length of relationship ever used?
+• serial comma on survivor lists; if 2, merge items, if >2, merge items -2 and -1
+• Figure out e-mail's not going out to everyone on list.
+• Break up form.
+
+===========
+OTHER TO DO
+===========
+1. Form factory for FH index view?
+
+===========
 Django Obit
 ===========
 

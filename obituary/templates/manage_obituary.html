@@ -32,6 +32,7 @@
 	<form action="" method="post">{% csrf_token %}
 	{% endif %}
 	<table>
+		<tr class="required" width="100%"><th>&nbsp;</th><td>Items in red are required.</td></tr>
 		{{ form }}
 	</table>
 	<table>
