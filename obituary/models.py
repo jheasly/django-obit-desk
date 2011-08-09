@@ -10,6 +10,12 @@ import datetime
 
 # Create your models here.
 
+DN_OBIT_EMAIL_RECIPIENTS = [
+    'john.heasly@registerguard.com', 
+    'lisa.crossley@registerguard.com', 
+    'jheasly@earthlink.net',
+]
+
 class baseOtherServices(models.Model):
     '''
     Abstract base class for both Death Notice and Obituary.
@@ -118,7 +124,7 @@ class Death_notice(models.Model):
     
     def save(self):
         from_email = 'rgnews.registerguard.@gmail.com'
-        to_email = ['john.heasly@registerguard.com']
+        to_email = DN_OBIT_EMAIL_RECIPIENTS
         message_email = 'Go to the death notice admin page for further information.'
         
         if(self.id):
@@ -128,9 +134,9 @@ class Death_notice(models.Model):
 #             )
         else:
             # a new Death_notice
-            datatuple = (
-                ('Death notice created by %s for %s %s' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
-            )
+            message_subj = 'Death notice created by %s for %s %s' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name)
+            datatuple = (message_subj, message_email, from_email, to_email,), # <- This trailing comma's vital!
+        
         if datatuple:
             send_mass_mail(datatuple)
         super(Death_notice, self).save()
@@ -247,7 +253,7 @@ class Obituary(models.Model):
     
     def save(self):
         from_email = 'rgnews.registerguard.@gmail.com'
-        to_email = ['john.heasly@registerguard.com', 'lisa.crossley@registerguard.com', 'jheasly@earthlink.net']
+        to_email = DN_OBIT_EMAIL_RECIPIENTS
         message_email = 'Go to the obituary admin page for further information.'
         
         if(self.pk):
@@ -257,9 +263,8 @@ class Obituary(models.Model):
 #             )
         else:
             # a new Death_notice
-            datatuple = (
-                ('Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
-            )
+            message_subj = 'Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+            datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
         if datatuple:
             send_mass_mail(datatuple)
         super(Obituary, self).save()
