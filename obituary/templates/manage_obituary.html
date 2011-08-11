@@ -31,13 +31,291 @@
 	{% else %}
 	<form action="" method="post">{% csrf_token %}
 	{% endif %}
+
 	<table>
 		<tr class="required" width="100%"><th>&nbsp;</th><td>Items in red are required.</td></tr>
-		{{ form }}
+		
+		<tr colspan="2">
+			<th>
+			{% if form.errors or formset.errors or bei_formset.errors or os_formset.errors or child_formset.errors or sib_formset.errors or wed_formset.errors %}
+				
+				{{ form.errors }} {{ formset.errors }} {{ bei_formset.errors }} {{ os_formset.errors }} {{ child_formset.errors }} {{ sib_formset.errors }} {{ wed_formset.errors }}
+				
+			{% endif %}
+			</th>
+		</tr>
+		
+		<tr {% if form.status.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.status.label_tag }}:
+			</th>
+			<td>
+				{{ form.status.errors }}
+				{{ form.status }}
+				{% if form.status.help_text %}<p>{{ form.status.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.death_notice.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.death_notice.label_tag }}:
+			</th>
+			<td>
+				{{ form.death_notice.errors }}
+				{{ form.death_notice }}
+				{% if form.death_notice.help_text %}<p>{{ form.death_notice.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.gender.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.gender.label_tag }}:
+			</th>
+			<td>
+				{{ form.gender.errors }}
+				{{ form.gender }}
+				{% if form.gender.help_text %}<p>{{ form.gender.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.date_of_birth.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.date_of_birth.label_tag }}:
+			</th>
+			<td>
+				{{ form.date_of_birth.errors }}
+				{{ form.date_of_birth }}
+				{% if form.date_of_birth.help_text %}<p>{{ form.date_of_birth.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.place_of_birth.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.place_of_birth.label_tag }}:
+			</th>
+			<td>
+				{{ form.place_of_birth.errors }}
+				{{ form.place_of_birth }}
+				{% if form.place_of_birth.help_text %}<p>{{ form.place_of_birth.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.parents_names.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.parents_names.label_tag }}:
+			</th>
+			<td>
+				{{ form.parents_names.errors }}
+				{{ form.parents_names }}
+				{% if form.parents_names.help_text %}<p>{{ form.parents_names.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.cause_of_death.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.cause_of_death.label_tag }}
+			</th>
+			<td>
+				{{ form.cause_of_death.errors }}
+				{{ form.cause_of_death }}
+				{% if form.cause_of_death.help_text %}<p>{{ form.cause_of_death.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.no_service_planned.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.no_service_planned.label_tag }}
+			</th>
+			<td>
+				{{ form.no_service_planned.errors }}
+				{{ form.no_service_planned }}
+				{% if form.no_service_planned.help_text %}<p>{{ form.no_service_planned.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
 	</table>
+	
+	<table>
+		<tr>
+			<td>{{ formset_name }}</td>
+		</tr>
+		{{ formset }}
+	</table>
+	
+	<table>
+		<tr>
+			<td>{{ bei_formset_name }}</td>
+		</tr>
+		{{ bei_formset }}
+	</table>
+	
+	<table>
+		<tr>
+			<td>{{ os_formset_name }}</td>
+		</tr>
+		{{ os_formset }}
+	</table>
+	
+	<table>
+	
+		<tr {% if form.remembrances.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.remembrances.label_tag }}
+			</th>
+			<td>
+				{{ form.remembrances.errors }}
+				{{ form.remembrances }}
+				{% if form.remembrances.help_text %}<p>{{ form.remembrances.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.photo.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.photo.label_tag }}:
+			</th>
+			<td>
+				{{ form.photo.errors }}
+				{{ form.photo }}
+				{% if form.photo.help_text %}<p>{{ form.photo.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.family_contact.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.family_contact.label_tag }}:
+			</th>
+			<td>
+				{{ form.family_contact.errors }}
+				{{ form.family_contact }}
+				{% if form.family_contact.help_text %}<p>{{ form.family_contact.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.family_contact_phone.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.family_contact_phone.label_tag }}:
+			</th>
+			<td>
+				{{ form.family_contact_phone.errors }}
+				{{ form.family_contact_phone }}
+				{% if form.family_contact_phone.help_text %}<p>{{ form.family_contact_phone.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.mailing_address.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.mailing_address.label_tag }}:
+			</th>
+			<td>
+				{{ form.mailing_address.errors }}
+				{{ form.mailing_address }}
+				{% if form.mailing_address.help_text %}<p>{{ form.mailing_address.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.number_of_copies.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_copies.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_copies.errors }}
+				{{ form.number_of_copies }}
+				{% if form.number_of_copies.help_text %}<p>{{ form.number_of_copies.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.education.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.education.label_tag }}:
+			</th>
+			<td>
+				{{ form.education.errors }}
+				{{ form.education }}
+				{% if form.education.help_text %}<p>{{ form.education.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.military_service.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.military_service.label_tag }}:
+			</th>
+			<td>
+				{{ form.military_service.errors }}
+				{{ form.military_service }}
+				{% if form.military_service.help_text %}<p>{{ form.military_service.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.career_work_experience.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.career_work_experience.label_tag }}:
+			</th>
+			<td>
+				{{ form.career_work_experience.errors }}
+				{{ form.career_work_experience }}
+				{% if form.career_work_experience.help_text %}<p>{{ form.career_work_experience.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.life_domestic_partner.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.life_domestic_partner.label_tag }}:
+			</th>
+			<td>
+				{{ form.life_domestic_partner.errors }}
+				{{ form.life_domestic_partner }}
+				{% if form.life_domestic_partner.help_text %}<p>{{ form.life_domestic_partner.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.length_of_relationship.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.length_of_relationship.label_tag }}:
+			</th>
+			<td>
+				{{ form.length_of_relationship.errors }}
+				{{ form.length_of_relationship }}
+				{% if form.length_of_relationship.help_text %}<p>{{ form.length_of_relationship.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+	</table>
+	
 	<table>
 		{{ wed_formset }}
 	</table>
+	
+	<table>
+		<tr colspan="2">
+			<th>
+				<h1>Survivors</h1>
+			</th>
+		</tr>
+		
+		<tr {% if form.parents.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.parents.label_tag }}:
+			</th>
+			<td>
+				{{ form.parents.errors }}
+				{{ form.parents }}
+				{% if form.parents.help_text %}<p>{{ form.parents.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.grandparents.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.grandparents.label_tag }}:
+			</th>
+			<td>
+				{{ form.grandparents.errors }}
+				{{ form.grandparents }}
+				{% if form.grandparents.help_text %}<p>{{ form.grandparents.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+	</table>
+	
 	<table>
 		<tr>
 			<td>{{ child_formset_name }}</td>
@@ -50,24 +328,88 @@
 		</tr>
 		{{ sib_formset }}
 	</table>
+	
 	<table>
-		<tr>
-			<td>{{ formset_name }}</td>
+		
+		<tr {% if form.number_of_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_grandchildren.errors }}
+				{{ form.number_of_grandchildren }}
+				{% if form.number_of_grandchildren.help_text %}<p>{{ form.number_of_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
 		</tr>
-		{{ formset }}
-	</table>
-	<table>
-		<tr>
-			<td>{{ bei_formset_name }}</td>
+		
+		<tr {% if form.number_of_step_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_step_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_step_grandchildren.errors }}
+				{{ form.number_of_step_grandchildren }}
+				{% if form.number_of_step_grandchildren.help_text %}<p>{{ form.number_of_step_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
 		</tr>
-		{{ bei_formset }}
-	</table>
-	<table>
-		<tr>
-			<td>{{ os_formset_name }}</td>
+		
+		<tr {% if form.number_of_great_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_great_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_great_grandchildren.errors }}
+				{{ form.number_of_great_grandchildren }}
+				{% if form.number_of_great_grandchildren.help_text %}<p>{{ form.number_of_great_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
 		</tr>
-		{{ os_formset }}
+		
+		<tr {% if form.number_of_step_great_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_step_great_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_step_great_grandchildren.errors }}
+				{{ form.number_of_step_great_grandchildren }}
+				{% if form.number_of_step_great_grandchildren.help_text %}<p>{{ form.number_of_step_great_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.number_of_great_great_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_great_great_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_great_great_grandchildren.errors }}
+				{{ form.number_of_great_great_grandchildren }}
+				{% if form.number_of_great_great_grandchildren.help_text %}<p>{{ form.number_of_great_great_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.number_of_step_great_great_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_step_great_great_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_step_great_great_grandchildren.errors }}
+				{{ form.number_of_step_great_great_grandchildren }}
+				{% if form.number_of_step_great_great_grandchildren.help_text %}<p>{{ form.number_of_step_great_great_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.preceded_in_death_by.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.preceded_in_death_by.label_tag }}:
+			</th>
+			<td>
+				{{ form.preceded_in_death_by.errors }}
+				{{ form.preceded_in_death_by }}
+				{% if form.preceded_in_death_by.help_text %}<p>{{ form.preceded_in_death_by.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
 	</table>
+	
 	<table>
 		<tr>
 			<td>
