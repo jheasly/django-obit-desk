@@ -133,6 +133,17 @@
 			</td>
 		</tr>
 		
+		<tr {% if form.service_plans_indefinite.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.service_plans_indefinite.label_tag }}
+			</th>
+			<td>
+				{{ form.service_plans_indefinite.errors }}
+				{{ form.service_plans_indefinite }}
+				{% if form.service_plans_indefinite.help_text %}<p>{{ form.service_plans_indefinite.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
 	</table>
 	
 	<table>
