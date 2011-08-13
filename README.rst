@@ -27,7 +27,6 @@ Other To Do
 - Form factory for FH index view?
 - Be able to tell a Obituary save from a Death Notice save for e-mail notification purposes.
 - Move e-mail addresses to settings.
-- Include state in template output for out-of-state FHs.
 
 ===========
 Odd Areas

@@ -145,7 +145,6 @@ class Death_notice(models.Model):
         suffixes = (' jr', ' sr', ' ii', ' iii')
         shortened_name = self.last_name
         for suffix in suffixes:
-            print suffix
             if self.last_name.lower().count(suffix):
                 offset = self.last_name.lower().find(suffix)
                 shortened_name = self.last_name[:offset]
@@ -239,6 +238,7 @@ class Obituary(models.Model):
     # Survivors
     life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
     length_of_relationship = models.CharField(max_length=12, blank=True)
+    spouse = models.CharField(max_length=255, blank=True, help_text=u'Life/domestic partner')
     parents = models.CharField(max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
     grandparents = models.CharField(max_length=255, blank=True, help_text=u'If living')
     number_of_grandchildren = models.IntegerField(u'Number of grandchildren', blank=True, null=True)
@@ -247,7 +247,8 @@ class Obituary(models.Model):
     number_of_step_great_grandchildren = models.CharField(u'Number of step great-grandchildren', max_length=75, blank=True)
     number_of_great_great_grandchildren = models.CharField(u'Number of great-great-grandchildren', max_length=75, blank=True)
     number_of_step_great_great_grandchildren = models.CharField(u'Number of step great-great-grandchildren', max_length=75, blank=True)
-    preceded_in_death_by = models.TextField(blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
+    preceded_in_death_by = models.TextField(u'Preceded in death by ... ', blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
+    anything_else = models.TextField(u'Anything else we should know?', blank=True)
     status = models.CharField(max_length=4, choices=STATUS, default='live')
     
     obituary_in_system = models.BooleanField(u'Obituary in DT system')
@@ -337,7 +338,6 @@ class Obituary(models.Model):
         ##
         if self.death_notice.formerly_of:
             city = u'%s, formerly of %s' % (self.death_notice.city_of_residence.strip(), self.death_notice.formerly_of.strip())
-            print 'Formerly of!', self.death_notice.last_name
         else:
             city = self.death_notice.city_of_residence.strip()
         
@@ -482,13 +482,14 @@ class Obituary(models.Model):
     ## SURVIVORS
     ##
     def surviving_sig_ot(self):
-        if self.life_domestic_partner:
+        if self.spouse or self.life_domestic_partner:
             if self.gender == 'M':
                 sig_ot_str = u' his wife; '
             else:
                 sig_ot_str = u' her husband; '
         else:
-            sig_ot_str = u' '
+            sig_ot_str = u''
+        
         return sig_ot_str
     
     def surviving_parents(self):
@@ -528,7 +529,7 @@ class Obituary(models.Model):
                     if len(gender_set) == 1:
                         child_str = u'a %s, %s' % (gender, child_str)
                     else:
-                        child_str = u'%s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+                        child_str = u' %s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
                     gender_sub_list.append(child_str)
             child_display = '; '.join(gender_sub_list)
         else:

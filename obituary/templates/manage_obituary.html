@@ -21,6 +21,12 @@
 
 {% block content %}
 <div class="wrapper">
+	{% if messages %}
+		{% for message in messages %}
+			<p style="color: blue;">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+	
 	<table>
 		<tr><td><a href="{% url death_notice_index %}">Home</a></td></tr>
 		<tr><td>Hello {{ user.funeralhomeprofile.full_name }}</td></tr>
@@ -268,6 +274,14 @@
 			</td>
 		</tr>
 		
+	</table>
+	
+	<table>
+		{{ wed_formset }}
+	</table>
+	
+	<table>
+		
 		<tr {% if form.life_domestic_partner.field.required %}class="required"{% endif %}>
 			<th>
 				{{ form.life_domestic_partner.label_tag }}:
@@ -290,17 +304,21 @@
 			</td>
 		</tr>
 		
-	</table>
-	
-	<table>
-		{{ wed_formset }}
-	</table>
-	
-	<table>
 		<tr colspan="2">
 			<th>
 				<h1>Survivors</h1>
 			</th>
+		</tr>
+		
+		<tr {% if form.spouse.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.spouse.label_tag }}:
+			</th>
+			<td>
+				{{ form.spouse.errors }}
+				{{ form.spouse }}
+				{% if form.spouse.help_text %}<p>{{ form.spouse.help_text|safe }}</p>{% endif %}
+			</td>
 		</tr>
 		
 		<tr {% if form.parents.field.required %}class="required"{% endif %}>
@@ -410,12 +428,23 @@
 		
 		<tr {% if form.preceded_in_death_by.field.required %}class="required"{% endif %}>
 			<th>
-				{{ form.preceded_in_death_by.label_tag }}:
+				{{ form.preceded_in_death_by.label_tag }}
 			</th>
 			<td>
 				{{ form.preceded_in_death_by.errors }}
 				{{ form.preceded_in_death_by }}
 				{% if form.preceded_in_death_by.help_text %}<p>{{ form.preceded_in_death_by.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.anything_else.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.anything_else.label_tag }}
+			</th>
+			<td>
+				{{ form.anything_else.errors }}
+				{{ form.anything_else }}
+				{% if form.anything_else.help_text %}<p>{{ form.anything_else.help_text|safe }}</p>{% endif %}
 			</td>
 		</tr>
 		
@@ -450,6 +479,7 @@
             changeYear: true,
             yearRange: 'c-110:c+0',
             dateFormat: 'yy-mm-dd',
+            constrainInput: false,
         });
   });
 

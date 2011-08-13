@@ -151,6 +151,14 @@ def manage_obituary(request, obituary_id=None):
             os_formset.is_valid() and child_formset.is_valid() and \
             sib_formset.is_valid() and wed_formset.is_valid():
             
+            msg = ugettext('The %(verbose_name)s for %(first)s %(last)s was updated.') % \
+                {
+                    'verbose_name': Obituary._meta.verbose_name,
+                    'first': obituary.death_notice.first_name,
+                    'last': obituary.death_notice.last_name,
+                }
+            messages.success(request, msg, fail_silently=False)
+            
             obituary = form.save()
             formset.save()
             bei_formset.save()
