@@ -537,7 +537,7 @@ class Obituary(models.Model):
         return child_display
         
     def surviving_siblings(self):
-        genders = ('brother', 'sister',)
+        genders = ('brother', 'sister', 'stepbrother', 'stepsister',)
         if self.children_set.all():
             gender_sub_list = []
             for gender in genders:
