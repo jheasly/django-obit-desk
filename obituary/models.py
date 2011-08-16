@@ -154,7 +154,7 @@ class Death_notice(models.Model):
 class Service(models.Model):
     SERVICES = (
         ('A visitation', 'visitation',),
-        ('A visitation followed by a funeral', 'visitation followed by a funeral',),
+        ('A visitation followed by a funeral', 'visitation followed by the funeral',),
         ('A celebration of life', 'celebration of life',),
         ('The funeral', 'funeral',),
         ('The funeral Mass', 'funeral Mass',),
@@ -162,6 +162,7 @@ class Service(models.Model):
         ('A memorial service', 'memorial service',),
         ('A memorial service is planned', 'memorial service is planned',),
         ('A military graveside funeral', 'military graveside funeral',),
+        ('A service followed by the burial', 'service followed by the burial',),
     )
     
     death_notice = models.OneToOneField(Death_notice, blank=True, null=True)
@@ -224,8 +225,8 @@ class Obituary(models.Model):
     service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
-    place_of_birth = models.CharField(max_length=75, help_text=u'City, State')
-    parents_names = models.CharField(u'Parents\' names', max_length=75, blank=True, help_text=u'Use this format: "[Father\'s first name] and [Mother\'s first name] [Mother\'s maiden name] [Married last name]" e.g.: Thomas and Bernice Davis Baker')
+    place_of_birth = models.CharField(max_length=75, help_text=u'City, State (if known, otherwise, just enter state). If born in Lane County area, just enter city.')
+    parents_names = models.CharField(u'Parents\' names', max_length=75, blank=True, help_text=u'Format: "[Father\'s first name] and [Mother\'s first name] [Mother\'s maiden name] [Married last name]" e.g.: Thomas and Bernice Davis Baker')
     education = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
     career_work_experience = models.TextField(blank=True, help_text=u'Use complete sentences.')
@@ -538,11 +539,12 @@ class Obituary(models.Model):
         
     def surviving_siblings(self):
         genders = ('brother', 'sister', 'stepbrother', 'stepsister',)
-        if self.children_set.all():
+        if self.siblings_set.all():
             gender_sub_list = []
             for gender in genders:
                 child_list = []
                 gender_set = self.siblings_set.filter(gender=gender)
+                print self, 'gender_set', gender_set
                 if gender_set:
                     # build gender-based list
                     for child in gender_set:
@@ -680,6 +682,8 @@ class Siblings(models.Model):
     SIBLING_GENDER = (
         ('brother', 'brother',),
         ('sister', 'sister',),
+        ('stepbrother', 'stepbrother',),
+        ('stepsister', 'stepsister',),
     )
     
     obituary = models.ForeignKey(Obituary)

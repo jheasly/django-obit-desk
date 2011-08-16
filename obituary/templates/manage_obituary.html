@@ -28,7 +28,7 @@
 	{% endif %}
 	
 	<table>
-		<tr><td><a href="{% url death_notice_index %}">Home</a></td></tr>
+		<tr><td><a href="{% url death_notice_index %}">Home</a>&nbsp;|&nbsp;<a href="{% url logout %}">Logout</a></td></tr>
 		<tr><td>Hello {{ user.funeralhomeprofile.full_name }}</td></tr>
 	</table>
 	
@@ -304,11 +304,17 @@
 			</td>
 		</tr>
 		
+	</table>
+	
+	<table>
 		<tr colspan="2">
 			<th>
 				<h1>Survivors</h1>
 			</th>
 		</tr>
+	</table>
+	
+	<table>
 		
 		<tr {% if form.spouse.field.required %}class="required"{% endif %}>
 			<th>
