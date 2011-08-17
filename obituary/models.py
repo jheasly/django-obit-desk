@@ -470,7 +470,7 @@ class Obituary(models.Model):
                             date(self.date_or_what(wedding.spouse_death), "N j, Y"), 
                         )
                     else:
-                        wedding_str += u'. %s' % self.date_or_what(wedding.spouse_death)
+                        wedding_str += u'. %s died in %s' % (self.other_gender(self.gender).capitalize(), self.date_or_what(wedding.spouse_death))
                 wedding_list.append(wedding_str)
             marriage_str = '. '.join(wedding_list)
             if marriage_str[-1] != '.':

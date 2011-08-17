@@ -38,6 +38,7 @@ class Death_noticeAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'death_notice_created', 'death_notice_in_system', 'death_notice_has_run',)
     list_editable = ('death_notice_in_system', 'death_notice_has_run',)
     list_filter = ('death_notice_in_system', 'death_notice_has_run',)
+    search_fields = ['last_name', 'first_name',]
     
     inlines = [
         ServiceInline,
@@ -48,6 +49,7 @@ admin.site.register(Death_notice, Death_noticeAdmin)
 class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('death_notice', 'gender', 'date_of_birth', 'service_date', 'obituary_created', 'admin_thumbnail', 'display_photo_file_name', 'obituary_in_system', 'obituary_has_run', 'status',)
     list_editable = ('obituary_in_system', 'obituary_has_run')
+    search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     
     inlines = [
         MarriageInline,
