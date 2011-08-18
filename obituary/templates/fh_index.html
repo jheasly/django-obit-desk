@@ -33,7 +33,11 @@
 	{% if obituaries %}
 	<h3>Obituaries</h3>
 	{% for obituary in obituaries %}
-		<p><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a></p>
+	<div class="clear">
+		<div style="float: left; margin-right: 12px;">{{ obituary.admin_thumbnail|safe }}</div>
+		<p><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a>, created {{ obituary.obituary_created|date:"l, N j, Y, P" }} <br>
+		<b>Status: <a href="{% url manage_obituary obituary.pk %}">{{ obituary.get_status_display }}</a></b></p>
+	</div>
 	{% endfor %}
 	{% endif %}
 </div>

@@ -60,6 +60,8 @@ def deaths(request, model=None):
 def fh_index(request):
     death_notices = Death_notice.objects.filter(funeral_home__username=request.user.username)
     obituaries = Obituary.objects.filter(death_notice__funeral_home__username=request.user.username)
+    ObituaryFactoryFormSet = modelform_factory(Obituary)
+    
     return render_to_response('fh_index.html', {
         'death_notices': death_notices,
         'obituaries': obituaries,

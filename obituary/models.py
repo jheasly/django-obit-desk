@@ -496,9 +496,9 @@ class Obituary(models.Model):
     def surviving_parents(self):
         if self.parents:
             if self.gender == 'M':
-                surv_par_str = u'his %s; ' % self.parents
+                surv_par_str = u' his %s; ' % self.parents
             else:
-                surv_par_str = u'her %s; ' % self.parents
+                surv_par_str = u' her %s; ' % self.parents
         else:
             surv_par_str = u''
         return surv_par_str
