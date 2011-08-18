@@ -34,7 +34,7 @@
 	<h3>Obituaries</h3>
 	{% for obituary in obituaries %}
 	<div class="clear">
-		<div style="float: left; margin-right: 12px;">{{ obituary.admin_thumbnail|safe }}</div>
+		<div style="float: left; margin-right: 12px;">{% if obituary.photo.name %}<a href="http://{{ obituary.photo.storage.bucket }}.{{ obituary.photo.storage.connection.server }}/{{ obituary.photo.name }}">{% endif %}{{ obituary.admin_thumbnail|safe }}{% if obituary.photo.name %}</a>{% endif %}</div>
 		<p><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a>, created {{ obituary.obituary_created|date:"l, N j, Y, P" }} <br>
 		<b>Status: <a href="{% url manage_obituary obituary.pk %}">{{ obituary.get_status_display }}</a></b></p>
 	</div>
