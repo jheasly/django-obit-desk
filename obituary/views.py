@@ -1,4 +1,4 @@
-import codecs
+import codecs, datetime
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import logout
@@ -35,7 +35,7 @@ def deaths(request, model=None):
     
     t = loader.get_template(template_name)
     c = RequestContext(request, {'object_list': queryset})
-    f = codecs.open('/tmp/dt_text.txt', encoding='utf-16-le', mode='w')
+    f = codecs.open('/tmp/dt_text.txt', encoding='utf-8', mode='w')
     f.write(t.render(c))
     f.close()
     
@@ -49,10 +49,10 @@ def deaths(request, model=None):
     r = object_list(
         request,
         queryset = queryset,
-        mimetype = 'text/plain;charset=utf-16le',
+        mimetype = 'text/plain;charset=utf-8',
         template_name = template_name,
     )
-    r['Content-Disposition'] = 'attachment; filename=obituary.txt'
+    r['Content-Disposition'] = 'attachment; filename=%s-[%s].txt;' % (model._meta.verbose_name_plural.lower().replace(' ', '-'), datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'))
     return r
 
 @login_required

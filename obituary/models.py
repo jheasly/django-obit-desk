@@ -472,7 +472,7 @@ class Obituary(models.Model):
                         self.pronoun(), 
                         wedding.married, 
                     )
-                print 'init wedding_str', wedding_str
+                
                 if wedding.spouse_death:
                     # See if the 'spouse_death" is a date (a death) or a string, something else ... 
                     if isinstance(self.date_or_what(wedding.spouse_death), datetime.datetime):
