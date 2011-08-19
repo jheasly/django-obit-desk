@@ -41,11 +41,11 @@
 	<table>
 		<tr class="required" width="100%"><th>&nbsp;</th><td>Items in red are required.</td></tr>
 		
-		<tr colspan="2">
-			<th>
+		<tr>
+			<th colspan="2" class="required">
 			{% if form.errors or formset.errors or bei_formset.errors or os_formset.errors or child_formset.errors or sib_formset.errors or wed_formset.errors %}
 				
-				{{ form.errors }} {{ formset.errors }} {{ bei_formset.errors }} {{ os_formset.errors }} {{ child_formset.errors }} {{ sib_formset.errors }} {{ wed_formset.errors }}
+				Please address the error(s) below.
 				
 			{% endif %}
 			</th>
@@ -154,21 +154,21 @@
 	
 	<table>
 		<tr>
-			<td>{{ formset_name }}</td>
+			<th colspan="2">{{ formset_name }}</th>
 		</tr>
 		{{ formset }}
 	</table>
 	
 	<table>
 		<tr>
-			<td>{{ bei_formset_name }}</td>
+			<th colspan="2">{{ bei_formset_name }}</th>
 		</tr>
 		{{ bei_formset }}
 	</table>
 	
 	<table>
 		<tr>
-			<td>{{ os_formset_name }}</td>
+			<th colspan="2">{{ os_formset_name }}</th>
 		</tr>
 		{{ os_formset }}
 	</table>
@@ -353,13 +353,13 @@
 	
 	<table>
 		<tr>
-			<td>{{ child_formset_name }}</td>
+			<th colspan="2">{{ child_formset_name }}</th>
 		</tr>
 		{{ child_formset }}
 	</table>
 	<table>
 		<tr>
-			<td>{{ sib_formset_name }}</td>
+			<th colspan="2">{{ sib_formset_name }}</th>
 		</tr>
 		{{ sib_formset }}
 	</table>

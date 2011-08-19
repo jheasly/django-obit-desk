@@ -120,7 +120,7 @@ class Death_notice(models.Model):
         ordering = ('-death_notice_created',)
     
     def __unicode__(self):
-        return u'Death notice for %s %s' % (self.first_name, self.last_name)
+        return u'%s %s' % (self.first_name, self.last_name)
     
     def save(self):
         from_email = 'rgnews.registerguard.@gmail.com'
@@ -285,7 +285,7 @@ class Obituary(models.Model):
     def admin_thumbnail(self):
         if self.photo:
             im = get_thumbnail(self.photo, '60')
-            return u'<img src="%s" width="60" alt="%s %s" />' % (im.url, self.death_notice.first_name, self.death_notice.last_name)
+            return u'<a href="http://%s.%s/%s"><img src="%s" width="60" alt="%s %s" /></a>' % (self.photo.storage.bucket, self.photo.storage.connection.server, self.photo.name, im.url, self.death_notice.first_name, self.death_notice.last_name)
         else:
             return u'(No photo)'
     admin_thumbnail.short_description = u'Thumbnail'
@@ -442,6 +442,7 @@ class Obituary(models.Model):
         if self.marriage_set.all():
             wedding_list = []
             for wedding in self.marriage_set.all():
+                wedding_str = u''
                 if self.date_or_what(wedding.marriage_date) and wedding.marriage_location:
                     
                     if isinstance(self.date_or_what(wedding.marriage_date), datetime.datetime):
@@ -453,15 +454,25 @@ class Obituary(models.Model):
                         self.pronoun(), 
                         wedding.married, 
                         wedding_date_str,
-#                         date(self.date_or_what(wedding.marriage_date), "N j, Y"), 
                         wedding.marriage_location, 
+                    )
+                elif self.date_or_what(wedding.marriage_date) and not wedding.marriage_location:
+                    if isinstance(self.date_or_what(wedding.marriage_date), datetime.datetime):
+                        wedding_date_str = date(self.date_or_what(wedding.marriage_date), "N j, Y")
+                    else:
+                        wedding_date_str = self.date_or_what(wedding.marriage_date)
+                    
+                    wedding_str = u'%s married %s in %s' % (
+                        self.pronoun(), 
+                        wedding.married, 
+                        wedding_date_str,
                     )
                 elif not self.date_or_what(wedding.marriage_date) and not wedding.marriage_location:
                     wedding_str = u'%s married %s' % (
                         self.pronoun(), 
                         wedding.married, 
                     )
-                
+                print 'init wedding_str', wedding_str
                 if wedding.spouse_death:
                     # See if the 'spouse_death" is a date (a death) or a string, something else ... 
                     if isinstance(self.date_or_what(wedding.spouse_death), datetime.datetime):
@@ -470,10 +481,13 @@ class Obituary(models.Model):
                             date(self.date_or_what(wedding.spouse_death), "N j, Y"), 
                         )
                     else:
-                        wedding_str += u'. %s died in %s' % (self.other_gender(self.gender).capitalize(), self.date_or_what(wedding.spouse_death))
+                        if self.date_or_what(wedding.spouse_death).count('divorce'):
+                            wedding_str += u'. %s' % self.date_or_what(wedding.spouse_death)
+                        else:
+                            wedding_str += u'. %s died in %s' % (self.other_gender(self.gender).capitalize(), self.date_or_what(wedding.spouse_death))
                 wedding_list.append(wedding_str)
             marriage_str = '. '.join(wedding_list)
-            if marriage_str[-1] != '.':
+            if marriage_str and marriage_str[-1] != '.':
                 marriage_str += '.'
         else:
             marriage_str = u''
@@ -544,7 +558,6 @@ class Obituary(models.Model):
             for gender in genders:
                 child_list = []
                 gender_set = self.siblings_set.filter(gender=gender)
-                print self, 'gender_set', gender_set
                 if gender_set:
                     # build gender-based list
                     for child in gender_set:
@@ -617,9 +630,9 @@ class Obituary(models.Model):
 class Marriage(models.Model):
     obituary =  models.ForeignKey(Obituary)
     married = models.CharField(max_length=126, blank=True, help_text=u'Enter spouse\'s name.')
-    marriage_date = models.CharField(max_length=32, blank=True, help_text=u'If only the year is known, enter the year. If just month and year are known, enter month and year, i.e. \'September 1954\'')
+    marriage_date = models.CharField(max_length=32, blank=True, help_text=u'If only the year is known, type in the year. If just month and year are known, type in the month and year, i.e. \'September 1954\'')
     marriage_location = models.CharField(max_length=126, blank=True)
-    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, or complete date of death, if known. If they divorced, fill in year and date, if known.')
+    spouse_death = models.CharField(max_length=128, blank=True, null=True, help_text=u'\'Previously\' or year, month and year, or complete date of death, if known. If they divorced, enter as a complete sentence, i.e. \'They later divorced.\' or \'They divorced in 1953.\'')
     
     class Meta:
         ordering = ('marriage_date', 'id',)

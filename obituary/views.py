@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.db.models.loading import get_models, get_app, get_apps
 from django.forms.models import modelform_factory
-# from django.forms.models import modelformset_factory, inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext, loader
@@ -40,12 +39,12 @@ def deaths(request, model=None):
     f.write(t.render(c))
     f.close()
     
-    return object_list(
-        request,
-        queryset = queryset,
-        mimetype = 'text/plain;charset=utf-8',
-        template_name = template_name,
-    )
+#     return object_list(
+#         request,
+#         queryset = queryset,
+#         mimetype = 'text/plain;charset=utf-8',
+#         template_name = template_name,
+#     )
 
     r = object_list(
         request,

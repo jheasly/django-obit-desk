@@ -1,6 +1,6 @@
 {% extends "base_reader_form.html" %}
 
-{% block title %}Death notices for {{ user.funeralhomeprofile.full_name }}{% endblock %}
+{% block title %}Administration home page for {{ user.funeralhomeprofile.full_name }}{% endblock %}
 
 {% block css %}
 <style type="text/css">
@@ -35,7 +35,7 @@
 	{% for obituary in obituaries %}
 	<div class="clear">
 		<div style="float: left; margin-right: 12px;">{% if obituary.photo.name %}<a href="http://{{ obituary.photo.storage.bucket }}.{{ obituary.photo.storage.connection.server }}/{{ obituary.photo.name }}">{% endif %}{{ obituary.admin_thumbnail|safe }}{% if obituary.photo.name %}</a>{% endif %}</div>
-		<p><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a>, created {{ obituary.obituary_created|date:"l, N j, Y, P" }} <br>
+		<p style="margin-left: 72px;"><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a>, created {{ obituary.obituary_created|date:"l, N j, Y, P" }} <br>
 		<b>Status: <a href="{% url manage_obituary obituary.pk %}">{{ obituary.get_status_display }}</a></b></p>
 	</div>
 	{% endfor %}
