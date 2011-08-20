@@ -480,6 +480,14 @@
   });
 
   $(function(){
+    $("#id_visitation-0-visitation_date_time").datetimepicker({
+      stepMinute: 5,
+      hourMin: 6,
+      hourMax: 23,
+    });
+  });
+
+  $(function(){
     $(".marriage_date_picker").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -504,6 +512,7 @@
       stepMinute: 5,
       hourMin: 6,
       hourMax: 23,
+      constrainInput: false,
     });
   });
 

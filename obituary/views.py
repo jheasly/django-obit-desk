@@ -22,22 +22,21 @@ from obituary.forms import Death_noticeForm, \
 # Create your views here.
 
 def deaths(request, model=None):
-    if request.META['HTTP_USER_AGENT'].count('Macintosh'):
+    # Set the right template
+    if request.META['HTTP_USER_AGENT'].count('Macintosh') and model == 'Death_notice':
+        template_name = 'death_list_unix_line_endings.html'
+    elif request.META['HTTP_USER_AGENT'].count('Macintosh') and model == 'Obituary':
         template_name = 'obituary_list_unix_line_endings.html'
+    elif model == 'Death_notice':
+        template_name = 'death_list_windows_line_endings.html'
     else:
         template_name = 'obituary_list_windows_line_endings.html'
+        
     model = eval(model)
     if model == Death_notice:
         queryset = model.objects.filter(death_notice_in_system=False, obituary__isnull=True).order_by('last_name')
-        template_name = 'death_list_mac.html'
     else:
         queryset = model.objects.filter(obituary_in_system=False).order_by('death_notice__last_name')
-    
-    t = loader.get_template(template_name)
-    c = RequestContext(request, {'object_list': queryset})
-    f = codecs.open('/tmp/dt_text.txt', encoding='utf-8', mode='w')
-    f.write(t.render(c))
-    f.close()
     
 #     return object_list(
 #         request,
@@ -46,13 +45,20 @@ def deaths(request, model=None):
 #         template_name = template_name,
 #     )
 
-    r = object_list(
-        request,
-        queryset = queryset,
-        mimetype = 'text/plain;charset=utf-8',
-        template_name = template_name,
-    )
-    r['Content-Disposition'] = 'attachment; filename=%s-[%s].txt;' % (model._meta.verbose_name_plural.lower().replace(' ', '-'), datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'))
+    t = loader.get_template(template_name)
+    c = RequestContext(request, {'object_list': queryset })
+    data = t.render(c).replace('  ', ' ')
+    data = data.replace('; ; ', '; ')
+    data = data.replace('> ', '>')
+    r = HttpResponse(data, mimetype='text/plain;charset=utf-8')
+
+#     r = object_list(
+#         request,
+#         queryset = queryset,
+#         mimetype = 'text/plain;charset=utf-8',
+#         template_name = template_name,
+#     )
+    r['Content-Disposition'] = 'attachment; filename=%s-[%s].txt;' % (model._meta.verbose_name_plural.lower().replace(' ', '-'), datetime.datetime.now().strftime('%Y-%m-%d-%I-%M-%S-%p'))
     return r
 
 @login_required
