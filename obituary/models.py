@@ -110,6 +110,7 @@ class Death_notice(models.Model):
     city_of_residence = models.CharField(max_length=110)
     formerly_of = models.CharField(max_length=126, blank=True)
     death_date = models.DateField()
+    no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     death_notice_in_system = models.BooleanField()
     death_notice_has_run = models.BooleanField()
     death_notice_created = models.DateTimeField(auto_now_add=True)
