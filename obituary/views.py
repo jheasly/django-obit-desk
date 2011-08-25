@@ -80,8 +80,7 @@ def manage_death_notice(request, death_notice_id=None):
             Death_notice.objects.filter(funeral_home__username=request.user.username).get(pk=death_notice_id).delete()
             msg = ugettext('The %(verbose_name)s was deleted.') %\
                 { 'verbose_name': Death_notice._meta.verbose_name }
-#             messages.success(request, msg, fail_silently=True)
-            messages.success(request, msg, fail_silently=False)
+            messages.success(request, msg, fail_silently=True)
             return HttpResponseRedirect(reverse('death_notice_index'))
         
         if death_notice_id:
@@ -101,6 +100,8 @@ def manage_death_notice(request, death_notice_id=None):
             formset = ServiceFormSet(request.POST, instance=death_notice)
             formset.save()
             dn_os_formset = DeathNoticeOtherServicesFormSet(request.POST, instance=death_notice)
+            msg = ugettext('Death notice for %s %s saved.' % (death_notice.first_name, death_notice.last_name))
+            messages.success(request, msg, fail_silently=True)
             dn_os_formset.save()
             if request.POST.has_key('add_another'):
                 return HttpResponseRedirect(reverse('add_death_notice'))

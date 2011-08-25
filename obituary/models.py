@@ -163,6 +163,7 @@ class Service(models.Model):
         ('A memorial service', 'memorial service',),
         ('A memorial service is planned', 'memorial service is planned',),
         ('A military graveside funeral', 'military graveside funeral',),
+        ('The funeral service followed by the burial', 'funeral service followed by the burial',),
         ('A service followed by the burial', 'service followed by the burial',),
     )
     
@@ -311,7 +312,7 @@ class Obituary(models.Model):
             return u'No service scheduled.'
     
     ##
-    ## MODE ATTRIBUTES FOR OBITUARY TEMPLATING
+    ## MODEL ATTRIBUTES FOR OBITUARY TEMPLATING
     ##
     def pronoun(self):
         if self.gender == 'F':
@@ -323,6 +324,29 @@ class Obituary(models.Model):
         '''
         Navigates all the permutations of the first paragraph.
         '''
+        ##
+        ## VISITATION
+        ##
+        try:
+            self.visitation
+            
+            if self.visitation.visitation_end_date_time:
+                visitation_str = u' Visitation will be from %s to %s at %s.' % (date(self.visitation.visitation_start_date_time, "P"), date(self.visitation.visitation_end_date_time, "P l, N j,"), self.visitation.visitation_location)
+            else:
+                visitation_str = u' Visitation will be at %s at %s.' % (date(self.visitation.visitation_start_date_time, "P l,"), date(self.visitation.visitation_end_date_time, "P l, N j,"), self.visitation.visitation_location)
+        except Visitation.DoesNotExist:
+            visitation_str = u''
+        
+        ##
+        ## OTHER SERVICES
+        ##
+        try:
+             self.other_services
+             os_str = u'' 
+             
+        except Other_services.DoesNotExist:
+            os_str = u''
+        
         ##
         ## DATELINE
         ##
@@ -385,6 +409,7 @@ class Obituary(models.Model):
                 date(self.death_notice.death_date, "N j"),
                 self.death_notice.age,
             )
+        date_age_cause = date_age_cause + visitation_str
         
         ##
         ## SERVICE INTRO
@@ -640,15 +665,15 @@ class Marriage(models.Model):
 
 class Visitation(models.Model):
     obituary = models.OneToOneField(Obituary)
-    description = models.CharField(max_length=256)
-    visitation_date_time = models.DateTimeField()
+    visitation_start_date_time = models.DateTimeField()
+    visitation_end_date_time = models.DateTimeField(blank=True, null=True)
     visitation_location = models.CharField(max_length=126)
     
     class Meta:
         verbose_name = 'Visitation'
     
     def __unicode__(self):
-        return self.description
+        return u'Visitation for %s %s' % (self.obituary.death_notice.first_name, self.obituary.death_notice.last_name)
 
 class BEI(models.Model):
     BEI= (

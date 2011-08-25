@@ -23,7 +23,7 @@
 <div class="wrapper">
 	{% if messages %}
 		{% for message in messages %}
-			<p style="color: blue;">{{ message }}</p>
+			<p style="color: blue; font-weight: bold;">{{ message }}</p>
 		{% endfor %}
 	{% endif %}
 	
@@ -480,7 +480,15 @@
   });
 
   $(function(){
-    $("#id_visitation-0-visitation_date_time").datetimepicker({
+    $("#id_visitation-0-visitation_start_date_time").datetimepicker({
+      stepMinute: 5,
+      hourMin: 6,
+      hourMax: 23,
+    });
+  });
+
+  $(function(){
+    $("#id_visitation-0-visitation_end_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,
       hourMax: 23,
