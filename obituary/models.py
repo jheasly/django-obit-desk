@@ -83,7 +83,7 @@ class FuneralHomeProfile(models.Model):
     full_name = models.CharField(max_length=80)
     city = models.CharField(max_length=80, blank=True, help_text=u'Leave blank when city name is part of funeral home name, i.e., \'Oakridge Funeral Home Chapel of the Woods\'')
     state = models.CharField(max_length=6, choices=STATES, blank=True, help_text=u'Leave blank if located in Oregon')
-    phone = models.CharField(max_length=12, blank=True)
+    phone = models.CharField(max_length=14, blank=True)
     
     class Meta:
         ordering = ('full_name',)
@@ -242,8 +242,8 @@ class Obituary(models.Model):
     life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
     length_of_relationship = models.CharField(max_length=12, blank=True)
     spouse = models.CharField(max_length=255, blank=True, help_text=u'Life/domestic partner')
-    parents = models.CharField(max_length=255, blank=True, help_text=u'If living, i.e., \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
-    grandparents = models.CharField(max_length=255, blank=True, help_text=u'If living')
+    parents = models.CharField(max_length=255, blank=True, help_text=u'If living, i.e., \'parents, Nicki Kilday of Cottage Grove and Klinton Kilday of Glendale, Ariz.\' or  \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
+    grandparents = models.CharField(max_length=255, blank=True, help_text=u'If living, i.e., \'grandparents, Vern and Evelyn Shrock and John and Margie Nolte and Keith Kilday\'')
     number_of_grandchildren = models.IntegerField(u'Number of grandchildren', blank=True, null=True)
     number_of_step_grandchildren = models.IntegerField(u'Number of step grandchildren', blank=True, null=True)
     number_of_great_grandchildren = models.CharField(u'Number of great-grandchildren', max_length=75, blank=True)
@@ -543,6 +543,17 @@ class Obituary(models.Model):
             surv_par_str = u''
         return surv_par_str
     
+    def surviving_grandparents(self):
+        if self.surviving_grandparents:
+            if self.gender == 'M':
+                surv_gpar_str = u' his %s; ' % self.grandparents
+            else:
+                surv_gpar_str = u' her %s; ' % self.grandparents
+        else:
+            surv_gpar_str = u''
+        return surv_gpar_str
+    
+    
     def surviving_children(self):
         genders = ('son', 'daughter', 'stepson', 'stepdaughter')
         if self.children_set.all():
@@ -678,8 +689,11 @@ class Visitation(models.Model):
 class BEI(models.Model):
     BEI= (
         ('burial', 'burial',),
+        ('private burial', 'private burial',),
         ('entombment', 'entombment',),
+        ('private entombment', 'private entombment',),
         ('inurnment', 'inurnment',),
+        ('private inurnment', 'private inurnment',),
     )
     
     obituary = models.OneToOneField(Obituary)
