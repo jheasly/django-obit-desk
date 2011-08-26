@@ -271,7 +271,7 @@ class Obituary(models.Model):
         to_email = DN_OBIT_EMAIL_RECIPIENTS
         message_email = 'Go to the obituary admin page for further information.'
         
-        if(self.death_notice):
+        if(self.obituary_created):
             datatuple = None
 #             datatuple = (
 #                 ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
