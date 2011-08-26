@@ -36,7 +36,7 @@ def deaths(request, model=None):
     if model == Death_notice:
         queryset = model.objects.filter(death_notice_in_system=False, obituary__isnull=True).order_by('last_name')
     else:
-        queryset = model.objects.filter(obituary_in_system=False).order_by('death_notice__last_name')
+        queryset = model.objects.filter(obituary_in_system=False, status='live').order_by('death_notice__last_name')
     
 #     return object_list(
 #         request,
