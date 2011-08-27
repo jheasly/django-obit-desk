@@ -16,17 +16,14 @@ Make sure you can send out an e-mail. (Elsewise, it'll bust on save().)
 ===========
 Immediate To Do
 ===========
+- Finish password reset
 - Preceded in death (by wife). <- create logic for; if spouse death date
-- is length of relationship ever used?
-- serial comma on survivor lists; if 2, merge items, if >2, merge items -2 and -1
-- Live/draft status on User's index page.
 
 ===========
 Other To Do
 ===========
 - Form factory for FH index view?
-- Be able to tell a Obituary save from a Death Notice save for e-mail notification purposes.
-- Move e-mail addresses to settings.
+- Wire up delete_old_items in utils into cron job.
 
 ===========
 Odd Areas
