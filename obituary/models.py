@@ -8,13 +8,9 @@ from sorl.thumbnail import get_thumbnail, ImageField
 from os import path
 import datetime
 
-# Create your models here.
+from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS
 
-DN_OBIT_EMAIL_RECIPIENTS = [
-    'john.heasly@registerguard.com', 
-    'lisa.crossley@registerguard.com', 
-    'jheasly@earthlink.net',
-]
+# Create your models here.
 
 class baseOtherServices(models.Model):
     '''
@@ -272,10 +268,9 @@ class Obituary(models.Model):
         message_email = 'Go to the obituary admin page for further information.'
         
         if(self.obituary_created):
-            datatuple = None
-#             datatuple = (
-#                 ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
-#             )
+            datatuple = (
+                ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
+            )
         else:
             # a new Obituary
             message_subj = 'Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)

@@ -8,3 +8,4 @@ manage.py
 settings.py
 urls.py
 obituary/templates/manage_obituary.bak.html
+obituary/local_obituary_settings.py

@@ -19,6 +19,8 @@ from obituary.forms import Death_noticeForm, \
     Other_servicesFormSet, ChildrenFormSet, SiblingsFormSet, MarriageFormSet, \
     DeathNoticeOtherServicesFormSet
 
+from obituary_settings import DISPLAY_DAYS_BACK
+
 # Create your views here.
 
 def deaths(request, model=None):
@@ -63,8 +65,11 @@ def deaths(request, model=None):
 
 @login_required
 def fh_index(request):
-    death_notices = Death_notice.objects.filter(funeral_home__username=request.user.username)
-    obituaries = Obituary.objects.filter(death_notice__funeral_home__username=request.user.username)
+    
+    days_ago = datetime.timedelta(days=DISPLAY_DAYS_BACK)
+    
+    death_notices = Death_notice.objects.filter(death_notice_created__gte=( datetime.datetime.now() - days_ago ), funeral_home__username=request.user.username)
+    obituaries = Obituary.objects.filter(obituary_created__gte=( datetime.datetime.now() - days_ago ), death_notice__funeral_home__username=request.user.username)
     ObituaryFactoryFormSet = modelform_factory(Obituary)
     
     return render_to_response('fh_index.html', {
