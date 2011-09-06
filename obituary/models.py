@@ -107,6 +107,7 @@ class Death_notice(models.Model):
     formerly_of = models.CharField(max_length=126, blank=True)
     death_date = models.DateField()
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
+    remembrances = models.CharField(u'Remembrances to ... ', max_length=255, blank=True, help_text=u'(This item typically used when there won\'t be an obituary, but the deceased has selected an organization.)')
     death_notice_in_system = models.BooleanField()
     death_notice_has_run = models.BooleanField()
     death_notice_created = models.DateTimeField(auto_now_add=True)
