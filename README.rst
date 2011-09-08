@@ -23,7 +23,7 @@ Immediate To Do
 Other To Do
 ===========
 - Form factory for FH index view?
-- Wire up delete_old_items in utils into cron job.
+- Wire up delete_old_items() in utils into cron job.
 - jQuery/Ajax lookup of Death notice remembrances on Obituary onselect of Death notice
 
 ===========

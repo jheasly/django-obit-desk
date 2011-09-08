@@ -23,7 +23,7 @@ from obituary_settings import DISPLAY_DAYS_BACK
 
 # Create your views here.
 
-def deaths(request, model=None):
+def deaths(request, model=None, file=None):
     # Set the right template
     if request.META['HTTP_USER_AGENT'].count('Macintosh') and model == 'Death_notice':
         template_name = 'death_list_unix_line_endings.html'
@@ -40,28 +40,28 @@ def deaths(request, model=None):
     else:
         queryset = model.objects.filter(obituary_in_system=False, status='live').order_by('death_notice__last_name')
     
-#     return object_list(
-#         request,
-#         queryset = queryset,
-#         mimetype = 'text/plain;charset=utf-8',
-#         template_name = template_name,
-#     )
-
     t = loader.get_template(template_name)
     c = RequestContext(request, {'object_list': queryset })
     data = t.render(c).replace('  ', ' ')
     data = data.replace('; ; ', '; ')
     data = data.replace('> ', '>')
     r = HttpResponse(data, mimetype='text/plain;charset=utf-8')
-
+    r['Content-Disposition'] = 'attachment; filename=%s-[%s].txt;' % (model._meta.verbose_name_plural.lower().replace(' ', '-'), datetime.datetime.now().strftime('%Y-%m-%d-%I-%M-%S-%p'))
+    return r
+    
+#     return object_list(
+#         request,
+#         queryset = queryset,
+#         mimetype = 'text/plain;charset=utf-8',
+#         template_name = template_name,
+#     )
+    
 #     r = object_list(
 #         request,
 #         queryset = queryset,
 #         mimetype = 'text/plain;charset=utf-8',
 #         template_name = template_name,
 #     )
-    r['Content-Disposition'] = 'attachment; filename=%s-[%s].txt;' % (model._meta.verbose_name_plural.lower().replace(' ', '-'), datetime.datetime.now().strftime('%Y-%m-%d-%I-%M-%S-%p'))
-    return r
 
 @login_required
 def fh_index(request):
@@ -123,12 +123,17 @@ def manage_death_notice(request, death_notice_id=None):
             formset = ServiceFormSet(instance=Death_notice())
             dn_os_formset = DeathNoticeOtherServicesFormSet(instance=Death_notice())
     
-    return render_to_response('manage_death_notice.html', {
+    response_dict = {
         'form': form,
         'formset': formset,
         'other_services_formset': dn_os_formset,
         'death_notice_id': death_notice_id,
-    }, context_instance=RequestContext(request))
+    }
+    
+    if death_notice_id:
+        response_dict['death_notice'] = death_notice
+    
+    return render_to_response('manage_death_notice.html', response_dict, context_instance=RequestContext(request))
 
 # http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
 def manage_obituary(request, obituary_id=None):
