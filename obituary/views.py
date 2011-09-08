@@ -131,7 +131,7 @@ def manage_death_notice(request, death_notice_id=None):
     }
     
     if death_notice_id:
-        response_dict['death_notice'] = death_notice
+        response_dict['object_list'] = [death_notice]
     
     return render_to_response('manage_death_notice.html', response_dict, context_instance=RequestContext(request))
 
