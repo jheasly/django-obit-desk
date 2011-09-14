@@ -546,7 +546,7 @@ class Obituary(models.Model):
         return surv_par_str
     
     def surviving_grandparents(self):
-        if self.surviving_grandparents:
+        if self.grandparents:
             if self.gender == 'M':
                 surv_gpar_str = u' his %s; ' % self.grandparents
             else:
