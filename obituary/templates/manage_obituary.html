@@ -474,8 +474,8 @@
 	
 	<div style="display: none;">
 		<div id="preview_ob">
+			{% if current_obit.photo.name %}<a href="http://{{ current_obit.photo.storage.bucket }}.{{ current_obit.photo.storage.connection.server }}/{{ current_obit.photo.name }}">{% endif %}{{ current_obit.admin_thumbnail|safe }}{% if current_obit.photo.name %}</a>{% endif %}
 			{{ obit_preview|safe }}
-			{# {% include "obituary_list_unix_include.txt" %} #}
 		</div>
 	</div>
 	

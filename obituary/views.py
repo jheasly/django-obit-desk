@@ -242,6 +242,7 @@ def manage_obituary(request, obituary_id=None):
         dt = output_cleanup_hack(dt)
         dt = adobe_to_web(dt)
         ob_response_dict['obit_preview'] = dt
+        ob_response_dict['current_obit'] = current_obit
     
     return render_to_response('manage_obituary.html', ob_response_dict, context_instance=RequestContext(request))
 
