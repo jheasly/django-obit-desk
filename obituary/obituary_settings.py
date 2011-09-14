@@ -12,4 +12,8 @@ DN_OBIT_EMAIL_RECIPIENTS = [
 try:
     from local_obituary_settings import *
 except ImportError, e:
-    print 'Unable to load local_obituary_settings.py:', e
+# Commented out error as it was being output during a dumpdata and 
+# corrupting the .json data file.
+#
+#     print 'Unable to load local_obituary_settings.py:', e
+    pass
