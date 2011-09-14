@@ -154,6 +154,7 @@ class Service(models.Model):
         ('A visitation', 'visitation',),
         ('A visitation followed by a funeral', 'visitation followed by the funeral',),
         ('A celebration of life', 'celebration of life',),
+        ('A musical celebration of life', 'musical celebration of life',),
         ('The funeral', 'funeral',),
         ('The funeral Mass', 'funeral Mass',),
         ('A graveside service', 'graveside service',),
@@ -519,11 +520,16 @@ class Obituary(models.Model):
     ## SURVIVORS
     ##
     def surviving_sig_ot(self):
-        if self.spouse or self.life_domestic_partner:
+        if self.spouse:
             if self.gender == 'M':
                 sig_ot_str = u' his wife; '
             else:
                 sig_ot_str = u' her husband; '
+        elif self.life_domestic_partner:
+            if self.gender == 'M':
+                sig_ot_str = u' his %s; ' % self.life_domestic_partner
+            else:
+                sig_ot_str = u' her %s; ' % self.life_domestic_partner
         else:
             sig_ot_str = u''
         
