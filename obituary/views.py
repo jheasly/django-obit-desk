@@ -43,6 +43,7 @@ def deaths(request, model=None, file=None):
     
     t = loader.get_template(template_name)
     c = RequestContext(request, {'object_list': queryset })
+    data = data.replace('..', '.')
     data = t.render(c).replace('  ', ' ')
     data = data.replace('; ; ', '; ')
     data = data.replace('> ', '>')
