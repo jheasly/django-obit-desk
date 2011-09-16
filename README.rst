@@ -13,6 +13,8 @@ Add this to your urls.py:
 
 Make sure you can send out an e-mail. (Elsewise, it'll bust on save().)
 
+Also, add recipients to obituary_settings.py, otherwise no e-mails will go out.
+
 ===========
 Immediate To Do
 ===========
