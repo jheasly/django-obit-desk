@@ -41,7 +41,7 @@
 	{% endif %}
 
 	<table>
-		<tr class="required" width="100%"><th>&nbsp;</th><td>Items in red are required.</td></tr>
+		<tr class="required" width="100%"><th colspan="2">Items in red are required.</th></tr>
 		
 		<tr>
 			<th colspan="2" class="required">
@@ -51,17 +51,6 @@
 				
 			{% endif %}
 			</th>
-		</tr>
-		
-		<tr {% if form.status.field.required %}class="required"{% endif %}>
-			<th>
-				{{ form.status.label_tag }}:
-			</th>
-			<td>
-				{{ form.status.errors }}
-				{{ form.status }}
-				{% if form.status.help_text %}<p>{{ form.status.help_text|safe }}</p>{% endif %}
-			</td>
 		</tr>
 		
 		<tr {% if form.death_notice.field.required %}class="required"{% endif %}>
@@ -456,6 +445,17 @@
 			</td>
 		</tr>
 		
+		<tr {% if form.status.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.status.label_tag }}:
+			</th>
+			<td>
+				{{ form.status.errors }}
+				{{ form.status }}
+				{% if form.status.help_text %}<p>{{ form.status.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
 	</table>
 	
 	<table>
@@ -470,7 +470,7 @@
 	</table>
 	</form>
 	
-	{% if obituary_id %}<p><a class="preview_ob" href="#">Preview</a></p>{% endif %}
+	{% if obituary_id %}<p style="font-weight: bold;"><a class="preview_ob" href="#">Click here to preview</a></p>{% endif %}
 	
 	<div style="display: none;">
 		<div id="preview_ob">

@@ -26,7 +26,8 @@
 	{% if death_notices %}
 	<h3>Death notices</h3>
 	{% for death_notice in death_notices %}
-		<p><a href="{% url manage_death_notice death_notice.pk %}">{{ death_notice }}</a>, created {{ death_notice.death_notice_created|date:"l, N j, Y, P" }}</p>
+		<p><a href="{% url manage_death_notice death_notice.pk %}">{{ death_notice }}</a>, created {{ death_notice.death_notice_created|date:"l, N j, Y, P" }} <br>
+		<b>Status: <a href="{% url manage_death_notice death_notice.pk %}#id_status">{{ death_notice.get_status_display }}</a></b></p>
 	{% endfor %}
 	{% endif %}
 	
@@ -36,7 +37,7 @@
 	<div class="clear">
 		<div style="float: left; margin-right: 12px;">{% if obituary.photo.name %}<a href="http://{{ obituary.photo.storage.bucket }}.{{ obituary.photo.storage.connection.server }}/{{ obituary.photo.name }}">{% endif %}{{ obituary.admin_thumbnail|safe }}{% if obituary.photo.name %}</a>{% endif %}</div>
 		<p style="margin-left: 72px;"><a href="{% url manage_obituary obituary.pk %}">{{ obituary }}</a>, created {{ obituary.obituary_created|date:"l, N j, Y, P" }} <br>
-		<b>Status: <a href="{% url manage_obituary obituary.pk %}">{{ obituary.get_status_display }}</a></b></p>
+		<b>Status: <a href="{% url manage_obituary obituary.pk %}#id_status">{{ obituary.get_status_display }}</a></b></p>
 	</div>
 	{% endfor %}
 	{% endif %}

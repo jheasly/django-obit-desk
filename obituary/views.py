@@ -37,7 +37,7 @@ def deaths(request, model=None, file=None):
         
     model = eval(model)
     if model == Death_notice:
-        queryset = model.objects.filter(death_notice_in_system=False, obituary__isnull=True).order_by('last_name')
+        queryset = model.objects.filter(death_notice_in_system=False, status='live', obituary__isnull=True).order_by('last_name')
     else:
         queryset = model.objects.filter(obituary_in_system=False, status='live').order_by('death_notice__last_name')
     
@@ -164,6 +164,9 @@ def manage_obituary(request, obituary_id=None):
                 }
             messages.success(request, msg, fail_silently=False)
             return HttpResponseRedirect(reverse('death_notice_index'))
+        
+        if obituary_id:
+            current_obit = Obituary.objects.filter(death_notice__funeral_home__username=request.user.username).get(pk=obituary_id)
         
         form = ObituaryForm(request, request.POST, request.FILES, instance=obituary)
         formset = VisitationFormSet(request.POST, instance=obituary)

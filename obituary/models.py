@@ -12,6 +12,11 @@ from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS
 
 # Create your models here.
 
+STATUS = (
+    ('live','Submitted to R-G',),
+    ('drft','Draft',),
+)
+
 class baseOtherServices(models.Model):
     '''
     Abstract base class for both Death Notice and Obituary.
@@ -111,6 +116,7 @@ class Death_notice(models.Model):
     death_notice_in_system = models.BooleanField()
     death_notice_has_run = models.BooleanField()
     death_notice_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=4, choices=STATUS, default='drft', help_text=u'Only items with a status of \'Submitted to R-G\' will be picked up for publication in the newspaper. (If the Death Notice is a work-in-progress, use the default \'Draft\' status.)</p><p><span style="color: black; font-weight: bold;">NOTE:</span> If you make a change <i style="font-weight: bold;">after</i> a Death Notice has been submitted, you <i style="font-weight: bold;">MUST</i> contact The Register-Guard newsroom.</p>')
     
     class Meta:
         verbose_name = 'Death notice'
@@ -124,13 +130,14 @@ class Death_notice(models.Model):
         from_email = 'rgnews.registerguard.@gmail.com'
         to_email = DN_OBIT_EMAIL_RECIPIENTS
         message_email = 'Go to the death notice admin page for further information.'
+        datatuple = None
         
-        if(self.id):
-            datatuple = None
-#             datatuple = (
-#                 ('Change made by %s to %s %s death notice' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
-#             )
-        else:
+        if(self.pk and self.status == 'live'):
+#             datatuple = None
+            datatuple = (
+                ('Change made to *PREVIOUSLY-SUBMITTED* Death Notice by %s to %s %s death notice' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name), message_email, from_email, to_email),
+            )
+        elif not self.pk:
             # a new Death_notice
             message_subj = 'Death notice created by %s for %s %s' % (self.funeral_home.funeralhomeprofile.full_name, self.first_name, self.last_name)
             datatuple = (message_subj, message_email, from_email, to_email,), # <- This trailing comma's vital!
@@ -148,6 +155,14 @@ class Death_notice(models.Model):
                 shortened_name = self.last_name[:offset]
                 break
         return shortened_name
+    
+    def ready_for_print(self):
+        if self.status == 'live':
+            return True
+        else:
+            return False
+    ready_for_print.boolean = True
+    ready_for_print.short_description = 'Print ready'
 
 class Service(models.Model):
     SERVICES = (
@@ -190,12 +205,6 @@ class DeathNoticeOtherServices(baseOtherServices):
 #     other_services_location = models.CharField(max_length=126, blank=True)
 
 class Obituary(models.Model):
-    STATUS = (
-        ('live','Live',),
-        ('drft','Draft',),
-        ('hidn','Hidden',),
-    )
-    
     GENDERS =  (
         ('M', 'M',),
         ('F', 'F',),
@@ -233,11 +242,11 @@ class Obituary(models.Model):
     remembrances = models.CharField(u'Remembrances to ... ', max_length=255, blank=True)
     family_contact = models.CharField(max_length=126)
     family_contact_phone = models.CharField(max_length=12)
-    mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space below if you would like to receive up to 10 copies of this obituary.')
+    mailing_address = models.TextField(blank=True, help_text=u'Please include a mailing address in the space above if you would like to receive up to 10 copies of this obituary.')
     number_of_copies = models.IntegerField(choices=COPIES, blank=True, null=True, help_text=u'Number of copies you would like.', default=10)
     photo = ImageField(upload_to=obit_file_name, blank=True)
     # Survivors
-    life_domestic_partner = models.CharField(max_length=256, blank=True, help_text=u'Synonymous with spouse')
+    life_domestic_partner = models.CharField(max_length=256, blank=True)
     length_of_relationship = models.CharField(max_length=12, blank=True)
     spouse = models.CharField(max_length=255, blank=True, help_text=u'Life/domestic partner')
     parents = models.CharField(max_length=255, blank=True, help_text=u'If living, i.e., \'parents, Nicki Kilday of Cottage Grove and Klinton Kilday of Glendale, Ariz.\' or  \'mother,\' \'father\' or \'parents\' with hometown, if changed from place of birth, \'mother, now of Oneonta, N.Y.\'')
@@ -250,7 +259,7 @@ class Obituary(models.Model):
     number_of_step_great_great_grandchildren = models.CharField(u'Number of step great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(u'Preceded in death by ... ', blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
     anything_else = models.TextField(u'Anything else we should know?', blank=True)
-    status = models.CharField(max_length=4, choices=STATUS, default='live')
+    status = models.CharField(max_length=4, choices=STATUS, default='drft', help_text=u'Only items with a status of \'Submitted to R-G\' will be picked up for publication in the newspaper. (If the Obituary is a work-in-progress, use the default \'Draft\' status.)</p><p><span style="color: black; font-weight: bold;">NOTE:</span> If you make a change <i style="font-weight: bold;">after</i> an Obituary has been submitted, you <i style="font-weight: bold;">MUST</i> contact The Register-Guard newsroom.</p>')
     
     obituary_in_system = models.BooleanField(u'Obituary in DT system')
     obituary_has_run = models.BooleanField()
@@ -307,6 +316,14 @@ class Obituary(models.Model):
                 return u'%s' % date(self.death_notice.service.service_date_time, "P l, N j,")
         except Service.DoesNotExist:
             return u'No service scheduled.'
+    
+    def ready_for_print(self):
+        if self.status == 'live':
+            return True
+        else:
+            return False
+    ready_for_print.boolean = True
+    ready_for_print.short_description = 'Print ready'
     
     ##
     ## MODEL ATTRIBUTES FOR OBITUARY TEMPLATING
