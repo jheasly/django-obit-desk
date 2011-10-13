@@ -8,7 +8,7 @@ from sorl.thumbnail import get_thumbnail, ImageField
 from os import path
 import datetime
 
-from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS
+from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS, BO_OBIT_EMAIL_RECIPIENTS
 
 # Create your models here.
 
@@ -278,7 +278,10 @@ class Obituary(models.Model):
         to_email = DN_OBIT_EMAIL_RECIPIENTS
         message_email = 'Go to the obituary admin page for further information.'
         
-        if(self.obituary_created):
+        '''
+        Change/new e-mails for changed, saved obituaries
+        '''
+        if self.obituary_created:
             datatuple = (
                 ('Change made to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name), message_email, from_email, to_email),
             )
@@ -286,6 +289,18 @@ class Obituary(models.Model):
             # a new Obituary
             message_subj = 'Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
             datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
+        
+        '''
+        An obituary has been marked as 'has_run'
+        '''
+        if self.obituary_created and self.obituary_has_run:
+            to_email = BO_OBIT_EMAIL_RECIPIENTS
+            unsaved_copy = Obituary.objects.get(pk=self.pk)
+            if unsaved_copy.obituary_has_run == False and self.obituary_has_run == True:
+                message_subj = 'Obituary has been published in print for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+                message_email = 'Add $25 to the tab of %s. (You can also check http://www.registerguard.com/web/news/obituaries/)' % self.death_notice.funeral_home.funeralhomeprofile.full_name
+                datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
+        
         if datatuple:
             send_mass_mail(datatuple)
         super(Obituary, self).save()
