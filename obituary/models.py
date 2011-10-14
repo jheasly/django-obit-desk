@@ -263,6 +263,7 @@ class Obituary(models.Model):
     
     obituary_in_system = models.BooleanField(u'Obituary in DT system')
     obituary_has_run = models.BooleanField()
+    obituary_publish_date = models.DateField(blank=True, null=True)
     obituary_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
