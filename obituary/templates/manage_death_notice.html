@@ -63,6 +63,15 @@
 
   // http://trentrichardson.com/examples/timepicker/
   $(function(){
+    $("#id_service-0-service_end_date_time").datetimepicker({
+      stepMinute: 5,
+      hourMin: 6,
+      hourMax: 23
+    });
+  });
+
+  // http://trentrichardson.com/examples/timepicker/
+  $(function(){
     $("#id_deathnoticeotherservices-0-other_services_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,

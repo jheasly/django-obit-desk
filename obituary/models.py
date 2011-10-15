@@ -183,6 +183,7 @@ class Service(models.Model):
     death_notice = models.OneToOneField(Death_notice, blank=True, null=True)
     service = models.CharField(choices=SERVICES, max_length=65)
     service_date_time = models.DateTimeField()
+    service_end_date_time = models.DateTimeField(blank=True, null=True, help_text=u'(Optional.)')
     service_location = models.CharField(max_length=75)
     service_city = models.CharField(max_length=80, blank=True)
     
