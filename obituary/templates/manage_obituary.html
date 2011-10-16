@@ -357,6 +357,10 @@
 	
 	<table>
 		
+		<tr>
+			<th colspan="2">Grandchildren</th>
+		</tr>
+		
 		<tr {% if form.number_of_grandchildren.field.required %}class="required"{% endif %}>
 			<th>
 				{{ form.number_of_grandchildren.label_tag }}:
@@ -365,17 +369,6 @@
 				{{ form.number_of_grandchildren.errors }}
 				{{ form.number_of_grandchildren }}
 				{% if form.number_of_grandchildren.help_text %}<p>{{ form.number_of_grandchildren.help_text|safe }}</p>{% endif %}
-			</td>
-		</tr>
-		
-		<tr {% if form.number_of_step_grandchildren.field.required %}class="required"{% endif %}>
-			<th>
-				{{ form.number_of_step_grandchildren.label_tag }}:
-			</th>
-			<td>
-				{{ form.number_of_step_grandchildren.errors }}
-				{{ form.number_of_step_grandchildren }}
-				{% if form.number_of_step_grandchildren.help_text %}<p>{{ form.number_of_step_grandchildren.help_text|safe }}</p>{% endif %}
 			</td>
 		</tr>
 		
@@ -390,17 +383,6 @@
 			</td>
 		</tr>
 		
-		<tr {% if form.number_of_step_great_grandchildren.field.required %}class="required"{% endif %}>
-			<th>
-				{{ form.number_of_step_great_grandchildren.label_tag }}:
-			</th>
-			<td>
-				{{ form.number_of_step_great_grandchildren.errors }}
-				{{ form.number_of_step_great_grandchildren }}
-				{% if form.number_of_step_great_grandchildren.help_text %}<p>{{ form.number_of_step_great_grandchildren.help_text|safe }}</p>{% endif %}
-			</td>
-		</tr>
-		
 		<tr {% if form.number_of_great_great_grandchildren.field.required %}class="required"{% endif %}>
 			<th>
 				{{ form.number_of_great_great_grandchildren.label_tag }}:
@@ -409,6 +391,32 @@
 				{{ form.number_of_great_great_grandchildren.errors }}
 				{{ form.number_of_great_great_grandchildren }}
 				{% if form.number_of_great_great_grandchildren.help_text %}<p>{{ form.number_of_great_great_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr>
+			<th colspan="2">Step grandchildren</th>
+		</tr>
+		
+		<tr {% if form.number_of_step_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_step_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_step_grandchildren.errors }}
+				{{ form.number_of_step_grandchildren }}
+				{% if form.number_of_step_grandchildren.help_text %}<p>{{ form.number_of_step_grandchildren.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
+		<tr {% if form.number_of_step_great_grandchildren.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.number_of_step_great_grandchildren.label_tag }}:
+			</th>
+			<td>
+				{{ form.number_of_step_great_grandchildren.errors }}
+				{{ form.number_of_step_great_grandchildren }}
+				{% if form.number_of_step_great_grandchildren.help_text %}<p>{{ form.number_of_step_great_grandchildren.help_text|safe }}</p>{% endif %}
 			</td>
 		</tr>
 		

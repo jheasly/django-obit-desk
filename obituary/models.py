@@ -590,7 +590,7 @@ class Obituary(models.Model):
         return surv_gpar_str
     
     def surviving_children(self):
-        genders = ('son', 'daughter', 'stepson', 'stepdaughter')
+        genders = ('son', 'daughter', 'stepson', 'stepdaughter', 'adopted son', 'adopted daughter')
         if self.children_set.all():
             gender_sub_list = []
             for gender in genders:
@@ -614,7 +614,7 @@ class Obituary(models.Model):
                         child_str = ', '.join(child_list)
                     
                     if len(gender_set) == 1:
-                        child_str = u'a %s, %s' % (gender, child_str)
+                        child_str = u' a %s, %s' % (gender, child_str)
                     else:
                         child_str = u' %s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
                     gender_sub_list.append(child_str)
@@ -751,10 +751,12 @@ class Children(models.Model):
         ('son',      'son',),
         ('stepdaughter', 'stepdaughter',),
         ('stepson', 'stepson',),
+        ('adopted daughter', 'adopted daughter',),
+        ('adopted son', 'adopted son',),
     )
     
     obituary = models.ForeignKey(Obituary)
-    gender = models.CharField(choices=CHILD_GENDER, max_length=12, blank=True, null=True)
+    gender = models.CharField(choices=CHILD_GENDER, max_length=16, blank=True, null=True)
     name = models.CharField(max_length=126)
     residence = models.CharField(max_length=126, blank=True)
     
