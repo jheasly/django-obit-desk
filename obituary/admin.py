@@ -7,6 +7,7 @@ from obituary.models import Death_notice, Obituary, FuneralHomeProfile, \
 
 class FuneralHomeProfileAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'city', 'state', 'phone',)
+    list_filter = ('user__is_active',)
 
 admin.site.register(FuneralHomeProfile, FuneralHomeProfileAdmin)
 
@@ -47,8 +48,8 @@ class Death_noticeAdmin(admin.ModelAdmin):
 admin.site.register(Death_notice, Death_noticeAdmin)
 
 class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('death_notice', 'ready_for_print', 'gender', 'date_of_birth', 'service_date', 'obituary_created', 'admin_thumbnail', 'display_photo_file_name', 'obituary_in_system', 'obituary_has_run', 'status',)
-    list_editable = ('obituary_in_system', 'obituary_has_run')
+    list_display = ('death_notice', 'ready_for_print', 'gender', 'date_of_birth', 'service_date', 'obituary_created', 'admin_thumbnail', 'display_photo_file_name', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'status',)
+    list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     
     inlines = [

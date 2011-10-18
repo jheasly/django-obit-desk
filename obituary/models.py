@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import send_mail, send_mass_mail, EmailMessage
 from django.db import models
 from django.contrib.humanize.templatetags.humanize import apnumber
 from django.template.defaultfilters import date
@@ -8,7 +8,8 @@ from sorl.thumbnail import get_thumbnail, ImageField
 from os import path
 import datetime
 
-from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS, BO_OBIT_EMAIL_RECIPIENTS
+from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS, BO_OBIT_EMAIL_RECIPIENTS, \
+    IMAGING_OBIT_EMAIL_RECIPIENTS
 
 # Create your models here.
 
@@ -82,8 +83,10 @@ class FuneralHomeProfile(models.Model):
     )
     user = models.OneToOneField('auth.User')
     full_name = models.CharField(max_length=80)
+    address = models.CharField(max_length=256, blank=True)
     city = models.CharField(max_length=80, blank=True, help_text=u'Leave blank when city name is part of funeral home name, i.e., \'Oakridge Funeral Home Chapel of the Woods\'')
     state = models.CharField(max_length=6, choices=STATES, blank=True, help_text=u'Leave blank if located in Oregon')
+    zip_code = models.CharField(max_length=32, blank=True)
     phone = models.CharField(max_length=14, blank=True)
     
     class Meta:
@@ -293,15 +296,34 @@ class Obituary(models.Model):
             datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
         
         '''
-        An obituary has been marked as 'has_run'
+        Check for obituary being marked 'has_run'
         '''
         if self.obituary_created and self.obituary_has_run:
             to_email = BO_OBIT_EMAIL_RECIPIENTS
-            unsaved_copy = Obituary.objects.get(pk=self.pk)
-            if unsaved_copy.obituary_has_run == False and self.obituary_has_run == True:
+            copy_existing = Obituary.objects.get(pk=self.pk)
+            if copy_existing.obituary_has_run == False and self.obituary_has_run == True:
                 message_subj = 'Obituary has been published in print for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
                 message_email = 'Add $25 to the tab of %s. (You can also check http://www.registerguard.com/web/news/obituaries/)' % self.death_notice.funeral_home.funeralhomeprofile.full_name
                 datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
+        
+        '''
+        Check for attachment of image.
+        '''
+        if self.obituary_created and self.photo and self.status == 'live':
+            to_email = IMAGING_OBIT_EMAIL_RECIPIENTS
+            copy_existing = Obituary.objects.get(pk=self.pk)
+            if not copy_existing.photo and self.photo:
+                print 'Newly added image.'
+                message_sub = 'Photo has been attached to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name)
+                message_email = 'Photo file %s is attached.' % path.split(self.photo.name)[1]
+                imaging_email = EmailMessage({
+                    'subject': message_sub, 
+                    'body': message_email,
+                    'to': to_email,
+                })
+                imaging_email.attach(path.split(self.photo.name)[1], self.photo.read(), 'image/jpg')
+                foo = imaging_email.send(fail_silently=False)
+                print 'Email send result:', foo
         
         if datatuple:
             send_mass_mail(datatuple)
