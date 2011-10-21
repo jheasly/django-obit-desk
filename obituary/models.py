@@ -294,6 +294,18 @@ class Obituary(models.Model):
             # a new Obituary
             message_subj = 'Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
             datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
+            '''
+            Check for photo with an about-to-be-created Obituary.
+            '''
+            if self.photo and self.status == 'live':
+                message_subj = 'Photo has been attached to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name)
+                message_email = 'Photo file %s is attached.' % path.split(self.photo.name)[1]
+                imaging_email = EmailMessage()
+                imaging_email.subject = message_subj
+                imaging_email.body = message_email
+                imaging_email.to = to_email
+                imaging_email.attach(path.split(self.photo.name)[1], self.photo.read(), 'image/jpg')
+                imaging_email.send(fail_silently=False)
         
         '''
         Check for obituary being marked 'has_run'
@@ -307,23 +319,23 @@ class Obituary(models.Model):
                 datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
         
         '''
-        Check for attachment of image.
+        Check for attachment of photo to an existing Obituary.
         '''
         if self.obituary_created and self.photo and self.status == 'live':
             to_email = IMAGING_OBIT_EMAIL_RECIPIENTS
             copy_existing = Obituary.objects.get(pk=self.pk)
             if not copy_existing.photo and self.photo:
-                print 'Newly added image.'
-                message_sub = 'Photo has been attached to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name)
+                '''
+                TODO: Factor this e-mailer out; rename image to that of decedent; take out mime-type;
+                '''
+                message_subj = 'Photo has been attached to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name)
                 message_email = 'Photo file %s is attached.' % path.split(self.photo.name)[1]
-                imaging_email = EmailMessage({
-                    'subject': message_sub, 
-                    'body': message_email,
-                    'to': to_email,
-                })
+                imaging_email = EmailMessage()
+                imaging_email.subject = message_subj
+                imaging_email.body = message_email
+                imaging_email.to = to_email
                 imaging_email.attach(path.split(self.photo.name)[1], self.photo.read(), 'image/jpg')
-                foo = imaging_email.send(fail_silently=False)
-                print 'Email send result:', foo
+                imaging_email.send(fail_silently=False)
         
         if datatuple:
             send_mass_mail(datatuple)
