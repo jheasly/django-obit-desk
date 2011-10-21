@@ -2,10 +2,11 @@
 *.DS_Store
 obituary/fixtures/*
 obit_images/*
+local_settings.py
 __init__.py
 manage.py
 settings.py
 urls.py
 obituary/templates/manage_obituary.bak.html
-obituary/local_settings.py
+obituary/obituary_settings.py
 obituary/local_obituary_settings.py
