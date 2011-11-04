@@ -262,7 +262,6 @@ class Obituary(models.Model):
     number_of_great_great_grandchildren = models.CharField(u'Number of great-great-grandchildren', max_length=75, blank=True)
     number_of_step_great_great_grandchildren = models.CharField(u'Number of step great-great-grandchildren', max_length=75, blank=True)
     preceded_in_death_by = models.TextField(u'Preceded in death by ... ', blank=True, help_text=u'Limited to spouses, children, grandchildren. Use complete sentences.')
-    anything_else = models.TextField(u'Anything else we should know?', blank=True)
     status = models.CharField(max_length=4, choices=STATUS, default='drft', help_text=u'Only items with a status of \'Submitted to R-G\' will be picked up for publication in the newspaper. (If the Obituary is a work-in-progress, use the default \'Draft\' status.)</p><p><span style="color: black; font-weight: bold;">NOTE:</span> If you make a change <i style="font-weight: bold;">after</i> an Obituary has been submitted, you <i style="font-weight: bold;">MUST</i> contact The Register-Guard newsroom.</p>')
     
     obituary_in_system = models.BooleanField(u'Obituary in DT system')
