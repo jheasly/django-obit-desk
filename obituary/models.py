@@ -236,6 +236,8 @@ class Obituary(models.Model):
     cause_of_death = models.CharField(u'Died of ... ', max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
+    preferred_run_date = models.DateField(u'Preferred date of print publication:', help_text=u'<b><i>Not a guarantee</i></b>, but a target date.')
+    prepaid_by = models.CharField(max_length=325, blank=True)
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
     place_of_birth = models.CharField(max_length=75, help_text=u'City, State (if known, otherwise, just enter state). If born in Lane County area, just enter city.')

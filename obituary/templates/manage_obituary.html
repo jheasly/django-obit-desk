@@ -119,6 +119,17 @@
 			</td>
 		</tr>
 		
+		<tr {% if form.preferred_run_date.field.required %}class="required"{% endif %}>
+			<th>
+				{{ form.preferred_run_date.label_tag }}
+			</th>
+			<td>
+				{{ form.preferred_run_date.errors }}
+				{{ form.preferred_run_date }}
+				{% if form.preferred_run_date.help_text %}<p>{{ form.preferred_run_date.help_text|safe }}</p>{% endif %}
+			</td>
+		</tr>
+		
 		<tr {% if form.no_service_planned.field.required %}class="required"{% endif %}>
 			<th>
 				{{ form.no_service_planned.label_tag }}
@@ -553,6 +564,12 @@
       hourMin: 6,
       hourMax: 23,
     });
+  });
+
+  $(function(){
+    $("#id_preferred_run_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+        });
   });
 
   document.getElementById('id_death_notice').focus()

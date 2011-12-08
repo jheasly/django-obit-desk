@@ -144,6 +144,7 @@ def manage_death_notice(request, death_notice_id=None):
     return render_to_response('manage_death_notice.html', response_dict, context_instance=RequestContext(request))
 
 # http://docs.djangoproject.com/en/1.3/topics/forms/modelforms/
+@login_required
 def manage_obituary(request, obituary_id=None):
     if obituary_id:
         # Editing existing record ... 

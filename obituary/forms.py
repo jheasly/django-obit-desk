@@ -57,8 +57,8 @@ class Death_noticeForm(ModelForm):
     death_date = forms.DateField(widget=CalendarWidget())
     
     class Meta:
-         model = Death_notice
-         exclude = ('funeral_home', 'death_notice_in_system', 'death_notice_has_run',)
+        model = Death_notice
+        exclude = ('funeral_home', 'death_notice_in_system', 'death_notice_has_run',)
 
 class ObituaryForm(ModelForm):
     def __init__(self, request, *args, **kwargs):
@@ -75,7 +75,7 @@ class ObituaryForm(ModelForm):
     
     class Meta:
         model = Obituary
-        exclude = ('funeral_home', 'obituary_in_system', 'obituary_has_run',)
+        exclude = ('funeral_home', 'prepaid_by', 'obituary_in_system', 'obituary_has_run',)
 
 VisitationFormSet = inlineformset_factory(Obituary,
     Visitation,

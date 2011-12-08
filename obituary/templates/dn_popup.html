@@ -24,17 +24,17 @@
 {% block content %}
 <h1>Add {{ dn_verbose_name }}</h1>
 <form method="POST" action="/add/{{ field }}/">
-        {% csrf_token %}
-        <table>
-        {{ form }}
-        </table>
-        <table>
-        {{ service_form }}
-        </table>
-        <table>
-        {{ other_services_formset }}
-        </table>
-        
+		{% csrf_token %}
+		<table>
+		{{ form }}
+		</table>
+		<table>
+		{{ service_form }}
+		</table>
+		<table>
+		{{ other_services_formset }}
+		</table>
+		
 <p><input type="submit" value="Save" /> | <a href="javascript:window.close()">Cancel</a></p>
 </form>
 
