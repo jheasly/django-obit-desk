@@ -301,3 +301,7 @@ def add_new_model(request, model_name):
                 
                 page_context = {'form': form, 'service_form': service_form, 'other_services_formset': dn_os_formset, 'field': normal_model_name, 'dn_verbose_name': dn_name }
                 return render_to_response('dn_popup.html', page_context, context_instance=RequestContext(request))
+
+@login_required
+def billing(request):
+    return render_to_response('manage_billing.html', context_instance=RequestContext(request))

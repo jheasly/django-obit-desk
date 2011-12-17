@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from sorl.thumbnail.admin import AdminImageMixin
+from obituary.forms import ObituaryAdminForm
 from obituary.models import Death_notice, Obituary, FuneralHomeProfile, \
     Service, Visitation, BEI, Other_services, Children, Siblings, Marriage, \
     DeathNoticeOtherServices
@@ -48,11 +49,13 @@ class Death_noticeAdmin(admin.ModelAdmin):
 admin.site.register(Death_notice, Death_noticeAdmin)
 
 class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('death_notice', 'ready_for_print', 'gender', 'date_of_birth', 'preferred_run_date', 'service_date', 'obituary_created', 'admin_thumbnail', 'display_photo_file_name', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'status',)
+    list_display = ('death_notice', 'ready_for_print', 'date_of_birth', 'preferred_run_date', 'service_date', 'obituary_created', 'admin_thumbnail', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'status',)
     list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     date_hierarchy = 'preferred_run_date'
     ordering = ('-preferred_run_date',)
+    
+    form = ObituaryAdminForm
     
     inlines = [
         MarriageInline,

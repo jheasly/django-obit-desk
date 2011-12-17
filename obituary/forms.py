@@ -141,3 +141,14 @@ MarriageFormSet = inlineformset_factory(Obituary,
     form = MarriageForm,
     can_delete=True,
     extra=1,)
+
+class ObituaryAdminForm(forms.ModelForm):
+    class Meta:
+        model = Obituary
+    
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        prepaid_by = cleaned_data.get("prepaid_by")
+        if not prepaid_by:
+            raise forms.ValidationError("You need to enter a name in the 'Prepaid by' field.")
+        return cleaned_data
