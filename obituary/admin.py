@@ -42,6 +42,13 @@ class Death_noticeAdmin(admin.ModelAdmin):
     list_filter = ('death_notice_in_system', 'death_notice_has_run',)
     search_fields = ['last_name', 'first_name',]
     
+    # To filter out everything but funeral homes in inline dropdown.
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'funeral_home':
+            # needs tighter filtering and ordering ... 
+            kwargs['queryset'] = User.objects.exclude(is_staff=True)
+        return super(Death_noticeAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    
     inlines = [
         ServiceInline,
         DeathNoticeOtherServicesInline,
