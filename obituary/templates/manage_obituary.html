@@ -1,8 +1,10 @@
 {% extends "base_reader_form.html" %}
+{% load adminmedia %}
 
 {% block js %}
-<script type="text/javascript" src="/media/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/admin/RelatedObjectLookups.js"></script>
 <script type="text/javascript" src="http://static.registerguard.com/colorbox/jquery.colorbox.js"></script>
+<!-- {% admin_media_prefix %} -->
 {% endblock %}
 
 {% block css %}
