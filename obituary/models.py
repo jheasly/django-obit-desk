@@ -557,7 +557,13 @@ class Obituary(models.Model):
                     wedding_str = u'%s married %s in %s' % (
                         self.pronoun(), 
                         wedding.married, 
-                        wedding_date_str,
+                        wedding_date_str, 
+                    )
+                elif not self.date_or_what(wedding.marriage_date) and wedding.marriage_location:
+                    wedding_str = u'%s married %s in %s' % (
+                        self.pronoun(), 
+                        wedding.married, 
+                        wedding.marriage_location, 
                     )
                 elif not self.date_or_what(wedding.marriage_date) and not wedding.marriage_location:
                     wedding_str = u'%s married %s' % (
