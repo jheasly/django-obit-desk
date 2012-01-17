@@ -4,6 +4,7 @@
 {% block js %}
 <script type="text/javascript" src="{% admin_media_prefix %}js/admin/RelatedObjectLookups.js"></script>
 <script type="text/javascript" src="http://static.registerguard.com/colorbox/jquery.colorbox.js"></script>
+<script type="text/javascript" src="http://static.registerguard.com/printelement/jquery.printelement.js"></script>
 <!-- {% admin_media_prefix %} -->
 {% endblock %}
 
@@ -499,12 +500,14 @@
 		<div id="preview_ob">
 			{% if current_obit.photo.name %}<a href="http://{{ current_obit.photo.storage.bucket }}.{{ current_obit.photo.storage.connection.server }}/{{ current_obit.photo.name }}">{% endif %}{{ current_obit.admin_thumbnail|safe }}{% if current_obit.photo.name %}</a>{% endif %}
 			{{ obit_preview|safe }}
+			<div class="printMe">Print</div>
 		</div>
 	</div>
 	
 </div>
 
 <script type="text/javascript"> 
+//<!-- 
   $(function(){
     $("#id_date_of_birth").datepicker({
             changeMonth: true,
@@ -578,7 +581,12 @@
 
   $(document).ready(function() {
     $(".preview_ob").colorbox({width: "50%", inline: "true", href: "#preview_ob"});
+    $(".printMe").click(function() {
+      $("#cboxWrapper").printElement();
+      return false;
+    });
   });
+// -->
 </script>
 
 {% endblock content %}

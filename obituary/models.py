@@ -554,7 +554,7 @@ class Obituary(models.Model):
                     else:
                         wedding_date_str = self.date_or_what(wedding.marriage_date)
                     
-                    wedding_str = u'%s married %s in %s' % (
+                    wedding_str = u'%s married %s on %s' % (
                         self.pronoun(), 
                         wedding.married, 
                         wedding_date_str, 
