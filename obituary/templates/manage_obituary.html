@@ -19,6 +19,12 @@
 	#wrapper {
 		background: #eee;
 	}
+	@media print
+	{
+	body * {visibility: hidden;}
+	#preview_ob * {visibility: visible;}
+	#preview_ob { position: absolute; top: 40px; left: 30px;}
+	}
 	-->
 </style>
 <link rel="stylesheet" type="text/css" href="http://static.registerguard.com/colorbox/example4/colorbox.css">
@@ -500,7 +506,7 @@
 		<div id="preview_ob">
 			{% if current_obit.photo.name %}<a href="http://{{ current_obit.photo.storage.bucket }}.{{ current_obit.photo.storage.connection.server }}/{{ current_obit.photo.name }}">{% endif %}{{ current_obit.admin_thumbnail|safe }}{% if current_obit.photo.name %}</a>{% endif %}
 			{{ obit_preview|safe }}
-			<div class="printMe">Print</div>
+			<div class="printMe" style="cursor: pointer; display: block; position: absolute; bottom: 0;">print</div>
 		</div>
 	</div>
 	
@@ -513,7 +519,7 @@
             changeMonth: true,
             changeYear: true,
             yearRange: 'c-110:c+0',
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'yy-mm-dd'
         });
   });
 
@@ -521,7 +527,7 @@
     $("#id_visitation-0-visitation_start_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,
-      hourMax: 23,
+      hourMax: 23
     });
   });
 
@@ -529,7 +535,7 @@
     $("#id_visitation-0-visitation_end_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,
-      hourMax: 23,
+      hourMax: 23
     });
   });
 
@@ -539,7 +545,7 @@
             changeYear: true,
             yearRange: 'c-110:c+0',
             dateFormat: 'yy-mm-dd',
-            constrainInput: false,
+            constrainInput: false
         });
   });
 
@@ -549,7 +555,7 @@
             changeYear: true,
             yearRange: 'c-110:c+0',
             dateFormat: 'yy-mm-dd',
-            constrainInput: false,
+            constrainInput: false
         });
   });
 
@@ -558,7 +564,7 @@
       stepMinute: 5,
       hourMin: 6,
       hourMax: 23,
-      constrainInput: false,
+      constrainInput: false
     });
   });
 
@@ -567,13 +573,13 @@
     $("#id_other_services-0-other_services_date_time").datetimepicker({
       stepMinute: 5,
       hourMin: 6,
-      hourMax: 23,
+      hourMax: 23
     });
   });
 
   $(function(){
     $("#id_preferred_run_date").datepicker({
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'yy-mm-dd'
         });
   });
 
@@ -581,9 +587,27 @@
 
   $(document).ready(function() {
     $(".preview_ob").colorbox({width: "50%", inline: "true", href: "#preview_ob"});
-    $(".printMe").click(function() {
-      $("#cboxWrapper").printElement();
+    
+    $(".printMe").click(function() { 
+      $("#preview_ob").printElement();
       return false;
+/*
+      PrintElem("#preview_ob");
+      
+      function PrintElem(elem) {
+        Popup($(elem).text());
+      }
+      
+      function Popup(data) {
+        var mywindow = window.open('', 'my div', 'height=400,width=500');
+        mywindow.document.write('<html><head><title>my div</title>');
+        mywindow.document.write('</head><body>');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+        mywindow.document.close();
+        mywindow.print();
+      }
+*/
     });
   });
 // -->
