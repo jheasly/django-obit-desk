@@ -305,3 +305,22 @@ def add_new_model(request, model_name):
 @login_required
 def billing(request):
     return render_to_response('manage_billing.html', context_instance=RequestContext(request))
+
+@login_required
+def print_obituary(request, obituary_id=None):
+    '''
+    Coding Horror: Pretty much copied line-for-line 
+    from manage_obituary(request, obituary_id=None), ~ Line 241, above. 
+    '''
+    if obituary_id:
+        obit = Obituary.objects.get(pk=obituary_id)
+        tm = loader.get_template('obituary_list_unix_include.txt')
+        ct = RequestContext(request, {'object_list': [obit]})
+        dt = tm.render(ct)
+        dt = output_cleanup_hack(dt)
+        dt = adobe_to_web(dt)
+    response_dict = {
+        'obit_string': dt,
+        'obit': obit,
+    }
+    return render_to_response('print_obituary.html', response_dict, context_instance=RequestContext(request))

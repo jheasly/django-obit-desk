@@ -9,7 +9,7 @@ from obituary_settings import DISPLAY_DAYS_BACK
 
 class ObitsCalendarDateTimeWidget(forms.DateTimeInput):
     class Media:
-        css = {'all':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
+        css = {'screen':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
         js = (
             'http://static.registerguard.com/timepicker/jquery.timepicker.addon.js',
         )
@@ -30,7 +30,7 @@ ServiceFormSet = inlineformset_factory(Death_notice,
 
 class CalendarWidget(forms.DateInput):
     class Media:
-        css = {'all':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
+        css = {'screen':('http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/overcast/jquery-ui.css',)}
         js = (
             'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js',
             'http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js',

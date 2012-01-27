@@ -4,12 +4,10 @@
 {% block js %}
 <script type="text/javascript" src="{% admin_media_prefix %}js/admin/RelatedObjectLookups.js"></script>
 <script type="text/javascript" src="http://static.registerguard.com/colorbox/jquery.colorbox.js"></script>
-<script type="text/javascript" src="http://static.registerguard.com/printelement/jquery.printelement.js"></script>
-<!-- {% admin_media_prefix %} -->
 {% endblock %}
 
 {% block css %}
-<style type="text/css">
+<style type="text/css" media="screen">
 	<!--
 	table {
 		margin: 10px 0 10px 0;
@@ -19,15 +17,9 @@
 	#wrapper {
 		background: #eee;
 	}
-	@media print
-	{
-	body * {visibility: hidden;}
-	#preview_ob * {visibility: visible;}
-	#preview_ob { position: absolute; top: 40px; left: 30px;}
-	}
 	-->
 </style>
-<link rel="stylesheet" type="text/css" href="http://static.registerguard.com/colorbox/example4/colorbox.css">
+<link rel="stylesheet" type="text/css" href="http://static.registerguard.com/colorbox/example4/colorbox.css" media="screen">
 {% endblock %}
 
 {% block content %}
@@ -500,13 +492,12 @@
 	</table>
 	</form>
 	
-	{% if obituary_id %}<p style="font-weight: bold;"><a class="preview_ob" href="#">Click here to preview</a></p>{% endif %}
+	{% if obituary_id %}<p style="font-weight: bold;"><a class="preview_ob" href="#">See a preview</a> | <a href="{% url print_obituary obituary_id %}" rel="external">Print the preview</a></p>{% endif %}
 	
 	<div style="display: none;">
 		<div id="preview_ob">
 			{% if current_obit.photo.name %}<a href="http://{{ current_obit.photo.storage.bucket }}.{{ current_obit.photo.storage.connection.server }}/{{ current_obit.photo.name }}">{% endif %}{{ current_obit.admin_thumbnail|safe }}{% if current_obit.photo.name %}</a>{% endif %}
 			{{ obit_preview|safe }}
-			<div class="printMe" style="cursor: pointer; display: block; position: absolute; bottom: 0;">print</div>
 		</div>
 	</div>
 	
@@ -588,10 +579,11 @@
   $(document).ready(function() {
     $(".preview_ob").colorbox({width: "50%", inline: "true", href: "#preview_ob"});
     
-    $(".printMe").click(function() { 
-      $("#preview_ob").printElement();
-      return false;
 /*
+    $(".printMe").click(function() { 
+      $("#preview_ob").print();
+      return false;
+
       PrintElem("#preview_ob");
       
       function PrintElem(elem) {
@@ -607,8 +599,8 @@
         mywindow.document.close();
         mywindow.print();
       }
-*/
     });
+*/
   });
 // -->
 </script>
