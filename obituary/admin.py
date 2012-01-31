@@ -56,8 +56,10 @@ class Death_noticeAdmin(admin.ModelAdmin):
 admin.site.register(Death_notice, Death_noticeAdmin)
 
 class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('death_notice', 'ready_for_print', 'date_of_birth', 'preferred_run_date', 'service_date', 'obituary_created', 'admin_thumbnail', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'status',)
+    list_display = ('death_notice', 'fh', 'ready_for_print', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'preferred_run_date', 'service_date', 'admin_thumbnail', 'obituary_created', 'status', 'date_of_birth', )
     list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
+#     list_filter = ('death_notice__funeral_home',)
+#     list_filter = ('death_notice__city_of_residence',)
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     date_hierarchy = 'preferred_run_date'
     ordering = ('-preferred_run_date',)
@@ -72,6 +74,13 @@ class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
         ChildrenInline,
         SiblingsInline,
     ]
+    
+    death_notice_fk_filter_related_only=True
+    death_notice_fk_filter_name_field='city_of_residence'
+    
+    def fh(self, obj):
+        return obj.death_notice.funeral_home.username
+    fh.short_description = u'Funeral home'
 
 admin.site.register(Obituary, ObituaryAdmin)
 
