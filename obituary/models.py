@@ -166,6 +166,14 @@ class Death_notice(models.Model):
             return False
     ready_for_print.boolean = True
     ready_for_print.short_description = 'Print ready'
+    
+    def service_date(self):
+        try:
+            self.service
+            if self.service.service_date_time:
+                return u'%s' % date(self.service.service_date_time, "P l, N j")
+        except Service.DoesNotExist:
+            return u'No service scheduled.'
 
 class Service(models.Model):
     SERVICES = (

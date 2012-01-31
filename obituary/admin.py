@@ -37,7 +37,7 @@ class DeathNoticeOtherServicesInline(admin.TabularInline):
     model = DeathNoticeOtherServices
 
 class Death_noticeAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'ready_for_print', 'death_notice_created', 'death_notice_in_system', 'death_notice_has_run',)
+    list_display = ('__unicode__', 'ready_for_print', 'service_date', 'death_notice_created', 'death_notice_in_system', 'death_notice_has_run',)
     list_editable = ('death_notice_in_system', 'death_notice_has_run',)
     list_filter = ('death_notice_in_system', 'death_notice_has_run',)
     search_fields = ['last_name', 'first_name',]
