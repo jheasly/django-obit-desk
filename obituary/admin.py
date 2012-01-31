@@ -58,8 +58,7 @@ admin.site.register(Death_notice, Death_noticeAdmin)
 class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('death_notice', 'fh', 'ready_for_print', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'preferred_run_date', 'service_date', 'admin_thumbnail', 'obituary_created', 'status', 'date_of_birth', )
     list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
-#     list_filter = ('death_notice__funeral_home',)
-#     list_filter = ('death_notice__city_of_residence',)
+    list_filter = ('death_notice__funeral_home',)
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     date_hierarchy = 'preferred_run_date'
     ordering = ('-preferred_run_date',)
