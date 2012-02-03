@@ -48,6 +48,7 @@ class FuneralHomeProfile(models.Model):
         ('Idaho', 'Idaho',),
         ('Ill.', 'Ill.',),
         ('Ind.', 'Ind.',),
+        ('Iowa', 'Iowa',),
         ('Kan.', 'Kan.',),
         ('Ky.', 'Ky.',),
         ('La.', 'La. ',),
@@ -235,6 +236,11 @@ class Obituary(models.Model):
         (10, '10'),
     )
     
+    COST = {
+        'FH':    '$25',
+        'STAFF': '$50 (prepaid)',
+    }
+    
     def obit_file_name(instance, filename):
         (orig_name, orig_ext) = path.splitext(filename)
 #         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
@@ -303,34 +309,42 @@ class Obituary(models.Model):
             # a new Obituary
             message_subj = 'Obituary created for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
             datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
-            '''
-            Check for photo with an about-to-be-created Obituary.
-            '''
-            if self.photo and self.status == 'live':
-                message_subj = 'Photo has been attached to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name)
-                message_email = 'Photo file %s is attached.' % path.split(self.photo.name)[1]
-                imaging_email = EmailMessage()
-                imaging_email.subject = message_subj
-                imaging_email.body = message_email
-                imaging_email.to = to_email
-                imaging_email.attach(path.split(self.photo.name)[1], self.photo.read(), 'image/jpg')
-                imaging_email.send(fail_silently=False)
+        '''
+        Check for photo with an about-to-be-created Obituary.
+        '''
+        if self.photo and not self.obituary_created:
+            to_email = IMAGING_OBIT_EMAIL_RECIPIENTS
+            message_subj = 'Photo has been attached to %s %s obituary' % (self.death_notice.first_name, self.death_notice.last_name)
+            message_email = 'Photo file %s is attached.' % path.split(self.photo.name)[1]
+            imaging_email = EmailMessage()
+            imaging_email.subject = message_subj
+            imaging_email.body = message_email
+            imaging_email.to = to_email
+            imaging_email.attach(path.split(self.photo.name)[1], self.photo.read(), 'image/jpg')
+            imaging_email.send(fail_silently=False)
         
         '''
         Check for obituary being marked 'has_run'
         '''
         if self.obituary_created and self.obituary_has_run:
             to_email = BO_OBIT_EMAIL_RECIPIENTS
+            # Compare what's in database vs. what's on current Web form.
             copy_existing = Obituary.objects.get(pk=self.pk)
             if copy_existing.obituary_has_run == False and self.obituary_has_run == True:
+                if self.prepaid_by:
+                    cost = self.COST['STAFF']
+                else:
+                    cost = self.COST['FH']
                 message_subj = 'Obituary has been published in print for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
-                message_email = 'Add $25 to the tab of %s. (You can also check http://www.registerguard.com/web/news/obituaries/)' % self.death_notice.funeral_home.funeralhomeprofile.full_name
+                message_email = 'Add %s to the tab of %s. (You can also check http://www.registerguard.com/web/news/obituaries/)' % (cost, self.death_notice.funeral_home.funeralhomeprofile.full_name)
                 datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
         
         '''
         Check for attachment of photo to an existing Obituary.
         '''
-        if self.obituary_created and self.photo and self.status == 'live':
+          # I think maybe we don't care if it's live, if a photo's been attached?
+#         if self.obituary_created and self.photo and self.status == 'live':
+        if self.obituary_created and self.photo:
             to_email = IMAGING_OBIT_EMAIL_RECIPIENTS
             copy_existing = Obituary.objects.get(pk=self.pk)
             if not copy_existing.photo and self.photo:
@@ -407,7 +421,7 @@ class Obituary(models.Model):
             if self.visitation.visitation_end_date_time:
                 visitation_str = u' Visitation will be from %s to %s at %s.' % (date(self.visitation.visitation_start_date_time, "P"), date(self.visitation.visitation_end_date_time, "P l, N j,"), self.visitation.visitation_location)
             else:
-                visitation_str = u' Visitation will be at %s at %s.' % (date(self.visitation.visitation_start_date_time, "P l,"), date(self.visitation.visitation_end_date_time, "P l, N j,"), self.visitation.visitation_location)
+                visitation_str = u' Visitation will be at %s at %s.' % (date(self.visitation.visitation_start_date_time, "P l,"), self.visitation.visitation_location)
         except Visitation.DoesNotExist:
             visitation_str = u''
         
