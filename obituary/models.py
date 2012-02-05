@@ -30,6 +30,7 @@ class baseOtherServices(models.Model):
         abstract = True
         verbose_name = 'Other services'
         verbose_name_plural = 'Other services'
+        managed = True
     
     def __unicode__(self):
         return self.description
@@ -213,9 +214,6 @@ class Service(models.Model):
 
 class DeathNoticeOtherServices(baseOtherServices):
     death_notice = models.OneToOneField(Death_notice)
-#     description = models.CharField(max_length=256)
-#     other_services_date_time = models.CharField(max_length=150, blank=True, help_text=u'YYYY-MM-DD format')
-#     other_services_location = models.CharField(max_length=126, blank=True)
 
 class Obituary(models.Model):
     GENDERS =  (
@@ -246,6 +244,7 @@ class Obituary(models.Model):
 #         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
         return 'obits/%s/%s/ob.%s.%s%s' % (datetime.date.today().year, datetime.date.today().month, instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
+    user = models.ForeignKey('auth.User', null=True, blank=True)
     death_notice = models.OneToOneField(Death_notice, primary_key=True)
     cause_of_death = models.CharField(u'Died of ... ', max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
@@ -723,7 +722,7 @@ class Obituary(models.Model):
     def surviving_grands(self):
         grand_list = (
             [self.number_of_grandchildren,                  u'grandchildren',],
-            [self.number_of_step_grandchildren,             u'step granchildren',],
+            [self.number_of_step_grandchildren,             u'step grandchildren',],
             [self.number_of_great_grandchildren,            u'great-grandchildren',],
             [self.number_of_step_great_grandchildren,       u'step great-grandchildren',],
             [self.number_of_great_great_grandchildren,      u'great-great grandchildren',],
