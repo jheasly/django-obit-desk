@@ -4,8 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	</head>
 	<body>
-	{% for item in list %}
-		<p>{{ item }} {{ item.obituary_publish_date }} {{ item.number_of_copies }} {{ item.mailing_address }}</p>
-	{% endfor %}
+		<table cellspacing="0" cellpadding="3">
+		<tr><th>&nbsp;</th><th>Name</th><th>Publication<br/>date</th><th>Number<br />of copies</th><th>Mailing<br/>address</th></tr>
+		{% for item in list %}
+			<tr style="background: {% cycle '#fff' '#eee' %};"><td>{% if item.photo.name %}{{ item.admin_thumbnail|safe }}{% else %}&nbsp;{% endif %}</td><td>{{ item.death_notice.first_name }} {{ item.death_notice.last_name }}</td><td>{{ item.obituary_publish_date }}</td><td>{{ item.number_of_copies }}</td><td>{{ item.mailing_address }}</td></tr>
+		{% endfor %}
+		</table>
 	</body>
 </html>
