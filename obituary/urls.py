@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm
 from obituary.views import deaths, fh_index, logout_view, manage_death_notice, \
-    manage_obituary, billing, print_obituary
+    manage_obituary, billing, print_obituary, hard_copies_manifest
 
 urlpatterns = patterns('',
     url(r'^deaths/(?P<death_notice_id>\d+)/$', manage_death_notice, name='manage_death_notice'),
@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^password_reset_done/$', password_reset_done, name='password_reset_done'),
     url(r'^password_reset/(?P<uidb36>[0-9A-Za-z]+)/(?P<token>[\d\w-]+)/$', password_reset_confirm, name='password_reset_confirm'),
     url(r'^billing/$', billing, name='billing'),
+    url(r'^hard-copies/$', hard_copies_manifest, name='hard-copies'),
 )

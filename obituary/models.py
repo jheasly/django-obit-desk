@@ -510,16 +510,30 @@ class Obituary(models.Model):
                 else:
                     celebrated = u'held'
                 
-                service = u'%s will be %s at %s at %s in %s, for %s of %s, %s' % (
-                    self.death_notice.service.service.strip(), 
-                    celebrated, 
-                    date(self.death_notice.service.service_date_time, "P l, N j,"),
-                    self.death_notice.service.service_location.strip(),
-                    self.death_notice.service.service_city.strip(),
-                    full_name, 
-                    city,
-                    u'who ' + date_age_cause,
-                )
+                # Not local death_notice service, so the city is included 
+                if self.death_notice.service.service_city:
+                    service = u'%s will be %s at %s at %s in %s, for %s of %s, %s' % (
+                        self.death_notice.service.service.strip(), 
+                        celebrated, 
+                        date(self.death_notice.service.service_date_time, "P l, N j,"),
+                        self.death_notice.service.service_location.strip(),
+                        self.death_notice.service.service_city.strip(),
+                        full_name, 
+                        city,
+                        u'who ' + date_age_cause,
+                    )
+                # A local death_notice service, so no city
+                else:
+                    service = u'%s will be %s at %s at %s, for %s of %s, %s' % (
+                        self.death_notice.service.service.strip(), 
+                        celebrated, 
+                        date(self.death_notice.service.service_date_time, "P l, N j,"),
+                        self.death_notice.service.service_location.strip(),
+                        full_name, 
+                        city,
+                        u'who ' + date_age_cause,
+                    )
+                
         except Service.DoesNotExist:
             service = u'%s of %s, %s' % (
                 full_name, 

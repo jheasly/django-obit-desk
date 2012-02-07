@@ -324,3 +324,11 @@ def print_obituary(request, obituary_id=None):
         'obit': obit,
     }
     return render_to_response('print_obituary.html', response_dict, context_instance=RequestContext(request))
+
+@login_required
+def hard_copies_manifest(request):
+    have_run_list = Obituary.objects.filter(obituary_has_run=True)
+    response_dict = {
+        'list': have_run_list,
+    }
+    return render_to_response('hard_copies_manifest.html', response_dict, context_instance=RequestContext(request))
