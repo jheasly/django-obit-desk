@@ -60,7 +60,7 @@ class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
     list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     date_hierarchy = 'preferred_run_date'
-    ordering = ('-preferred_run_date',)
+    ordering = ('-obituary_created',)
     
     form = ObituaryAdminForm
     

@@ -623,9 +623,9 @@ class Obituary(models.Model):
                 sig_ot_str = u' her husband; '
         elif self.life_domestic_partner:
             if self.gender == 'M':
-                sig_ot_str = u' his %s; ' % self.life_domestic_partner
+                sig_ot_str = u' %s; ' % self.life_domestic_partner
             else:
-                sig_ot_str = u' her %s; ' % self.life_domestic_partner
+                sig_ot_str = u' %s; ' % self.life_domestic_partner
         else:
             sig_ot_str = u''
         
