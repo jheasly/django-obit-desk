@@ -18,7 +18,13 @@
 
 {% block content %}
 <div class="wrapper">
-	<h1>This month</h1>
+	<h1><a href="#">This month</a></h1>
+	<table cellspacing="0" cellpadding="3">
+	{% for obit in run_obits %}
+		<tr style="background: {% cycle '#fff' '#eee' %};"><td>{{ obit.death_notice.first_name }}</td><td>{{ obit.death_notice.last_name }}</td><td>{{ obit.obituary_publish_date }}</td></tr>
+	{% endfor %}
+	</table>
 	<h1>Last month</h1>
+	<p>{{ month }}</p>
 </div> <!-- /.wrapper -->
 {% endblock content %}

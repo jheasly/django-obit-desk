@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^password_reset/$', password_reset, name='password_reset'),
     url(r'^password_reset_done/$', password_reset_done, name='password_reset_done'),
     url(r'^password_reset/(?P<uidb36>[0-9A-Za-z]+)/(?P<token>[\d\w-]+)/$', password_reset_confirm, name='password_reset_confirm'),
+    url(r'^billing/(?P<billing_month>[a-z]{3})/$', billing, name='billing'),
     url(r'^billing/$', billing, name='billing'),
     url(r'^hard-copies/$', hard_copies_manifest, name='hard-copies'),
 )

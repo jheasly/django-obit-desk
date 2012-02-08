@@ -334,8 +334,16 @@ class Obituary(models.Model):
                     cost = self.COST['STAFF']
                 else:
                     cost = self.COST['FH']
-                message_subj = 'Obituary has been published in print for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
-                message_email = 'Add %s to the tab of %s. (You can also check http://www.registerguard.com/web/news/obituaries/)' % (cost, self.death_notice.funeral_home.funeralhomeprofile.full_name)
+                
+                if self.user and (self.user.username in ('lcrossley', 'weeditor',)):
+                    message_subj = '[Accounting] Obituary printed for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+                    message_email = 'Add %s to the invoice of %s.' % (cost, self.death_notice.funeral_home.funeralhomeprofile.full_name)
+                elif self.user and (self.user.username in ('wcarole', 'bholmes', 'bnelson', 'jhamilton', 'nkeller', 'phowells',)):
+                    message_subj = '[Accounting] PRE-PAID obituary printed for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+                    message_email = '%s for the %s obituary was prepaid: %s.' % (cost, self.death_notice.funeral_home.funeralhomeprofile.full_name, self.prepaid_by)
+                else:
+                    message_subj = '[Accounting] Obituary printed for %s %s' % (self.death_notice.first_name, self.death_notice.last_name)
+                    message_email = 'Add %s to the invoice of %s. (You can also check http://www.registerguard.com/web/news/obituaries/)' % (cost, self.death_notice.funeral_home.funeralhomeprofile.full_name)
                 datatuple = (message_subj,  message_email, from_email, to_email,), # <- This trailing comma's vital!
         
         '''

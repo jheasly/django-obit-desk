@@ -1,4 +1,5 @@
 import codecs, datetime
+from dateutil import relativedelta
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import logout
@@ -303,8 +304,16 @@ def add_new_model(request, model_name):
                 return render_to_response('dn_popup.html', page_context, context_instance=RequestContext(request))
 
 @login_required
-def billing(request):
-    return render_to_response('manage_billing.html', context_instance=RequestContext(request))
+def billing(request, billing_month=None):
+    now = datetime.datetime.now()
+    this_month = now.month
+    one_month_back = now + relativedelta.relativedelta(months=-1)
+    run_obits = Obituary.objects.filter(obituary_has_run=True, obituary_publish_date__isnull=False, obituary_publish_date__gte='2012-2-1').order_by('-obituary_publish_date')
+    response_dict = {
+        'run_obits': run_obits,
+        'month': billing_month,
+    }
+    return render_to_response('manage_billing.html', response_dict, context_instance=RequestContext(request))
 
 @login_required
 def print_obituary(request, obituary_id=None):
