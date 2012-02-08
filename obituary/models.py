@@ -856,7 +856,7 @@ class Siblings(models.Model):
     )
     
     obituary = models.ForeignKey(Obituary)
-    gender = models.CharField(choices=SIBLING_GENDER, max_length=8, blank=True, null=True)
+    gender = models.CharField(choices=SIBLING_GENDER, max_length=12, blank=True, null=True)
     name = models.CharField(max_length=126, blank=True, help_text=u'First and last, no middle initial')
     residence = models.CharField(max_length=126, blank=True, help_text=u'City and state')
     
