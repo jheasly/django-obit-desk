@@ -327,7 +327,7 @@ def print_obituary(request, obituary_id=None):
 
 @login_required
 def hard_copies_manifest(request):
-    have_run_list = Obituary.objects.filter(obituary_has_run=True)
+    have_run_list = Obituary.objects.filter(obituary_has_run=True, obituary_publish_date__isnull=False).order_by('-obituary_publish_date')
     response_dict = {
         'list': have_run_list,
     }
