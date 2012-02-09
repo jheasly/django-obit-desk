@@ -20,15 +20,23 @@
 <div class="wrapper">
 	<h1><a href="#">This month</a></h1>
 	<table cellspacing="0" cellpadding="3">
-		<tr><th colspan="2">Name</th><th>Print date</th><th>Prepaid by</th><th>Funeral home<br/>invoice amount</th></tr>
+		<tr><th>Name</th><th>Date first printed</th><th>"Prepaid by" field from form</th><th>Funeral home to be billed</th><th>Funeral home<br/>invoice amount</th></tr>
 	{% for obit in run_obits %}
-		<tr style="background: {% cycle '#fff' '#eee' %};"><td>{{ forloop.counter }}) {{ obit.death_notice.first_name }}</td><td>{{ obit.death_notice.last_name }}</td><td>{{ obit.obituary_publish_date }}</td>
+		<tr style="background: {% cycle '#fff' '#eee' %};">
+			<td>
+				{{ forloop.counter }}) {{ obit.death_notice.first_name }} {{ obit.death_notice.last_name }}
+			</td>
+			<td>
+				{{ obit.obituary_publish_date }}</td>
 			<td>
 			{% if obit.prepaid_by %}
 				{{ obit.prepaid_by }}
 			{% else %}
 				&nbsp;
 			{% endif %}
+			</td>
+			<td>
+				{{ obit.death_notice.funeral_home.funeralhomeprofile.full_name }}
 			</td>
 			<td>
 			{% if obit.user.username in ad_reps %}
