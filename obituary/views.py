@@ -310,6 +310,8 @@ def billing(request, billing_month=None):
     one_month_back = now + relativedelta.relativedelta(months=-1)
     run_obits = Obituary.objects.filter(obituary_has_run=True, obituary_publish_date__isnull=False, obituary_publish_date__gte='2012-2-1').order_by('-obituary_publish_date')
     response_dict = {
+        'ad_reps': ('wcarole', 'bholmes', 'bnelson', 'jhamilton', 'nkeller', 'phowells',),
+        'newsroom': ('lcrossley', 'weeditor',),
         'run_obits': run_obits,
         'month': billing_month,
     }

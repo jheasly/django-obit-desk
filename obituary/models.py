@@ -236,7 +236,7 @@ class Obituary(models.Model):
     
     COST = {
         'FH':    '$25',
-        'STAFF': '$50 (prepaid)',
+        'STAFF': '$50',
     }
     
     def obit_file_name(instance, filename):
