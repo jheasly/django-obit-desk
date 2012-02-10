@@ -304,7 +304,7 @@ def add_new_model(request, model_name):
                 return render_to_response('dn_popup.html', page_context, context_instance=RequestContext(request))
 
 @login_required
-def billing(request, billing_month=None):
+def billing(request, billing_month=None, excel_response=False):
     now = datetime.datetime.now()
     this_month = now.month
     one_month_back = now + relativedelta.relativedelta(months=-1)
@@ -315,7 +315,22 @@ def billing(request, billing_month=None):
         'run_obits': run_obits,
         'month': billing_month,
     }
-    return render_to_response('manage_billing.html', response_dict, context_instance=RequestContext(request))
+    if excel_response:
+        t = loader.get_template('manage_billing.html')
+        c = RequestContext(request, response_dict)
+        xls = t.render(c)
+        response = HttpResponse(mimetype="application/ms-excel")
+        response['Content-Disposition'] = 'attachment; filename=%s' % 'excel.xls'
+        return response
+    else:
+        return render_to_response('manage_billing.html', response_dict, context_instance=RequestContext(request))
+
+@login_required
+def billing_excel(xls, fname="foo.xls"):
+    response = HttpResponse(mimetype="application/ms-excel")
+    response['Content-Disposition'] = 'attachment; filename=%s' % fname
+    xls.save(response)
+    return response
 
 @login_required
 def print_obituary(request, obituary_id=None):
