@@ -640,7 +640,7 @@ class Obituary(models.Model):
     ## SURVIVORS
     ##
     def surviving_sig_ot(self):
-        if self.spouse:
+        if self.spouse and not self.life_domestic_partner:
             if self.gender == 'M':
                 sig_ot_str = u' his wife; '
             else:
