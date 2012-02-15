@@ -245,7 +245,7 @@ class Obituary(models.Model):
         return 'obits/%s/%s/ob.%s.%s%s' % (datetime.date.today().year, datetime.date.today().month, instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
     user = models.ForeignKey('auth.User', null=True, blank=True)
-    death_notice = models.OneToOneField(Death_notice, primary_key=True)
+    death_notice = models.OneToOneField(Death_notice, primary_key=True, limit_choices_to ={'death_notice_created__gte': datetime.datetime.now() + datetime.timedelta(days=-5) })
     cause_of_death = models.CharField(u'Died of ... ', max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
