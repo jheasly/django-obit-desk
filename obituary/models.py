@@ -846,7 +846,7 @@ class Children(models.Model):
     
     obituary = models.ForeignKey(Obituary)
     gender = models.CharField(choices=CHILD_GENDER, max_length=16, blank=True, null=True)
-    name = models.CharField(max_length=126)
+    name = models.CharField(max_length=126, blank=True)
     residence = models.CharField(max_length=126, blank=True)
     
     class Meta:
