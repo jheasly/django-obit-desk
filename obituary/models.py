@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.humanize.templatetags.humanize import apnumber
 from django.template.defaultfilters import date
 from sorl.thumbnail import get_thumbnail, ImageField
+from cuddlybuddly.thumbnail.main import Thumbnail
 from os import path
 import datetime
 
@@ -245,7 +246,7 @@ class Obituary(models.Model):
         return 'obits/%s/%s/ob.%s.%s%s' % (datetime.date.today().year, datetime.date.today().month, instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
     user = models.ForeignKey('auth.User', null=True, blank=True)
-    death_notice = models.OneToOneField(Death_notice, primary_key=True, limit_choices_to ={'death_notice_created__gte': datetime.datetime.now() + datetime.timedelta(days=-5) })
+    death_notice = models.OneToOneField(Death_notice, primary_key=True, limit_choices_to ={'death_notice_created__gte': datetime.datetime.now() + datetime.timedelta(days=-8) })
     cause_of_death = models.CharField(u'Died of ... ', max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
@@ -373,10 +374,19 @@ class Obituary(models.Model):
             send_mass_mail(datatuple)
         super(Obituary, self).save()
     
+#     def admin_thumbnail(self):
+#         if self.photo:
+#             im = get_thumbnail(self.photo, '60')
+#             return u'<a href="http://%s.%s/%s"><img src="%s" width="60" alt="%s %s" /></a>' % (self.photo.storage.bucket, self.photo.storage.connection.server, self.photo.name, im.url, self.death_notice.first_name, self.death_notice.last_name)
+#         else:
+#             return u'(No photo)'
+#     admin_thumbnail.short_description = u'Thumbnail'
+#     admin_thumbnail.allow_tags = True
+    
     def admin_thumbnail(self):
         if self.photo:
-            im = get_thumbnail(self.photo, '60')
-            return u'<a href="http://%s.%s/%s"><img src="%s" width="60" alt="%s %s" /></a>' % (self.photo.storage.bucket, self.photo.storage.connection.server, self.photo.name, im.url, self.death_notice.first_name, self.death_notice.last_name)
+            cbim = Thumbnail(self.photo.name, 60, 60)
+            return u'<a href="%s"><img src="%s%s" onclick="javascript:window.open(this.href); return false;"></a>' % (self.photo.url, self.photo.storage.base_url, cbim)
         else:
             return u'(No photo)'
     admin_thumbnail.short_description = u'Thumbnail'
