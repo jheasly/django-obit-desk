@@ -386,7 +386,7 @@ class Obituary(models.Model):
     def admin_thumbnail(self):
         if self.photo:
             cbim = Thumbnail(self.photo.name, 60, 60)
-            return u'<a href="%s"><img src="%s%s" onclick="javascript:window.open(this.href); return false;"></a>' % (self.photo.url, self.photo.storage.base_url, cbim)
+            return u'<a href="%s" target="_blank"><img src="%s%s"></a>' % (self.photo.url, self.photo.storage.base_url, cbim)
         else:
             return u'(No photo)'
     admin_thumbnail.short_description = u'Thumbnail'
