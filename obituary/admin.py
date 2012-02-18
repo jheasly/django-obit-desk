@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from sorl.thumbnail.admin import AdminImageMixin
 from obituary.forms import ObituaryAdminForm
 from obituary.models import Death_notice, Obituary, FuneralHomeProfile, \
     Service, Visitation, BEI, Other_services, Children, Siblings, Marriage, \
@@ -43,10 +42,13 @@ class Death_noticeAdmin(admin.ModelAdmin):
     search_fields = ['last_name', 'first_name',]
     
     # To filter out everything but funeral homes in inline dropdown.
+    #
+    # For alternative approach to Admin inline model filtering/ordering,
+    # see class ObituaryAdminForm in forms.py of this app.
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'funeral_home':
-            # needs tighter filtering and ordering ... 
-            kwargs['queryset'] = User.objects.exclude(is_staff=True)
+            # Group '1' is 'funeral homes'; TODO: decouple from group id ... 
+            kwargs['queryset'] = User.objects.filter(groups='1').order_by('username')
         return super(Death_noticeAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
     
     inlines = [
@@ -55,7 +57,7 @@ class Death_noticeAdmin(admin.ModelAdmin):
     ]
 admin.site.register(Death_notice, Death_noticeAdmin)
 
-class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
+class ObituaryAdmin(admin.ModelAdmin):
     list_display = ('death_notice', 'fh', 'user', 'ready_for_print', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'preferred_run_date', 'service_date', 'admin_thumbnail', 'obituary_created', 'status', 'date_of_birth', )
     list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
@@ -75,6 +77,7 @@ class ObituaryAdmin(AdminImageMixin, admin.ModelAdmin):
     
     exclude = ('user',)
     
+    # An artifact of unimplemented http://djangosnippets.org/snippets/2261/
     death_notice_fk_filter_related_only=True
     death_notice_fk_filter_name_field='city_of_residence'
     

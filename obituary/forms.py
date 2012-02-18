@@ -143,6 +143,13 @@ MarriageFormSet = inlineformset_factory(Obituary,
     extra=1,)
 
 class ObituaryAdminForm(forms.ModelForm):
+    # See http://stackoverflow.com/questions/1474135/django-admin-ordering-of-foreignkey-and-manytomanyfield-relations-referencing-u
+    #
+    # For an alternative method for drop-down filtering/ordering of Admin 
+    # inline fields, see formfield_for_foreignkey override in 
+    # class Death_noticeAdmin in admin.py of this app.
+    death_notice = forms.ModelChoiceField(queryset=Death_notice.objects.order_by('last_name'))
+    
     class Meta:
         model = Obituary
     
