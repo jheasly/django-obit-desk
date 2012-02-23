@@ -58,11 +58,12 @@ class Death_noticeAdmin(admin.ModelAdmin):
 admin.site.register(Death_notice, Death_noticeAdmin)
 
 class ObituaryAdmin(admin.ModelAdmin):
-    list_display = ('death_notice', 'fh', 'user', 'ready_for_print', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date', 'preferred_run_date', 'service_date', 'admin_thumbnail', 'obituary_created', 'status', 'date_of_birth', )
-    list_editable = ('obituary_in_system', 'obituary_has_run', 'obituary_publish_date')
+    list_display = ('death_notice', 'fh', 'user', 'ready_for_print', 'obituary_in_system', 'obituary_publish_date', 'preferred_run_date', 'service_date', 'admin_thumbnail', 'obituary_created', 'status', 'date_of_birth', )
+    list_editable = ('obituary_in_system', 'obituary_publish_date')
     search_fields = ['death_notice__last_name', 'death_notice__first_name',]
     date_hierarchy = 'preferred_run_date'
     ordering = ('-obituary_created',)
+    save_on_top = True
     
     form = ObituaryAdminForm
     

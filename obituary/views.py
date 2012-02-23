@@ -308,7 +308,7 @@ def billing(request, billing_month=None, excel_response=False):
     now = datetime.datetime.now()
     this_month = now.month
     one_month_back = now + relativedelta.relativedelta(months=-1)
-    run_obits = Obituary.objects.filter(obituary_has_run=True, obituary_publish_date__isnull=False, obituary_publish_date__gte='2012-2-1').order_by('-obituary_publish_date')
+    run_obits = Obituary.objects.filter(obituary_publish_date__isnull=False, obituary_publish_date__gte='2012-2-1').order_by('-obituary_publish_date')
     response_dict = {
         'ad_reps': ('wcarole', 'bholmes', 'bnelson', 'jhamilton', 'nkeller', 'phowells',),
         'newsroom': ('lcrossley', 'weeditor',),
@@ -353,7 +353,7 @@ def print_obituary(request, obituary_id=None):
 
 @login_required
 def hard_copies_manifest(request):
-    have_run_list = Obituary.objects.filter(obituary_has_run=True, obituary_publish_date__isnull=False).order_by('-obituary_publish_date')
+    have_run_list = Obituary.objects.filter(obituary_publish_date__isnull=False).order_by('-obituary_publish_date')
     response_dict = {
         'list': have_run_list,
     }

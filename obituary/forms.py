@@ -75,7 +75,7 @@ class ObituaryForm(ModelForm):
     
     class Meta:
         model = Obituary
-        exclude = ('funeral_home', 'prepaid_by', 'obituary_in_system', 'obituary_has_run',)
+        exclude = ('funeral_home', 'prepaid_by', 'obituary_in_system', 'obituary_has_run', 'obituary_publish_date',)
 
 VisitationFormSet = inlineformset_factory(Obituary,
     Visitation,

@@ -326,13 +326,13 @@ class Obituary(models.Model):
             imaging_email.send(fail_silently=False)
         
         '''
-        Check for obituary being marked 'has_run'
+        Check if obituary has 'publish_date'
         '''
-        if self.obituary_created and self.obituary_has_run:
+        if self.obituary_created and self.obituary_publish_date:
             to_email = BO_OBIT_EMAIL_RECIPIENTS
             # Compare what's in database vs. what's on current Web form.
             copy_existing = Obituary.objects.get(pk=self.pk)
-            if copy_existing.obituary_has_run == False and self.obituary_has_run == True:
+            if not copy_existing.obituary_publish_date and self.obituary_publish_date:
                 if self.prepaid_by:
                     cost = self.COST['STAFF']
                 else:
@@ -833,7 +833,7 @@ class BEI(models.Model):
     obituary = models.OneToOneField(Obituary)
     bei = models.CharField(u'burial, entombment or inurnment', choices=BEI, max_length=20)
     bei_date_time = models.CharField(u'burial, entombment or inurnment date and time', max_length=110, blank=True, null=True)
-    bei_location = models.CharField(u'burial, entombment or inurnment location', max_length=126)
+    bei_location = models.CharField(u'burial, entombment or inurnment location', max_length=126, blank=True)
     
     class Meta:
         verbose_name = 'Burial, entombment or inurnment'
