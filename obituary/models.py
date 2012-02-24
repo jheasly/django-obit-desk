@@ -570,7 +570,7 @@ class Obituary(models.Model):
     def date_or_what(self, wed_date_str):
         '''
         Takes a string; if it's in YYYY-MM-DD format, a date object is 
-        returned, otherwise the the original string is returned.
+        returned, otherwise the original string is returned.
         '''
         from datetime import datetime
         try:
@@ -578,6 +578,18 @@ class Obituary(models.Model):
             return date_obj
         except (AttributeError, ValueError,):
             return wed_date_str
+    
+    def datetime_or_what(self, date_time_str):
+        '''
+        Takes a string; if it's in YYYY-MM-DD HH:MM format, a date/time object
+        is returned, otherwise the original string is returned.
+        '''
+        from datetime import datetime
+        try:
+            date_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M')
+            return date_obj
+        except (AttributeError, ValueError,):
+            return date_time_str
     
     def other_gender(self, the_one):
         if the_one == 'M':
@@ -793,7 +805,7 @@ class Obituary(models.Model):
     ##
     def bei_display(self):
         try:
-            bei_str = u'<pstyle:BodyText\:BodyText\_No\_BL>%s will be at %s in %s.\n' % ( self.bei.bei.capitalize(), date(self.bei.bei_date_time,"P l, N j,"), self.bei.bei_location)
+            bei_str = u'<pstyle:BodyText\:BodyText\_No\_BL>%s will be at %s in %s.\n' % ( self.bei.bei.capitalize(), date(self.datetime_or_what(self.bei.bei_date_time), "P, l, N j,"), self.bei.bei_location)
         except BEI.DoesNotExist:
             bei_str = u''
         return bei_str
