@@ -844,7 +844,7 @@ class BEI(models.Model):
     
     obituary = models.OneToOneField(Obituary)
     bei = models.CharField(u'burial, entombment or inurnment', choices=BEI, max_length=20)
-    bei_date_time = models.CharField(u'burial, entombment or inurnment date and time', max_length=110, blank=True, null=True)
+    bei_date_time = models.CharField(u'burial, entombment or inurnment date and time', max_length=110, blank=True)
     bei_location = models.CharField(u'burial, entombment or inurnment location', max_length=126, blank=True)
     
     class Meta:
