@@ -180,25 +180,26 @@ class Death_notice(models.Model):
 
 class Service(models.Model):
     SERVICES = (
-        ('A visitation', 'visitation',),
-        ('A visitation followed by a funeral', 'visitation followed by the funeral',),
         ('A celebration of life', 'celebration of life',),
-        ('A musical celebration of life', 'musical celebration of life',),
         ('The funeral', 'funeral',),
         ('The funeral Mass', 'funeral Mass',),
+        ('The funeral service followed by the burial', 'funeral service followed by the burial',),
         ('A graveside service', 'graveside service',),
+        ('A musical celebration of life', 'musical celebration of life',),
         ('A memorial service', 'memorial service',),
         ('A memorial service is planned', 'memorial service is planned',),
         ('A military graveside funeral', 'military graveside funeral',),
-        ('The funeral service followed by the burial', 'funeral service followed by the burial',),
+        ('A private service', 'private service',),
         ('A service followed by the burial', 'service followed by the burial',),
+        ('A visitation', 'visitation',),
+        ('A visitation followed by a funeral', 'visitation followed by the funeral',),
     )
     
     death_notice = models.OneToOneField(Death_notice, blank=True, null=True)
     service = models.CharField(choices=SERVICES, max_length=65)
-    service_date_time = models.DateTimeField()
+    service_date_time = models.DateTimeField(blank=True, null=True)
     service_end_date_time = models.DateTimeField(blank=True, null=True, help_text=u'(Optional.)')
-    service_location = models.CharField(max_length=75)
+    service_location = models.CharField(max_length=75, blank=True)
     service_city = models.CharField(max_length=80, blank=True)
     
     class Meta:
@@ -250,7 +251,7 @@ class Obituary(models.Model):
     cause_of_death = models.CharField(u'Died of ... ', max_length=75, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
     service_plans_indefinite = models.CharField(u'Service planned, no specifics yet', max_length=300, blank=True, help_text=u'If a Service is planned, but exact date, time, place are not known or it is private, use this field, i.e., "A service is planned in Oakridge." or "A service is planned for February." or "A private memorial service is planned." (If specifics are known, use Service section of Death Notice form.)')
-    preferred_run_date = models.DateField(u'Preferred print date', help_text=u'<b><i>Not a guarantee</i></b>, but a target date.')
+#     preferred_run_date = models.DateField(u'Preferred print date', help_text=u'<b><i>Not a guarantee</i></b>, but a target date.')
     prepaid_by = models.CharField(max_length=325, blank=True)
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
@@ -281,7 +282,7 @@ class Obituary(models.Model):
     status = models.CharField(max_length=4, choices=STATUS, default='drft', help_text=u'Only items with a status of \'Submitted to R-G\' will be picked up for publication in the newspaper. (If the Obituary is a work-in-progress, use the default \'Draft\' status.)</p><p><span style="color: black; font-weight: bold;">NOTE:</span> If you make a change <i style="font-weight: bold;">after</i> an Obituary has been submitted, you <i style="font-weight: bold;">MUST</i> contact The Register-Guard newsroom.</p>')
     
     obituary_in_system = models.BooleanField(u'Obit in DT?')
-    obituary_has_run = models.BooleanField(u'Obit has run?')
+#     obituary_has_run = models.BooleanField(u'Obit has run?')
     obituary_publish_date = models.DateField(blank=True, null=True, help_text=u'Date the obituary was published in the paper.')
     obituary_created = models.DateTimeField(auto_now_add=True)
     
