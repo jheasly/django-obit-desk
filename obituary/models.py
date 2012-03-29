@@ -8,6 +8,7 @@ from sorl.thumbnail import get_thumbnail, ImageField
 from cuddlybuddly.thumbnail.main import Thumbnail
 from os import path
 import datetime
+from dateutil.parser import parse
 
 from obituary_settings import DN_OBIT_EMAIL_RECIPIENTS, BO_OBIT_EMAIL_RECIPIENTS, \
     IMAGING_OBIT_EMAIL_RECIPIENTS
@@ -587,7 +588,8 @@ class Obituary(models.Model):
         '''
         from datetime import datetime
         try:
-            date_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M')
+#            date_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M')
+            date_obj = parse(date_time_str)
             return date_obj
         except (AttributeError, ValueError,):
             return date_time_str
