@@ -26,9 +26,8 @@ class baseOtherServices(models.Model):
     '''
     description = models.CharField(u'Description of other service', max_length=256)
     other_services_date_time = models.DateTimeField()
-    other_services_location = models.CharField(max_length=126)
     other_services_end_date_time = models.DateTimeField(blank=True)
-    other_services_end_location = models.CharField(blank=True, max_length=126)
+    other_services_location = models.CharField(max_length=126)
     
     class Meta:
         abstract = True
