@@ -20,7 +20,7 @@
 <div class="wrapper">
 	<h1><a href="#">This month</a></h1>
 	<table cellspacing="0" cellpadding="3">
-		<tr><th>Name</th><th>Date first printed</th><th>"Prepaid by" field from form</th><th>Funeral home to be billed</th><th>Funeral home<br/>invoice amount</th></tr>
+		<tr><th>Name</th><th>Date first printed</th><th>"Prepaid by" field from form</th><th>Funeral home to be billed</th><th>If entered<br>by R-G staff</th><th>Funeral home<br>invoice amount</th></tr>
 	{% for obit in run_obits %}
 		<tr style="background: {% cycle '#fff' '#eee' %};">
 			<td>
@@ -37,6 +37,13 @@
 			</td>
 			<td>
 				{{ obit.death_notice.funeral_home.funeralhomeprofile.full_name }}
+			</td>
+			<td>
+			{% if obit.user %}
+				{{ obit.user.first_name }} {{ obit.user.last_name }}
+			{% else %}
+				&nbsp;
+			{% endif %}
 			</td>
 			<td>
 			{% if obit.user.username in ad_reps %}
