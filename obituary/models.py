@@ -720,7 +720,7 @@ class Obituary(models.Model):
                             child_list.append(u'%s' % (child.name))
                         else:
                             pass
-                    print 'child_list', child_list
+                    
                     if len(child_list) == 0:
                         # No child names in list (!)
                         child_str = ''
@@ -738,7 +738,7 @@ class Obituary(models.Model):
                     else:
                         # pluralize un-gendered 'child' with 'ren' OR gendered children with 's' 
                         if gender.count('child'):
-                            child_str = u' %s %sren, %s' % (apnumber(len(gender_set)), gender, child_str)
+                            child_str = u' %s %sren' % (apnumber(len(gender_set)), gender)
                         else:
                             child_str = u' %s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
                     gender_sub_list.append(child_str)
