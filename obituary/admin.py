@@ -79,8 +79,8 @@ class ObituaryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     
     # An artifact of unimplemented http://djangosnippets.org/snippets/2261/
-    death_notice_fk_filter_related_only=True
-    death_notice_fk_filter_name_field='city_of_residence'
+#     death_notice_fk_filter_related_only=True
+#     death_notice_fk_filter_name_field='city_of_residence'
     
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'user', None) is None and not obj.obituary_created:

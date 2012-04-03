@@ -705,7 +705,7 @@ class Obituary(models.Model):
         return surv_gpar_str
     
     def surviving_children(self):
-        genders = ('son', 'daughter', 'stepson', 'stepdaughter', 'adopted son', 'adopted daughter')
+        genders = ('son', 'daughter', 'stepson', 'stepdaughter', 'adopted son', 'adopted daughter', 'child', 'stepchild',)
         if self.children_set.all():
             gender_sub_list = []
             for gender in genders:
@@ -716,10 +716,15 @@ class Obituary(models.Model):
                     for child in gender_set:
                         if child.residence:
                             child_list.append(u'%s of %s' % (child.name, child.residence))
-                        else:
+                        elif child.name:
                             child_list.append(u'%s' % (child.name))
-                    
-                    if len(child_list) == 1:
+                        else:
+                            pass
+                    print 'child_list', child_list
+                    if len(child_list) == 0:
+                        # No child names in list (!)
+                        child_str = ''
+                    elif len(child_list) == 1:
                         child_str = ', '.join(child_list)
                     else:
                         # insert 'and" in front of last item
@@ -731,7 +736,11 @@ class Obituary(models.Model):
                     if len(gender_set) == 1:
                         child_str = u' a %s, %s' % (gender, child_str)
                     else:
-                        child_str = u' %s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
+                        # pluralize un-gendered 'child' with 'ren' OR gendered children with 's' 
+                        if gender.count('child'):
+                            child_str = u' %s %sren, %s' % (apnumber(len(gender_set)), gender, child_str)
+                        else:
+                            child_str = u' %s %ss, %s' % (apnumber(len(gender_set)), gender, child_str)
                     gender_sub_list.append(child_str)
             child_display = '; '.join(gender_sub_list)
         else:
@@ -868,6 +877,8 @@ class Children(models.Model):
         ('stepson', 'stepson',),
         ('adopted daughter', 'adopted daughter',),
         ('adopted son', 'adopted son',),
+        ('child', 'child',),
+        ('stepchild', 'stepchild',),
     )
     
     obituary = models.ForeignKey(Obituary)
