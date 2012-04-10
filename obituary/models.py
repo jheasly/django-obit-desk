@@ -589,8 +589,11 @@ class Obituary(models.Model):
         '''
         from datetime import datetime
         try:
-#            date_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M')
-            date_obj = parse(date_time_str)
+            # check to see if a date_time_str was supplied ... 
+            if date_time_str:
+                date_obj = parse(date_time_str)
+            else:
+                date_obj = ''
             return date_obj
         except (AttributeError, ValueError,):
             return date_time_str
@@ -818,7 +821,10 @@ class Obituary(models.Model):
     ##
     def bei_display(self):
         try:
-            bei_str = u'<pstyle:BodyText\:BodyText\_No\_BL>%s will be at %s in %s.\n' % ( self.bei.bei.capitalize(), date(self.datetime_or_what(self.bei.bei_date_time), "P, l, N j,"), self.bei.bei_location)
+            if self.bei.bei_date_time:
+                bei_str = u'<pstyle:BodyText\:BodyText\_No\_BL>%s will be at %s in %s.\n' % ( self.bei.bei.capitalize(), date(self.datetime_or_what(self.bei.bei_date_time), "P, l, N j,"), self.bei.bei_location)
+            else:
+                bei_str = u'<pstyle:BodyText\:BodyText\_No\_BL>%s will be held at %s.\n' % ( self.bei.bei.capitalize(), self.bei.bei_location)
         except BEI.DoesNotExist:
             bei_str = u''
         return bei_str
