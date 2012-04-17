@@ -6,7 +6,7 @@ from obituary.models import Death_notice, Obituary, FuneralHomeProfile, \
     DeathNoticeOtherServices
 
 class FuneralHomeProfileAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'city', 'state', 'phone',)
+    list_display = ('full_name', 'user', 'city', 'state', 'phone',)
     list_filter = ('user__is_active',)
 
 admin.site.register(FuneralHomeProfile, FuneralHomeProfileAdmin)
