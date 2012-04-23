@@ -1,9 +1,19 @@
 from django.conf.urls.defaults import *
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm
+from django.views.generic.simple import direct_to_template
 from obituary.views import deaths, fh_index, logout_view, manage_death_notice, \
     manage_obituary, billing, print_obituary, hard_copies_manifest, billing_excel
 
-urlpatterns = patterns('',
+urlpatterns = list()
+
+'''
+Dirty hack: Uncomment following three lines for maintenance mode.
+'''
+# urlpatterns = patterns('',
+#     url(r'^.*$', direct_to_template, {'template': 'maintenance.html'})
+# )
+
+urlpatterns += patterns('',
     url(r'^deaths/(?P<death_notice_id>\d+)/$', manage_death_notice, name='manage_death_notice'),
     url(r'^deaths/$', manage_death_notice, name='add_death_notice'),
     url(r'^obituaries/(?P<obituary_id>\d+)/$', manage_obituary, name='manage_obituary'),
