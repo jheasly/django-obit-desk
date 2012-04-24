@@ -751,7 +751,7 @@ class Obituary(models.Model):
         return child_display
         
     def surviving_siblings(self):
-        genders = ('brother', 'sister', 'stepbrother', 'stepsister',)
+        genders = ('brother', 'sister', 'stepbrother', 'half-brother', 'stepsister', 'half-sister',)
         if self.siblings_set.all():
             gender_sub_list = []
             for gender in genders:
@@ -905,7 +905,9 @@ class Siblings(models.Model):
         ('brother', 'brother',),
         ('sister', 'sister',),
         ('stepbrother', 'stepbrother',),
+        ('half-brother', 'half-brother',),
         ('stepsister', 'stepsister',),
+        ('half-sister', 'half-sister',),
     )
     
     obituary = models.ForeignKey(Obituary)
