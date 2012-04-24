@@ -25,7 +25,7 @@ class baseOtherServices(models.Model):
     Abstract base class for both Death Notice and Obituary.
     '''
     description = models.CharField(u'Description of other service', max_length=256)
-    other_services_date_time = models.DateTimeField()
+    other_services_date_time = models.DateTimeField(blank=True, null=True)
     other_services_end_date_time = models.DateTimeField(blank=True, null=True, help_text=u'(Optional.)')
     other_services_location = models.CharField(max_length=126)
     
@@ -841,7 +841,7 @@ class Marriage(models.Model):
 
 class Visitation(models.Model):
     obituary = models.OneToOneField(Obituary)
-    visitation_start_date_time = models.DateTimeField()
+    visitation_start_date_time = models.DateTimeField(blank=True, null=True)
     visitation_end_date_time = models.DateTimeField(blank=True, null=True)
     visitation_location = models.CharField(max_length=126)
     
@@ -863,7 +863,7 @@ class BEI(models.Model):
     
     obituary = models.OneToOneField(Obituary)
     bei = models.CharField(u'burial, entombment or inurnment', choices=BEI, max_length=20)
-    bei_date_time = models.CharField(u'burial, entombment or inurnment date and time', max_length=110, blank=True)
+    bei_date_time = models.CharField(u'burial, entombment or inurnment date and time', max_length=110, blank=True, null=True)
     bei_location = models.CharField(u'burial, entombment or inurnment location', max_length=126, blank=True)
     
     class Meta:
