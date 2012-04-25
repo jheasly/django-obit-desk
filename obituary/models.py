@@ -3,6 +3,7 @@
 from django.core.mail import send_mail, send_mass_mail, EmailMessage
 from django.db import models
 from django.contrib.humanize.templatetags.humanize import apnumber
+from django.contrib.auth.models import User
 from django.template.defaultfilters import date
 from sorl.thumbnail import get_thumbnail, ImageField
 from cuddlybuddly.thumbnail.main import Thumbnail
@@ -86,7 +87,7 @@ class FuneralHomeProfile(models.Model):
         ('Wis.', 'Wis.',),
         ('Wyo.', 'Wyo.',),
     )
-    user = models.OneToOneField('auth.User')
+    user = models.OneToOneField(User)
     full_name = models.CharField(max_length=80)
     address = models.CharField(max_length=256, blank=True)
     city = models.CharField(max_length=80, blank=True, help_text=u'Leave blank when city name is part of funeral home name, i.e., \'Oakridge Funeral Home Chapel of the Woods\'')
@@ -109,7 +110,7 @@ class Death_notice(models.Model):
         (2, 'months',),
         (3, 'days',),
     )
-    funeral_home = models.ForeignKey('auth.User')
+    funeral_home = models.ForeignKey(User)
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(u'Middle name or initial', max_length=95, blank=True)
     nickname = models.CharField(max_length=90, blank=True, help_text='Just enter name, without double-quotes, i.e. Jack, not "Jack"')
@@ -248,7 +249,7 @@ class Obituary(models.Model):
 #         return 'obit_images/ob.%s.%s%s' % (instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
         return 'obits/%s/%s/ob.%s.%s%s' % (datetime.date.today().year, datetime.date.today().month, instance.death_notice.last_name.lower(), instance.death_notice.first_name.lower(), orig_ext)
     
-    user = models.ForeignKey('auth.User', null=True, blank=True)
+    user = models.ForeignKey(User, null=True, blank=True)
     death_notice = models.OneToOneField(Death_notice, primary_key=True, limit_choices_to ={'death_notice_created__gte': datetime.datetime.now() + datetime.timedelta(days=-28) })
     cause_of_death = models.CharField(u'Died of ... ', max_length=150, blank=True, help_text=u'Leave blank if family chooses not to list cause of death.')
     no_service_planned = models.BooleanField(u'No service planned?', blank=True, help_text=u'Check if NO SERVICE IS PLANNED.')
