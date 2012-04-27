@@ -133,7 +133,7 @@ class Death_notice(models.Model):
         ordering = ('-death_notice_created',)
     
     def __unicode__(self):
-        return u'%s %s' % (self.first_name, self.last_name)
+        return u'%s %s %s' % (self.first_name, self.middle_name, self.last_name)
     
     def save(self):
         from_email = 'rgnews.registerguard.@gmail.com'
