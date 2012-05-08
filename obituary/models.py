@@ -258,7 +258,7 @@ class Obituary(models.Model):
     prepaid_by = models.CharField(max_length=325, blank=True)
     gender = models.CharField(choices=GENDERS, max_length=1)
     date_of_birth = models.DateField(help_text=u'YYYY-MM-DD format')
-    place_of_birth = models.CharField(max_length=75, help_text=u'City, State (if known, otherwise, just enter state). If born in Lane County area, just enter city.')
+    place_of_birth = models.CharField(max_length=75, blank=True, help_text=u'City, State (if known, otherwise, just enter state). If born in Lane County area, just enter city.')
     parents_names = models.CharField(u'Parents\' names', max_length=150, blank=True, help_text=u'Format: "[Father\'s first name] and [Mother\'s first name] [Mother\'s maiden name] [Married last name]" e.g.: Thomas and Bernice Davis Baker')
     education = models.TextField(blank=True, help_text=u'Use complete sentences.')
     military_service = models.TextField(blank=True, help_text=u'Use complete sentences.')
