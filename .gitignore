@@ -1,5 +1,6 @@
 *.pyc
 *.DS_Store
+ap_wfm
 obituary/fixtures/*
 obit_images/*
 local_settings.py

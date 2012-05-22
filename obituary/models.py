@@ -72,6 +72,7 @@ class FuneralHomeProfile(models.Model):
         ('N.M.', 'N.M.',),
         ('N.J.', 'N.J.',),
         ('N.Y.', 'N.Y.',),
+        ('Ohio', 'Ohio',),
         ('Okla.', 'Okla.',),
         ('Pa.', 'Pa.',),
         ('R.I.', 'R.I.',),
