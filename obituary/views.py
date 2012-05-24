@@ -39,6 +39,10 @@ def deaths(request, model=None, file=None):
     model = eval(model)
     if model == Death_notice:
         queryset = model.objects.filter(death_notice_in_system=False, status='live', obituary__isnull=True).order_by('last_name')
+        '''
+        Possible change: Allow for Death Notice while Obituary gets to Live status
+        queryset = model.objects.filter(death_notice_in_system=False, status='live', obituary__status='drft').order_by('last_name')
+        '''
     else:
         queryset = model.objects.filter(obituary_in_system=False, status='live').order_by('death_notice__last_name')
     
