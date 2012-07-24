@@ -110,6 +110,7 @@ class Death_notice(models.Model):
         (1, 'years',),
         (2, 'months',),
         (3, 'days',),
+        (4, 'hours',),
     )
     funeral_home = models.ForeignKey(User)
     first_name = models.CharField(max_length=100)
