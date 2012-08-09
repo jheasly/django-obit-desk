@@ -521,12 +521,12 @@ class Obituary(models.Model):
                 date(self.death_notice.death_date, "N j"),
                 self.cause_of_death.strip(),
                 self.pronoun(),
-                self.death_notice.age_unit_combo,
+                self.death_notice.age_unit_combo(),
             )
         else:
             date_age_cause = u'died %s at age %s. The family chose not to list the cause of death.' % (
                 date(self.death_notice.death_date, "N j"),
-                self.death_notice.age,
+                self.death_notice.age_unit_combo(),
             )
         date_age_cause = date_age_cause + visitation_str
         
