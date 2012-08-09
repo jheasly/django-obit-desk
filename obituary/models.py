@@ -182,6 +182,12 @@ class Death_notice(models.Model):
                 return u'%s' % date(self.service.service_date_time, "P l, N j")
         except Service.DoesNotExist:
             return u'No service scheduled.'
+    
+    def age_unit_combo(self):
+        if not self.age_unit == 1: # 1 = 'years'
+            return u'%s %s' % (self.age, self.get_age_unit_display())
+        else:
+            return u'%s' % (self.age)
 
 class Service(models.Model):
     SERVICES = (
@@ -515,7 +521,7 @@ class Obituary(models.Model):
                 date(self.death_notice.death_date, "N j"),
                 self.cause_of_death.strip(),
                 self.pronoun(),
-                self.death_notice.age,
+                self.death_notice.age_unit_combo,
             )
         else:
             date_age_cause = u'died %s at age %s. The family chose not to list the cause of death.' % (
