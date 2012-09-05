@@ -198,6 +198,7 @@ class Service(models.Model):
         ('A graveside service', 'graveside service',),
         ('A musical celebration of life', 'musical celebration of life',),
         ('A memorial service', 'memorial service',),
+        ('A memorial service and reception', 'memorial service and reception',),
         ('A memorial service is planned', 'memorial service is planned',),
         ('A military graveside funeral', 'military graveside funeral',),
         ('A private service', 'private service',),
